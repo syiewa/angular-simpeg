@@ -1,6 +1,6 @@
 define(['app'], function(app) {
     var url = 'admin/unitkerja';
-    app.controller('editunitkerjaController', function($scope, $routeParams, dataService) {
+    app.controller('editunitkerjaController', function($scope, $routeParams, dataService, $location) {
         $scope.statusData = {};
         $scope.header = "Edit Data Unit Kerja";
         // set var statusId yang diambil dari parameter route.
@@ -22,7 +22,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                window.location.href = '/unitkerja';
+                                $location.path('/unitkerja');
                             }
                         }).
                         error(function(data) {
@@ -34,7 +34,7 @@ define(['app'], function(app) {
         };
     });
 
-    app.controller('newunitkerjaController', function($scope, dataService) {
+    app.controller('newunitkerjaController', function($scope, dataService, $location) {
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.header = "Tambah Data Unit Kerja";
         $scope.unitkerja = [];
@@ -52,7 +52,7 @@ define(['app'], function(app) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                window.location.href = '/unitkerja';
+                                $location.path('/unitkerja');
                             }
                         }).
                         error(function(data) {
@@ -62,14 +62,14 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('listunitkerjaController', function($scope, $filter, dataService) {
+    app.controller('listunitkerjaController', function($scope, $filter, dataService,$location) {
         $scope.header = "Data Unit Kerja";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true
         getUnitKerja(); // memanggil fungsi getUnit Kerja()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            window.location.href = '/unitkerja/edit/' + id;
+            $location.path('/unitkerja/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);

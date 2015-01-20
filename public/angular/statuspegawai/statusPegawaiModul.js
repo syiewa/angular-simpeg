@@ -17,7 +17,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/');
+                                $location.path('/statuspegawai');
                             }
                         }).
                         error(function(data) {
@@ -39,7 +39,7 @@ define(['app'], function(app) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/');
+                                $location.path('/statuspegawai');
                             }
                         }).
                         error(function(data) {
@@ -49,14 +49,14 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('liststatuspegawaiController', function($scope, dataService, $filter) {
+    app.controller('liststatuspegawaiController', function($scope, dataService, $filter,$location) {
         $scope.header = "Data Status Pegawai";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true
         getStatus(); // memanggil fungsi getStatus()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            window.location.href = '/statuspegawai/edit/' + id;
+            $location.path('/statuspegawai/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);

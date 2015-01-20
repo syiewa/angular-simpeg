@@ -11,7 +11,7 @@ class UnitKerjaController extends \BaseController {
         //
         $data = array(
             'field' => Unitkerja::getColumn(),
-            'values' => UnitKerja::get(),
+            'values' => UnitKerja::orderBy('nama_unit_kerja')->get(),
         );
         return Response::json($data);
     }

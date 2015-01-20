@@ -1,6 +1,6 @@
 define(['app'], function(app) {
     var url = 'admin/eselon';
-    app.controller('editeselonController', function($q, $scope, $routeParams, dataService) {
+    app.controller('editeselonController', function($scope, $routeParams, dataService, $location) {
         $scope.header = "Edit Data Eselon";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams;
@@ -17,7 +17,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                window.location.href = '/eselon';
+                                $location.path('/eselon');
                             }
                         }).
                         error(function(data) {
@@ -29,7 +29,7 @@ define(['app'], function(app) {
         };
     });
 
-    app.controller('neweselonController', function($scope, dataService) {
+    app.controller('neweselonController', function($scope, dataService,$location) {
         $scope.header = "Tambah Data Eselon";
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.submitted = false; // submitted bernilai false 
@@ -39,7 +39,7 @@ define(['app'], function(app) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                window.location.href = '/eselon';
+                                $location.path('/eselon');
                             }
                         }).
                         error(function(data) {
@@ -49,14 +49,14 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('listeselonController', function($scope, $filter, dataService) {
+    app.controller('listeselonController', function($scope, $filter, dataService,$location) {
         $scope.header = "Data Eselon";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true
         getEselon(); // memanggil fungsi getEselon()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            window.location.href = '/eselon/edit/' + id;
+            $location.path('/eselon/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);

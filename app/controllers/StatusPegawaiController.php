@@ -13,7 +13,7 @@ class StatusPegawaiController extends \BaseController {
         //
         $data = array(
             'field' => StatusPegawai::getColumn(),
-            'values' => StatusPegawai::get()
+            'values' => StatusPegawai::orderBy('nama_status')->get()
         );
         return Response::json($data);
     }

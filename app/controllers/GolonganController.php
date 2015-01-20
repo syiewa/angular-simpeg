@@ -11,7 +11,7 @@ class GolonganController extends \BaseController {
         //
         $data = array(
             'field' => Golongan::getColumn(),
-            'values' => Golongan::get()
+            'values' => Golongan::orderBy('golongan')->get()
         );
         return Response::json($data);
     }

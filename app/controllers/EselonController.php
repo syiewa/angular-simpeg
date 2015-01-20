@@ -11,7 +11,7 @@ class EselonController extends \BaseController {
         //
         $data = array(
             'field' => Eselon::getColumn(),
-            'values' => Eselon::get()
+            'values' => Eselon::orderBy('nama_eselon')->get()
         );
         return Response::json($data);
     }

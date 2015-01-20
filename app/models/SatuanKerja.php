@@ -11,6 +11,7 @@ class SatuanKerja extends Eloquent {
     protected $primaryKey = 'id_satuan_kerja';
     protected $fillable = array('nama_satuan_kerja', 'parent_unit');
     public $timestamps = false;
+    protected $appends = ['nama_unit_kerja'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -37,11 +38,12 @@ class SatuanKerja extends Eloquent {
         return $data;
     }
 
-    public function getParentUnitAttribute($value) {
-        $parent = SatuanKerja::find($value);
+    public function getNamaUnitKerjaAttribute() {
+        $name = $this->attributes['parent_unit'];
+        $parent = UnitKerja::find($name);
         if ($parent) {
-            return $parent->nama_satuan_kerja;
-        } 
+            return $parent->nama_unit_kerja;
+        }
         return '-';
     }
 
@@ -53,6 +55,8 @@ class SatuanKerja extends Eloquent {
                 ->where('column_key', '!=', 'PRI')
                 ->get();
         foreach ($columns as $col) {
+            if ($col->COLUMN_NAME == 'parent_unit')
+                $col->COLUMN_NAME = 'nama_unit_kerja';
             $data[] = $col->COLUMN_NAME;
         }
         return $data;
