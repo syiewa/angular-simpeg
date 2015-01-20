@@ -1,20 +1,20 @@
 define(['app'], function(app) {
     var url = 'admin/eselon';
-    app.controller('editeselonController', function($scope,$routeParams, dataService) {
+    app.controller('editeselonController', function($q, $scope, $routeParams, dataService) {
         $scope.header = "Edit Data Eselon";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams;
         $scope.loading = true;
         $scope.submitted = false;
         // ambil data dari database dengan ajax
-        dataService.edit(url,$scope.statusId).success(function(data) {
+        dataService.edit(url, $scope.statusId).success(function(data) {
             $scope.statusData = data;
             $scope.loading = false;
         });
         // proses edit data saat submit , mengirimkan data via ajax dan disimpan ke dalam database
         $scope.processForm = function(isValid) {
             if (isValid) {
-                dataService.update(url,$scope.statusId, $scope.statusData).
+                dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
                                 window.location.href = '/eselon';
@@ -36,7 +36,7 @@ define(['app'], function(app) {
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
             // jika valid maka akan mengirimkan data ke url admin/eselon dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
-                dataService.save(url,$scope.statusData).
+                dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
                                 window.location.href = '/eselon';
@@ -68,7 +68,7 @@ define(['app'], function(app) {
         // fungsi untuk delete data
         $scope.delete = function(id) {
             if (confirm("Anda yakin untuk menghapus data?") === true) {
-                dataService.destroy(url,id).success(function(data) {
+                dataService.destroy(url, id).success(function(data) {
                     $scope.loading = true;
                     if (data.success) {
                         getEselon();
