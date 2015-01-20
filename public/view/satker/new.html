@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- eselonForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="eselonForm" ng-submit="processForm(eselonForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama eselon invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : eselonForm.eselon.$invalid && eselonForm.eselon.$dirty || submitted && eselonForm.eselon.$invalid}">
+                <label for="eselon">Nama Eselon</label>
+                <!-- Input eselon  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_eselon" name="nama_eselon" placeholder="Masukan nama eselon" required>
+                <!-- validasi input -->
+                <p ng-show="eselonForm.eselon.$invalid && eselonForm.eselon.$dirty || submitted && eselonForm.eselon.$invalid" class="help-block">Nama Eselon Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : eselonForm.level.$invalid && eselonForm.level.$dirty || submitted && eselonForm.level.$invalid}">
+                <label for="level">Level</label>
+                <!-- Input level  -->
+                <input type="number" class="form-control" ng-model="statusData.level" name="level" placeholder="Masukan level" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="eselonForm.level.$error.required && eselonForm.level.$dirty || submitted && eselonForm.level.$error.required" class="help-block">Level Diperlukan.</p>
+                <p ng-show="eselonForm.level.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="eselonForm.level.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/eselon" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

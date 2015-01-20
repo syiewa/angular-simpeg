@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- golonganForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="golonganForm" ng-submit="processForm(golonganForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama golongan invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : golonganForm.golongan.$invalid && golonganForm.golongan.$dirty || submitted && golonganForm.golongan.$invalid}">
+                <label for="golongan">Nama Golongan</label>
+                <!-- Input golongan  -->
+                <input type="text" class="form-control" ng-model="statusData.golongan" name="golongan" placeholder="Masukan nama golongan" required>
+                <!-- validasi input -->
+                <p ng-show="golonganForm.golongan.$invalid && golonganForm.golongan.$dirty || submitted && golonganForm.golongan.$invalid" class="help-block">Nama Golongan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : golonganForm.uraian.$invalid && golonganForm.uraian.$dirty || submitted && golonganForm.uraian.$invalid}">
+                <label for="uraian">Uraian</label>
+                <!-- Input uraian  -->
+                <input type="text" class="form-control" ng-model="statusData.uraian" name="uraian" placeholder="Masukan uraian" required>
+                <!-- validasi input -->
+                <p ng-show="golonganForm.uraian.$invalid && golonganForm.uraian.$dirty || submitted && golonganForm.uraian.$invalid" class="help-block">Uraian Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : golonganForm.level.$invalid && golonganForm.level.$dirty || submitted && golonganForm.level.$invalid}">
+                <label for="level">Level</label>
+                <!-- Input level  -->
+                <input type="number" class="form-control" ng-model="statusData.level" name="level" placeholder="Masukan level" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="golonganForm.level.$error.required && golonganForm.level.$dirty || submitted && golonganForm.level.$error.required" class="help-block">Level Diperlukan.</p>
+                <p ng-show="golonganForm.level.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="golonganForm.level.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/golongan" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

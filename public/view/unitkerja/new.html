@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- unit_kerjaForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="unitkerjaForm" ng-submit="processForm(unitkerjaForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama unit_kerja invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : unitkerjaForm.nama_unit_kerja.$invalid && unitkerjaForm.nama_unit_kerja.$dirty || submitted && unitkerjaForm.nama_unit_kerja.$invalid}">
+                <label for="unit_kerja">Nama Unit Kerja</label>
+                <!-- Input unit_kerja  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_unit_kerja" name="nama_unit_kerja" placeholder="Masukan nama unit kerja" required>
+                <!-- validasi input -->
+                <p ng-show="unitkerjaForm.nama_unit_kerja.$invalid && unitkerjaForm.nama_unit_kerja.$dirty || submitted && unitkerjaForm.nama_unit_kerja.$invalid" class="help-block">Nama Unit Kerja Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="unit_kerja">Parent Unit Kerja</label>
+                <select name="parent_unit" class="form-control" ng-model="statusData.parent_unit">
+                    <option value="">Pilih Parent Unit Kerja</option>
+                    <option ng-repeat="unit in unitkerja" ng-selected="{{unit.id == statusData.parent_unit}}" value="{{unit.id}}">{{unit.label}}</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : unitkerjaForm.eselon.$invalid && unitkerjaForm.eselon.$dirty || submitted && unitkerjaForm.eselon.$invalid}">
+                <label for="eselon">Eselon</label>
+                <select name="eselon" class="form-control" ng-model="statusData.eselon" required>
+                    <option value="">Pilih Eselon</option>
+                    <option ng-repeat="ese in eselon" ng-selected="{{ese.id == statusData.eselon}}" value="{{ese.id}}">{{ese.label}}</option>
+                </select>
+                <p ng-show="unitkerjaForm.eselon.$invalid && unitkerjaForm.eselon.$dirty || submitted && unitkerjaForm.eselon.$invalid" class="help-block">Eselon Diperlukan</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/unitkerja" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<label>Search:</label> <input type="text" ng-model="search.name" placeholder="Search" />
+<br />
+<label>Filter by Category:</label>
+<ul>
+    <li><a href="" ng-click="search.category = 'engineering'">Engineering</a></li>
+    <li><a href="" ng-click="search.category = 'management'">Management</a></li>
+    <li><a href="" ng-click="search.category = 'business'">Business</a></li>
+</ul>
+
+<label>Filter by Branch:</label>
+<ul>
+    <li><a href="" ng-click="search.branch = 'West'">West</a></li>
+    <li><a href="" ng-click="search.branch = 'East'">East</a></li>
+</ul>
+
+<p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
+
+<h1>Items</h1>
+<ul>
+    <li ng-repeat="item in filtered = items| filter:search | startFrom:(currentPage - 1) * entryLimit | limitTo:entryLimit">{{item.name}}</li>
+</ul>
+
+<pagination total-items="totalItems" ng-model="currentPage"
+            max-size="noOfPages" boundary-links="true"
+            items-per-page="entryLimit" class="pagination-sm">
+</pagination>
