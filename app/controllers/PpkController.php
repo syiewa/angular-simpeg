@@ -1,6 +1,6 @@
 <?php
 
-class SatuanKerjaController extends \BaseController {
+class PpkController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,15 +10,8 @@ class SatuanKerjaController extends \BaseController {
     public function index() {
         //
         $data = array(
-            'field' => SatuanKerja::getColumn(),
-            'values' => SatuanKerja::get()
-        );
-        return Response::json($data);
-    }
-
-    public function getSatuanKerja() {
-        $data = array(
-            'dropdown' => SatuanKerja::DropDownSatker()
+            'field' => Ppk::getColumn(),
+            'values' => Ppk::orderBy('nama_ppk')->get()
         );
         return Response::json($data);
     }
@@ -39,8 +32,8 @@ class SatuanKerjaController extends \BaseController {
      */
     public function store() {
         //
-        $satuankerja = new SatuanKerja(Input::All());
-        if ($satuankerja->save()) {
+        $ppk = new Ppk(Input::All());
+        if ($ppk->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -63,9 +56,10 @@ class SatuanKerjaController extends \BaseController {
      */
     public function edit($id) {
         //
+        $ppk = Ppk::find($id);
         $data = array(
-            'value' => SatuanKerja::find($id),
-            'unitkerja' => UnitKerja::DropDownUnit(),
+            'value' => $ppk,
+            'satuankerja' => SatuanKerja::DropDownSatker(),
         );
         return Response::json($data);
     }
@@ -78,8 +72,8 @@ class SatuanKerjaController extends \BaseController {
      */
     public function update($id) {
         //
-        $satuankerja = SatuanKerja::find($id);
-        if ($satuankerja->update(Input::All())) {
+        $ppk = Ppk::find($id);
+        if ($ppk->update(Input::All())) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -92,8 +86,8 @@ class SatuanKerjaController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $satuankerja = SatuanKerja::find($id);
-        if ($satuankerja->delete()) {
+        $ppk = Ppk::find($id);
+        if ($ppk->delete()) {
             return Response::json(array('success' => TRUE));
         }
     }

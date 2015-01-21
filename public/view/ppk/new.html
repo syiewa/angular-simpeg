@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- satuankerjaForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="satuankerjaForm" ng-submit="processForm(satuankerjaForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama satuankerja invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : satuankerjaForm.nama_ppk.$invalid && satuankerjaForm.nama_ppk.$dirty || submitted && satuankerjaForm.nama_ppk.$invalid}">
+                <label for="satuankerja">Nama Satuan Kerja</label>
+                <!-- Input satuankerja  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_ppk" name="nama_ppk" placeholder="Masukan nama satuan kerja" required>
+                <!-- validasi input -->
+                <p ng-show="satuankerjaForm.nama_ppk.$invalid && satuankerjaForm.nama_ppk.$dirty || submitted && satuankerjaForm.nama_ppk.$invalid" class="help-block">Nama Satuan Kerja Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{'has-error' :satuankerjaForm.parent_satuan_kerja.$invalid && satuankerjaForm.parent_satuan_kerja.$dirty || submitted && satuankerjaForm.parent_satuan_kerja.$invalid}">
+                <label for="unit_kerja">Parent Satuan Kerja</label>
+                <select name="parent_satuan_kerja" class="form-control" ng-model="statusData.parent_satuan_kerja" required>
+                    <option value="">Pilih Parent Satuan Kerja</option>
+                    <option ng-repeat="unit in satuankerja" ng-selected="{{unit.id == statusData.parent_satuan_kerja}}" value="{{unit.id}}">{{unit.label}}</option>
+                </select>
+                <p ng-show="satuankerjaForm.parent_satuan_kerja.$invalid && satuankerjaForm.parent_satuan_kerja.$dirty || submitted && satuankerjaForm.parent_satuan_kerja.$invalid" class="help-block">Parent Unit Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/ppk" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
