@@ -1,23 +1,23 @@
 define(['app'], function(app) {
     var url = 'admin/eselon';
-    app.controller('editeselonController', function($scope,$routeParams, dataService) {
+    app.controller('editeselonController', function($scope, $routeParams, dataService, $location) {
         $scope.header = "Edit Data Eselon";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams;
         $scope.loading = true;
         $scope.submitted = false;
         // ambil data dari database dengan ajax
-        dataService.edit(url,$scope.statusId).success(function(data) {
+        dataService.edit(url, $scope.statusId).success(function(data) {
             $scope.statusData = data;
             $scope.loading = false;
         });
         // proses edit data saat submit , mengirimkan data via ajax dan disimpan ke dalam database
         $scope.processForm = function(isValid) {
             if (isValid) {
-                dataService.update(url,$scope.statusId, $scope.statusData).
+                dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                window.location.href = '/eselon';
+                                $location.path('/eselon');
                             }
                         }).
                         error(function(data) {
@@ -29,17 +29,17 @@ define(['app'], function(app) {
         };
     });
 
-    app.controller('neweselonController', function($scope, dataService) {
+    app.controller('neweselonController', function($scope, dataService,$location) {
         $scope.header = "Tambah Data Eselon";
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
             // jika valid maka akan mengirimkan data ke url admin/eselon dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
-                dataService.save(url,$scope.statusData).
+                dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                window.location.href = '/eselon';
+                                $location.path('/eselon');
                             }
                         }).
                         error(function(data) {
@@ -49,14 +49,14 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('listeselonController', function($scope, $filter, dataService) {
+    app.controller('listeselonController', function($scope, $filter, dataService,$location) {
         $scope.header = "Data Eselon";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true
         getEselon(); // memanggil fungsi getEselon()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            window.location.href = '/eselon/edit/' + id;
+            $location.path('/eselon/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);
@@ -68,7 +68,7 @@ define(['app'], function(app) {
         // fungsi untuk delete data
         $scope.delete = function(id) {
             if (confirm("Anda yakin untuk menghapus data?") === true) {
-                dataService.destroy(url,id).success(function(data) {
+                dataService.destroy(url, id).success(function(data) {
                     $scope.loading = true;
                     if (data.success) {
                         getEselon();

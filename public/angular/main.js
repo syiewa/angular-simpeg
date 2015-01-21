@@ -10,8 +10,9 @@ require.config({
         'ui-bootstrap': 'services/ui-bootstrap-tpls-0.12.0.min',
         'golongan': 'golongan/golonganModul',
         'statuspegawai': 'statuspegawai/statusPegawaiModul',
-        'eselon' : 'eselon/eselonModul',
-        'unitkerja': 'unitkerja/unitkerjaModul'
+        'eselon': 'eselon/eselonModul',
+        'unitkerja': 'unitkerja/unitkerjaModul',
+        'satuankerja': 'satuankerja/satuankerjaModul'
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
     shim: {
@@ -23,6 +24,6 @@ require.config({
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap','golongan','statuspegawai','eselon','unitkerja'], function($) {
+require(['jquery', 'bootstrap', 'golongan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja'], function($) {
     return {};
 });

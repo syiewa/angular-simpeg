@@ -7,7 +7,6 @@ class SatuanKerjaController extends \BaseController {
      *
      * @return Response
      */
-
     public function index() {
         //
         $data = array(
@@ -33,6 +32,10 @@ class SatuanKerjaController extends \BaseController {
      */
     public function store() {
         //
+        $satuankerja = new SatuanKerja(Input::All());
+        if ($satuankerja->save()) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     /**
@@ -43,7 +46,6 @@ class SatuanKerjaController extends \BaseController {
      */
     public function show($id) {
         //
-
     }
 
     /**
@@ -54,7 +56,11 @@ class SatuanKerjaController extends \BaseController {
      */
     public function edit($id) {
         //
-
+        $data = array(
+            'value' => SatuanKerja::find($id),
+            'unitkerja' => UnitKerja::DropDownUnit(),
+        );
+        return Response::json($data);
     }
 
     /**
@@ -65,6 +71,10 @@ class SatuanKerjaController extends \BaseController {
      */
     public function update($id) {
         //
+        $satuankerja = SatuanKerja::find($id);
+        if ($satuankerja->update(Input::All())) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     /**
@@ -75,6 +85,10 @@ class SatuanKerjaController extends \BaseController {
      */
     public function destroy($id) {
         //
+        $satuankerja = SatuanKerja::find($id);
+        if ($satuankerja->delete()) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
 }
