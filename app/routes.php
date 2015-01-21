@@ -18,7 +18,9 @@ Route::group(array('prefix' => 'admin', 'before' => 'check'), function() {
     Route::resource('eselon', 'EselonController');
     Route::resource('satuankerja', 'SatuanKerjaController');
     Route::resource('unitkerja', 'UnitKerjaController');
+    Route::resource('ppk', 'PpkController');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
+    Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');
     Route::get('/dropdowneselon', 'EselonController@getEselon');
 });
 

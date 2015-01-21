@@ -11,7 +11,14 @@ class SatuanKerjaController extends \BaseController {
         //
         $data = array(
             'field' => SatuanKerja::getColumn(),
-            'values' => SatuanKerja::orderBy('nama_satuan_kerja')->get()
+            'values' => SatuanKerja::get()
+        );
+        return Response::json($data);
+    }
+
+    public function getSatuanKerja() {
+        $data = array(
+            'dropdown' => SatuanKerja::DropDownSatker()
         );
         return Response::json($data);
     }

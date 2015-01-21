@@ -32,8 +32,7 @@ class SatuanKerja extends Eloquent {
             $satuankerja = $query->select(array('id_satuan_kerja', 'nama_satuan_kerja'))->get();
         }
         foreach ($satuankerja as $unit) {
-            $data[0] = "-";
-            $data[$unit->id_satuan_kerja] = $unit->nama_satuan_kerja;
+            $data[] = array('id' => $unit->id_satuan_kerja, 'label' => $unit->nama_satuan_kerja);
         }
         return $data;
     }
