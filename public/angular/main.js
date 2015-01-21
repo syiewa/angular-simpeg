@@ -13,7 +13,8 @@ require.config({
         'eselon': 'eselon/eselonModul',
         'unitkerja': 'unitkerja/unitkerjaModul',
         'satuankerja': 'satuankerja/satuankerjaModul',
-        'ppk': 'ppk/ppkModul'
+        'ppk': 'ppk/ppkModul',
+        'pelatihan': 'pelatihan/pelatihanModul',
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
     shim: {
@@ -25,6 +26,6 @@ require.config({
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap', 'golongan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja','ppk'], function($) {
+require(['jquery', 'bootstrap', 'golongan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja','ppk','pelatihan'], function($) {
     return {};
 });

@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+
+        <form name="pelatihanForm" ng-submit="processForm(pelatihanForm.$valid)" novalidate>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : pelatihanForm.nama_pelatihan.$invalid && pelatihanForm.nama_pelatihan.$dirty || submitted && pelatihanForm.nama_pelatihan.$invalid}">
+                <label for="pelatihan">Nama Pelatihan</label>
+                <!-- Input pelatihan  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_pelatihan" name="nama_pelatihan" placeholder="Masukan nama pelatihan" required>
+                <!-- validasi input -->
+                <p ng-show="pelatihanForm.nama_pelatihan.$invalid && pelatihanForm.nama_pelatihan.$dirty || submitted && pelatihanForm.nama_pelatihan.$invalid" class="help-block">Nama Pelatihan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : pelatihanForm.level.$invalid && pelatihanForm.level.$dirty || submitted && pelatihanForm.level.$invalid}">
+                <label for="level">Level</label>
+                <!-- Input level  -->
+                <input type="number" class="form-control" ng-model="statusData.level" name="level" placeholder="Masukan level" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="pelatihanForm.level.$error.required && pelatihanForm.level.$dirty || submitted && pelatihanForm.level.$error.required" class="help-block">Level Diperlukan.</p>
+                <p ng-show="pelatihanForm.level.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="pelatihanForm.level.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/pelatihan" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
