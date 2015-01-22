@@ -1,6 +1,21 @@
 //var app = angular.module("myApp", ['routes','filter','statusPegawaiModul','golonganModul']); // load aplikasi dengan nama myApp dan plugin ngRoute dan ui.bootstrap
 define(['angularAMD', 'angular-route', 'ui-bootstrap', 'services/dataServices'], function(angularAMD) {
     var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap']);
+    var loginRequired = function($location, $q) {
+        var deferred = $q.defer();
+        var userIsAuthenticated = function(){
+            return true;
+        }
+
+        if (!userIsAuthenticated()) {
+            deferred.reject()
+            $location.path('/');
+        } else {
+            deferred.resolve()
+        }
+
+        return deferred.promise;
+    }
     app.config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
@@ -9,32 +24,35 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'services/dataServices'],
                     controller: "liststatuspegawaiController",
                     controllerUrl: 'statuspegawai/statusPegawaiModul'
                 }))
-                .when("/:page", angularAMD.route({
+                .when("/backend/:page", angularAMD.route({
                     templateUrl: function(page) {
                         return "view/" + page.page + "/list.html";
                     },
                     controller: 'pageController',
-                    controllerUrl: 'services/pageServices'
+                    controllerUrl: 'services/pageServices',
+                    resolve: {loginRequired: loginRequired}
                 }))
-                .when("/:page/:action", angularAMD.route({
+                .when("/backend/:page/:action", angularAMD.route({
                     templateUrl: function(page) {
                         return "view/" + page.page + "/new.html";
                     },
                     controller: 'pageController',
-                    controllerUrl: 'services/pageServices'
+                    controllerUrl: 'services/pageServices',
+                    resolve: {loginRequired: loginRequired}
                 }))
-                .when("/:page/:action/:id", angularAMD.route({
+                .when("/backend/:page/:action/:id", angularAMD.route({
                     templateUrl: function(page) {
                         return "view/" + page.page + "/new.html";
                     },
                     controller: 'pageController',
-                    controllerUrl: 'services/pageServices'
+                    controllerUrl: 'services/pageServices',
+                    resolve: {loginRequired: loginRequired}
                 }))
                 .otherwise({
                     redirectTo: "/"
                 });
     });
-    
+
     app.filter('labelCase', function() {
         return function(input) {
             input = input.replace(/_/g, ' ');

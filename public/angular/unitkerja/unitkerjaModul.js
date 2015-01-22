@@ -22,7 +22,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/unitkerja');
+                                $location.path('/backend/unitkerja');
                             }
                         }).
                         error(function(data) {
@@ -47,12 +47,12 @@ define(['app'], function(app) {
         });
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
-            // jika valid maka akan mengirimkan data ke url admin/unitkerja dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
+            // jika valid maka akan mengirimkan data ke url admin/backend/unitkerja dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/unitkerja');
+                                $location.path('/backend/unitkerja');
                             }
                         }).
                         error(function(data) {
@@ -69,7 +69,7 @@ define(['app'], function(app) {
         getUnitKerja(); // memanggil fungsi getUnit Kerja()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            $location.path('/unitkerja/edit/' + id);
+            $location.path('/backend/unitkerja/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);

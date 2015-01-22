@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- lokasikerjaForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="lokasikerjaForm" ng-submit="processForm(lokasikerjaForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama lokasi_kerja invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : lokasikerjaForm.lokasi_kerja.$invalid && lokasikerjaForm.lokasi_kerja.$dirty || submitted && lokasikerjaForm.lokasi_kerja.$invalid}">
+                <label for="lokasi_kerja">Nama Lokasi Kerja</label>
+                <!-- Input lokasi_kerja  -->
+                <input type="text" class="form-control" ng-model="statusData.lokasi_kerja" name="lokasi_kerja" placeholder="Masukan nama lokasi_kerja" required>
+                <!-- validasi input -->
+                <p ng-show="lokasikerjaForm.lokasi_kerja.$invalid && lokasikerjaForm.lokasi_kerja.$dirty || submitted && lokasikerjaForm.lokasi_kerja.$invalid" class="help-block">Nama Lokasi Kerja Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/backend/lokasikerja" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

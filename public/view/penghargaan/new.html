@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- penghargaanForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="penghargaanForm" ng-submit="processForm(penghargaanForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_penghargaan invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : penghargaanForm.nama_penghargaan.$invalid && penghargaanForm.nama_penghargaan.$dirty || submitted && penghargaanForm.nama_penghargaan.$invalid}">
+                <label for="nama_penghargaan">Nama Penghargaan</label>
+                <!-- Input nama_penghargaan  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_penghargaan" name="nama_penghargaan" placeholder="Masukan nama nama_penghargaan" required>
+                <!-- validasi input -->
+                <p ng-show="penghargaanForm.nama_penghargaan.$invalid && penghargaanForm.nama_penghargaan.$dirty || submitted && penghargaanForm.nama_penghargaan.$invalid" class="help-block">Nama Penghargaan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/backend/penghargaan" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

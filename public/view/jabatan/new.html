@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+
+        <form name="jabatanForm" ng-submit="processForm(jabatanForm.$valid)" novalidate>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : jabatanForm.nama_jabatan.$invalid && jabatanForm.nama_jabatan.$dirty || submitted && jabatanForm.nama_jabatan.$invalid}">
+                <label for="pelatihan">Nama Jabatan</label>
+                <!-- Input pelatihan  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_jabatan" name="nama_jabatan" placeholder="Masukan nama pelatihan" required>
+                <!-- validasi input -->
+                <p ng-show="jabatanForm.nama_jabatan.$invalid && jabatanForm.nama_jabatan.$dirty || submitted && jabatanForm.nama_jabatan.$invalid" class="help-block">Nama Jabatan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : jabatanForm.level.$invalid && jabatanForm.level.$dirty || submitted && jabatanForm.level.$invalid}">
+                <label for="level">Level</label>
+                <!-- Input level  -->
+                <input type="text" class="form-control" ng-model="statusData.level" name="level" placeholder="Masukan level" required>
+                <!-- validasi input -->
+                <p ng-show="jabatanForm.level.$error.required && jabatanForm.level.$dirty || submitted && jabatanForm.level.$error.required" class="help-block">Level Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/backend/jabatan" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

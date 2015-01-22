@@ -10,7 +10,7 @@
   | and give it the Closure to execute when that URI is requested.
   |
  */
-Route::group(array('prefix' => 'admin', 'before' => 'check'), function() {
+Route::group(array('prefix' => 'admin', 'before' => ''), function() {
 // main page for the admin section (app/views/admin/dashboard.blade.php)
     Route::resource('pegawai', 'PegawaiController');
     Route::resource('statuspegawai', 'StatusPegawaiController');
@@ -20,10 +20,16 @@ Route::group(array('prefix' => 'admin', 'before' => 'check'), function() {
     Route::resource('unitkerja', 'UnitKerjaController');
     Route::resource('ppk', 'PpkController');
     Route::resource('pelatihan', 'PelatihanController');
+    Route::resource('jabatan', 'JabatanController');
+    Route::resource('penghargaan', 'PenghargaanController');
+    Route::resource('hukuman', 'HukumanController');
+    Route::resource('lokasipelatihan', 'LokasiPelatihanController');
+    Route::resource('lokasikerja', 'LokasiKerjaController');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
     Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');
     Route::get('/dropdowneselon', 'EselonController@getEselon');
 });
+
 
 Route::get('/', function() {
     return View::make('index'); // will return app/views/index.php

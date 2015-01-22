@@ -1,17 +1,28 @@
 <?php
 
-class PelatihanController extends \BaseController {
+class PenghargaanController extends \BaseController {
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
+//    protected $layout = 'backend.layouts.index';
+
     public function index() {
         //
         $data = array(
-            'field' => Pelatihan::getColumn(),
-            'values' => Pelatihan::orderBy('nama_pelatihan')->get()
+            'field' => Penghargaan::getColumn(),
+            'values' => Penghargaan::orderBy('nama_penghargaan')->get()
+        );
+        return Response::json($data);
+    }
+
+    public function getPenghargaan() {
+        // data array yang menampung data berupa nama field tabel dan values dari tabel.
+        $data = array(
+            'field' => Penghargaan::getColumn(),
+            'values' => Penghargaan::get()
         );
         return Response::json($data);
     }
@@ -31,9 +42,11 @@ class PelatihanController extends \BaseController {
      * @return Response
      */
     public function store() {
-        //
-        $pelatihan = new Pelatihan(Input::All());
-        if ($pelatihan->save()) {
+        // membuat object baru dari Penghargaan() dengan input nama_penghargaan
+        $penghargaan = new Penghargaan();
+        $penghargaan->nama_penghargaan = Input::get('nama_penghargaan');
+        // bila proses memasukan data berhasil maka akan mengirimkan response dalam bentuk json
+        if ($penghargaan->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -56,8 +69,8 @@ class PelatihanController extends \BaseController {
      */
     public function edit($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        return Response::json($pelatihan);
+        $penghargaan = Penghargaan::find($id);
+        return Response::json($penghargaan);
     }
 
     /**
@@ -68,8 +81,9 @@ class PelatihanController extends \BaseController {
      */
     public function update($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->update(Input::All())) {
+        $penghargaan = Penghargaan::find($id);
+        $penghargaan->nama_penghargaan = Input::get('nama_penghargaan');
+        if ($penghargaan->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -82,10 +96,10 @@ class PelatihanController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->delete()) {
+        $penghargaan = Penghargaan::find($id);
+        if ($penghargaan->delete()) {
             return Response::json(array('success' => TRUE));
-        };
+        }
     }
 
 }
