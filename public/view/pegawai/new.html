@@ -1,0 +1,152 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <tabset justified="true">
+                <tab heading="Data Pegawai">
+                    <fieldset>
+                        <br />
+                        <div class="form-group">
+                            <label for="inputNIP" class="col-lg-2 control-label">NIP</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="inputNIP" placeholder="NIP" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNIPLama" class="col-lg-2 control-label">NIP Lama</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="inputNIPLama" placeholder="NIP Lama" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NoPegawai" class="col-lg-2 control-label">Nomor Pegawai</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="NoPegawai" placeholder="Nomor Pegawai" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="NamaPegawai" class="col-lg-2 control-label">Nama Pegawai</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="NamaPegawai" placeholder="Nama Pegawai" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Jenis Kelamin</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="select" name="jenis_kelamin">
+                                    <option value="L">Laki Laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Agama</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="select" name="agama">
+                                    <option selected="selected" value=""></option>
+                                    <option value="I">Islam</option>
+                                    <option value="H">Hindu</option>
+                                    <option value="B">Budha</option>
+                                    <option value="K">Kristen</option>
+                                    <option value="KP">Kristen Protestan</option>
+                                    <option value="KK">Kristen Katolik</option>
+                                    <option value="KH">Konghucu</option>
+                                    <option value="L">Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Status Pegawai</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="select" name="status_pegawai">
+                                    <option value="L">Laki Laki</option>
+                                    <option value="P">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempat_lahir" class="col-lg-2 control-label">Tempat Lahir / Tgl Lahir</label>
+                            <div class="col-lg-5">
+                                <input class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" type="text">
+                            </div>
+                            <div class="col-lg-5">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened"   datepicker-options="dateOptions"  ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <div class="col-lg-10">
+                                <input class="form-control" id="inputPassword" placeholder="Password" type="password">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> Checkbox
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="textArea" class="col-lg-2 control-label">Textarea</label>
+                            <div class="col-lg-10">
+                                <textarea class="form-control" rows="3" id="textArea"></textarea>
+                                <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-2 control-label">Radios</label>
+                            <div class="col-lg-10">
+                                <div class="radio">
+                                    <label>
+                                        <input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+                                        Option one is this
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input name="optionsRadios" id="optionsRadios2" value="option2" type="radio">
+                                        Option two can be something else
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Selects</label>
+                            <div class="col-lg-10">
+                                <select class="form-control" id="select">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                                <br>
+                                <select multiple="" class="form-control">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </tab>
+                <tab heading="Data Pangkat">Static content</tab>
+                <tab heading="Data Jabatan">Static content</tab>
+                <tab heading="Foto Pegawai">Static content</tab>
+            </tabset>
+        </form>
+    </div>
+</div>

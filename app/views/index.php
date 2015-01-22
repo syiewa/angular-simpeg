@@ -9,18 +9,30 @@
         <style>
             .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
             body { padding-top: 70px; }
+            .nav-tabs > .active > a, .nav-tabs > .active > a:hover { 
+                outline: 0;
+                color: #555555;
+                background-color: #ffffff;
+                border: 1px solid #ddd;
+                border-bottom-color: transparent;
+                cursor: default;
+            }
+
+            .tab-content {
+                clear: none;
+            }
         </style>
         <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>
     </head>
     <body>
     <ng-header class="navbar navbar-default navbar-fixed-top"></ng-header> 
-    </div>
-    <div class="container">
-        <!--        Loading icon -->
-        <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
-        <!--        div dimana untuk menampilkan konten-->
-        <div ng-view ng-hide="loading"></div>
-    </div>
-    <ng-footer class="footer"></ng-footer>
+</div>
+<div class="container">
+    <!--        Loading icon -->
+    <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+    <!--        div dimana untuk menampilkan konten-->
+    <div ng-view ng-hide="loading"></div>
+</div>
+<ng-footer class="footer"></ng-footer>
 </body>
 </html>
