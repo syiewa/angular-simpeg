@@ -7,27 +7,17 @@ class PegawaiController extends \BaseController {
      *
      * @return Response
      */
-    protected $layout = 'backend.layouts.index';
-
-
     public function index() {
         //
-        $data['title'] = $this->layout->title = 'Dashboard';
-        $this->layout->content = View::make('backend.index', $data);
+        $data = array(
+            'field' => array('nip','nama_pegawai','golongan','nama_status_pegawai'),
+            'values' => Pegawai::orderBy('nama_pegawai')->get()
+        );
+        return Response::json($data);
     }
 
     public function getPegawai() {
-        $pegawai = Pegawai::PegawaiDataTable();
-        return Datatables::of($pegawai)
-                        ->add_column('action', '<div class="btn-group">
-	          <a class="btn btn-small" href=""><i class="icon-ok-circle"></i> Lihat Detail</a>
-	          <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-	          <ul class="dropdown-menu">
-	            <li><a href="h"><i class="icon-pencil"></i> Edit Data</a></li>
-	            <li><a href="" ><i class="icon-trash"></i> Hapus Data</a></li>
-	          </ul>
-	        </div>')
-                        ->make();
+        
     }
 
     /**
