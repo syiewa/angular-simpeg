@@ -10,14 +10,10 @@ class PegawaiController extends \BaseController {
     public function index() {
         //
         $data = array(
-            'field' => array('nip','nama_pegawai','golongan','nama_status_pegawai'),
+            'field' => array('nip', 'nama_pegawai', 'golongan', 'nama_status_pegawai'),
             'values' => Pegawai::orderBy('nama_pegawai')->get()
         );
         return Response::json($data);
-    }
-
-    public function getPegawai() {
-        
     }
 
     /**
@@ -27,6 +23,11 @@ class PegawaiController extends \BaseController {
      */
     public function create() {
         //
+        $data = array(
+            'status' => StatusPegawai::DropdownStatusPegawai(),
+            'golongan' => Golongan::DropdownGolongan(),
+        );
+        return Response::json($data);
     }
 
     /**

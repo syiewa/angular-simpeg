@@ -17,15 +17,16 @@
                 border-bottom-color: transparent;
                 cursor: default;
             }
-
-            .tab-content {
-                clear: none;
+            .air {
+                position: fixed;
+                top:0px;
+                width:225px;
             }
         </style>
         <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>
     </head>
     <body>
-    <ng-header class="navbar navbar-default navbar-fixed-top"></ng-header> 
+    <ng-header class="navbar navbar-default navbar-fixed-top ui-scrollfix" role="navigation" ui-scrollfix="+0"></ng-header> 
 </div>
 <div class="container">
     <!--        Loading icon -->

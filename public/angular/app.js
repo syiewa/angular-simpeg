@@ -3,7 +3,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'services/dataServices'],
     var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap']);
     var loginRequired = function($location, $q) {
         var deferred = $q.defer();
-        var userIsAuthenticated = function(){
+        var userIsAuthenticated = function() {
             return true;
         }
 
@@ -20,9 +20,9 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'services/dataServices'],
         $locationProvider.html5Mode(true);
         $routeProvider
                 .when("/", angularAMD.route({
-                    templateUrl: "view/statuspegawai/list.html",
-                    controller: "liststatuspegawaiController",
-                    controllerUrl: 'statuspegawai/statusPegawaiModul'
+                    templateUrl: "view/pegawai/list.html",
+                    controller: "listpegawaiController",
+                    controllerUrl: 'pegawai/pegawaiModul'
                 }))
                 .when("/backend/:page", angularAMD.route({
                     templateUrl: function(page) {

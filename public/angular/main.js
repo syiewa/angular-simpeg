@@ -27,7 +27,7 @@ require.config({
         'angularAMD': ['angular'],
         'angular-route': ['angular'],
         'ui-bootstrap': ['angular'],
-        'bootstrap': {"deps": ['jquery']}
+        'bootstrap': {"deps": ['jquery']},
     },
     // kick start application
     deps: ['app']

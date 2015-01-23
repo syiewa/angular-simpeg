@@ -1,6 +1,13 @@
 define(['app'], function(app) {
     var url = 'admin/pegawai';
+    app.directive('ngEdit', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'view/pegawai/edit.html'
+        }
+    });
     app.controller('editpegawaiController', function($scope, $routeParams, dataService, $location) {
+        $scope.kampret = true;
         $scope.header = "Edit Data Pegawai";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams;
@@ -30,22 +37,20 @@ define(['app'], function(app) {
     });
 
     app.controller('newpegawaiController', function($scope, dataService, $location) {
+        $scope.kampret = false;
         $scope.header = "Tambah Data Pegawai";
-
-        $scope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened = true;
-        };
-
+        $scope.opened = false;
+        $scope.openedtgl = false;
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[0];
+        $scope.status = [];
+        dataService.get('admin/pegawai/create').success(function(data) {
+            $scope.status = data.status;
+            $scope.golongan = data.golongan;
+        });
+        $scope.maxDate = new Date();
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi

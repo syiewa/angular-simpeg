@@ -29,4 +29,17 @@ class StatusPegawai extends Eloquent {
         return $data;
     }
 
+    public function scopeDropdownStatusPegawai($query, $where = null) {
+        $data = array();
+        if ($where != null) {
+            $status = $query->select(array('id_status_pegawai', 'nama_status'))->where('id_status_pegawai', '!=', $where)->get();
+        } else {
+            $status = $query->select(array('id_status_pegawai', 'nama_status'))->get();
+        }
+        foreach ($status as $unit) {
+            $data[] = array('id' => $unit->id_status_pegawai, 'label' => $unit->nama_status);
+        }
+        return $data;
+    }
+
 }

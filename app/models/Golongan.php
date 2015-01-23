@@ -21,9 +21,8 @@ class Golongan extends Eloquent {
         $data = array();
         $golongan = $query->select(array('id_golongan', 'golongan'))->get();
         if (count($golongan) > 0) {
-            foreach ($gaolongan as $gol) {
-                $data[0] = '-';
-                $data[$gol->id_eselon] = $gol->nama_eselon;
+            foreach ($golongan as $gol) {
+                $data[] = array('id' => $gol->id_golongan, 'label' => $gol->golongan);
             }
         }
         return $data;

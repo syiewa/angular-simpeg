@@ -49,7 +49,7 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('liststatuspegawaiController', function($scope, dataService, $filter,$location) {
+    app.controller('liststatuspegawaiController', function($scope, dataService, $filter, $location) {
         $scope.header = "Data Status Pegawai";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true
