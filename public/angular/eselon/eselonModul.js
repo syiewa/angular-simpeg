@@ -17,7 +17,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/eselon');
+                                $location.path('/backend/eselon');
                             }
                         }).
                         error(function(data) {
@@ -34,12 +34,12 @@ define(['app'], function(app) {
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
-            // jika valid maka akan mengirimkan data ke url admin/eselon dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
+            // jika valid maka akan mengirimkan data ke url admin/backend/eselon dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/eselon');
+                                $location.path('/backend/eselon');
                             }
                         }).
                         error(function(data) {
@@ -56,7 +56,7 @@ define(['app'], function(app) {
         getEselon(); // memanggil fungsi getEselon()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            $location.path('/eselon/edit/' + id);
+            $location.path('/backend/eselon/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);

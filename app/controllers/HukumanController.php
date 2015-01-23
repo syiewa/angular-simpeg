@@ -1,17 +1,28 @@
 <?php
 
-class PelatihanController extends \BaseController {
+class HukumanController extends \BaseController {
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
+//    protected $layout = 'backend.layouts.index';
+
     public function index() {
         //
         $data = array(
-            'field' => Pelatihan::getColumn(),
-            'values' => Pelatihan::orderBy('nama_pelatihan')->get()
+            'field' => Hukuman::getColumn(),
+            'values' => Hukuman::orderBy('nama_hukuman')->get()
+        );
+        return Response::json($data);
+    }
+
+    public function getHukuman() {
+        // data array yang menampung data berupa nama field tabel dan values dari tabel.
+        $data = array(
+            'field' => Hukuman::getColumn(),
+            'values' => Hukuman::get()
         );
         return Response::json($data);
     }
@@ -31,9 +42,11 @@ class PelatihanController extends \BaseController {
      * @return Response
      */
     public function store() {
-        //
-        $pelatihan = new Pelatihan(Input::All());
-        if ($pelatihan->save()) {
+        // membuat object baru dari Hukuman() dengan input nama_hukuman
+        $hukuman = new Hukuman();
+        $hukuman->nama_hukuman = Input::get('nama_hukuman');
+        // bila proses memasukan data berhasil maka akan mengirimkan response dalam bentuk json
+        if ($hukuman->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -56,8 +69,8 @@ class PelatihanController extends \BaseController {
      */
     public function edit($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        return Response::json($pelatihan);
+        $hukuman = Hukuman::find($id);
+        return Response::json($hukuman);
     }
 
     /**
@@ -68,8 +81,9 @@ class PelatihanController extends \BaseController {
      */
     public function update($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->update(Input::All())) {
+        $hukuman = Hukuman::find($id);
+        $hukuman->nama_hukuman = Input::get('nama_hukuman');
+        if ($hukuman->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -82,10 +96,10 @@ class PelatihanController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->delete()) {
+        $hukuman = Hukuman::find($id);
+        if ($hukuman->delete()) {
             return Response::json(array('success' => TRUE));
-        };
+        }
     }
 
 }

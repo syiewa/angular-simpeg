@@ -1,6 +1,6 @@
 <?php
 
-class PelatihanController extends \BaseController {
+class JabatanController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,8 +10,8 @@ class PelatihanController extends \BaseController {
     public function index() {
         //
         $data = array(
-            'field' => Pelatihan::getColumn(),
-            'values' => Pelatihan::orderBy('nama_pelatihan')->get()
+            'field' => Jabatan::getColumn(),
+            'values' => Jabatan::orderBy('nama_jabatan')->get()
         );
         return Response::json($data);
     }
@@ -32,8 +32,8 @@ class PelatihanController extends \BaseController {
      */
     public function store() {
         //
-        $pelatihan = new Pelatihan(Input::All());
-        if ($pelatihan->save()) {
+        $jabatan = new Jabatan(Input::All());
+        if ($jabatan->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -56,8 +56,8 @@ class PelatihanController extends \BaseController {
      */
     public function edit($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        return Response::json($pelatihan);
+        $jabatan = Jabatan::find($id);
+        return Response::json($jabatan);
     }
 
     /**
@@ -68,8 +68,8 @@ class PelatihanController extends \BaseController {
      */
     public function update($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->update(Input::All())) {
+        $jabatan = Jabatan::find($id);
+        if ($jabatan->update(Input::All())) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -82,8 +82,8 @@ class PelatihanController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->delete()) {
+        $jabatan = Jabatan::find($id);
+        if ($jabatan->delete()) {
             return Response::json(array('success' => TRUE));
         };
     }

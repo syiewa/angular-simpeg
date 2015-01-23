@@ -1,7 +1,7 @@
 define(['app'], function(app) {
-    var url = 'admin/golongan';
-    app.controller('editgolonganController', function($scope, $routeParams, dataService, $location) {
-        $scope.header = "Edit Data Golongan";
+    var url = 'admin/lokasikerja'; // load aplikasi dengan nama myApp dan plugin ngRoute dan ui.bootstrap
+    app.controller('editlokasikerjaController', function($scope, dataService, $routeParams, $location) {
+        $scope.header = "Edit Data Lokasi Kerja";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams;
         $scope.loading = true;
@@ -17,7 +17,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/backend/golongan');
+                                $location.path('/backend/lokasikerja');
                             }
                         }).
                         error(function(data) {
@@ -29,17 +29,17 @@ define(['app'], function(app) {
         };
     });
 
-    app.controller('newgolonganController', function($scope, dataService, $location) {
-        $scope.header = "Tambah Data Golongan";
+    app.controller('newlokasikerjaController', function($scope, dataService, $location) {
+        $scope.header = "Tambah Data Lokasi Kerja";
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
-            // jika valid maka akan mengirimkan data ke url admin/golongan dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
+            // jika valid maka akan mengirimkan data ke url admin/backend/lokasikerja dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/backend/golongan');
+                                $location.path('/backend/lokasikerja');
                             }
                         }).
                         error(function(data) {
@@ -49,21 +49,21 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('listgolonganController', function($scope, $filter, dataService, $location) {
-        $scope.header = "Data Golongan";
+    app.controller('listlokasikerjaController', function($scope, dataService, $filter,$location) {
+        $scope.header = "Data Lokasi Kerja";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true
-        getGolongan(); // memanggil fungsi getGolongan()
+        getStatus(); // memanggil fungsi getStatus()
         // fungsi untuk menuju halaman edit data
         $scope.edit = function(id) {
-            $location.path('/backend/golongan/edit/' + id);
+            $location.path('/backend/lokasikerja/edit/' + id);
         };
         $scope.sort = function(field) {
             $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);
             $scope.sort.field = field;
             $scope.sort.order = !$scope.sort.order;
         }
-        $scope.sort.field = 'golongan';
+        $scope.sort.field = 'lokasi_kerja';
         $scope.sort.order = false;
         // fungsi untuk delete data
         $scope.delete = function(id) {
@@ -71,12 +71,12 @@ define(['app'], function(app) {
                 dataService.destroy(url, id).success(function(data) {
                     $scope.loading = true;
                     if (data.success) {
-                        getGolongan();
+                        getStatus();
                     }
                 });
             }
         };
-        function getGolongan() {
+        function getStatus() {
             dataService.get(url).success(function(data) {
                 $scope.fields = data.field;
                 $scope.statuses = data.values;
@@ -99,9 +99,7 @@ define(['app'], function(app) {
                     $scope.numPerPage = 5;
                 }, true);
                 $scope.loading = false;
-            })
+            });
         }
-
     });
-    return app;
-}); // load aplikasi dengan nama myApp dan plugin ngRoute dan ui.bootstrap
+});

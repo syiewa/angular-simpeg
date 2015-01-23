@@ -1,17 +1,28 @@
 <?php
 
-class PelatihanController extends \BaseController {
+class LokasiKerjaController extends \BaseController {
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
+//    protected $layout = 'backend.layouts.index';
+
     public function index() {
         //
         $data = array(
-            'field' => Pelatihan::getColumn(),
-            'values' => Pelatihan::orderBy('nama_pelatihan')->get()
+            'field' => LokasiKerja::getColumn(),
+            'values' => LokasiKerja::orderBy('lokasi_kerja')->get()
+        );
+        return Response::json($data);
+    }
+
+    public function getLokasiKerja() {
+        // data array yang menampung data berupa nama field tabel dan values dari tabel.
+        $data = array(
+            'field' => LokasiKerja::getColumn(),
+            'values' => LokasiKerja::get()
         );
         return Response::json($data);
     }
@@ -31,9 +42,11 @@ class PelatihanController extends \BaseController {
      * @return Response
      */
     public function store() {
-        //
-        $pelatihan = new Pelatihan(Input::All());
-        if ($pelatihan->save()) {
+        // membuat object baru dari LokasiKerja() dengan input lokasi_kerja
+        $lokasi_kerja = new LokasiKerja();
+        $lokasi_kerja->lokasi_kerja = Input::get('lokasi_kerja');
+        // bila proses memasukan data berhasil maka akan mengirimkan response dalam bentuk json
+        if ($lokasi_kerja->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -56,8 +69,8 @@ class PelatihanController extends \BaseController {
      */
     public function edit($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        return Response::json($pelatihan);
+        $lokasi_kerja = LokasiKerja::find($id);
+        return Response::json($lokasi_kerja);
     }
 
     /**
@@ -68,8 +81,9 @@ class PelatihanController extends \BaseController {
      */
     public function update($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->update(Input::All())) {
+        $lokasi_kerja = LokasiKerja::find($id);
+        $lokasi_kerja->lokasi_kerja = Input::get('lokasi_kerja');
+        if ($lokasi_kerja->save()) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -82,10 +96,10 @@ class PelatihanController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $pelatihan = Pelatihan::find($id);
-        if ($pelatihan->delete()) {
+        $lokasi_kerja = LokasiKerja::find($id);
+        if ($lokasi_kerja->delete()) {
             return Response::json(array('success' => TRUE));
-        };
+        }
     }
 
 }
