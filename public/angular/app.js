@@ -1,6 +1,6 @@
 //var app = angular.module("myApp", ['routes','filter','statusPegawaiModul','golonganModul']); // load aplikasi dengan nama myApp dan plugin ngRoute dan ui.bootstrap
-define(['angularAMD', 'angular-route', 'ui-bootstrap', 'services/dataServices'], function(angularAMD) {
-    var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap']);
+define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'services/dataServices'], function(angularAMD) {
+    var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap', 'ngScrollSpy']);
     var loginRequired = function($location, $q) {
         var deferred = $q.defer();
         var userIsAuthenticated = function() {
@@ -23,6 +23,11 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'services/dataServices'],
                     templateUrl: "view/pegawai/list.html",
                     controller: "listpegawaiController",
                     controllerUrl: 'pegawai/pegawaiModul'
+                }))
+                .when("/backend/pegawai/edit/:id/:data", angularAMD.route({
+                    templateUrl: "view/pegawai/new.html",
+                    controller: 'editpegawaiController',
+                    controllerUrl: 'services/pegawai'
                 }))
                 .when("/backend/:page", angularAMD.route({
                     templateUrl: function(page) {

@@ -17,10 +17,15 @@
                 border-bottom-color: transparent;
                 cursor: default;
             }
-            .air {
+            .affix {
+                border-color: #d5d5d5;
+                border-radius: 0;
+                border-width: 0 0 1px;
+                left: 0;
                 position: fixed;
-                top:0px;
-                width:225px;
+                right: 0;
+                top: 40px;
+                z-index: 1020;
             }
         </style>
         <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>

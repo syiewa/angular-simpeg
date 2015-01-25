@@ -8,6 +8,7 @@ require.config({
         'angular-route': 'services/angular-route.min',
         'angularAMD': 'services/angularAMD.min',
         'ui-bootstrap': 'services/ui-bootstrap-tpls-0.12.0.min',
+        'ngScrollSpy' : 'services/ngScrollSpy.min',
         'golongan': 'golongan/golonganModul',
         'statuspegawai': 'statuspegawai/statusPegawaiModul',
         'eselon': 'eselon/eselonModul',
@@ -27,6 +28,7 @@ require.config({
         'angularAMD': ['angular'],
         'angular-route': ['angular'],
         'ui-bootstrap': ['angular'],
+        'ngScrollSpy' : ['angular'],
         'bootstrap': {"deps": ['jquery']},
     },
     // kick start application
