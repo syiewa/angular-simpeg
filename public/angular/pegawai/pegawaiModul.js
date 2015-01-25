@@ -6,17 +6,19 @@ define(['app'], function(app) {
             templateUrl: 'view/pegawai/edit.html'
         }
     });
-    app.directive('ngPegawai',function(){
+    app.directive('ngPegawai', function() {
         return {
             restrict: 'E',
-            templateUrl: 'view/pegawai/editpegawai.html'
+            templateUrl: 'view/pegawai/editpegawai.html',
+            controller: function($scope, $routeParams, dataService, $location) {
+                $scope.header = "Edit Data " + $scope.data;
+            }
         }
     })
     app.controller('editpegawaiController', function($scope, $routeParams, dataService, $location) {
         $scope.data = $routeParams.data;
-        console.log($scope.edit);
         $scope.kampret = true;
-        $scope.header = "Edit Data Pegawai";
+
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams.id;
         $scope.loading = true;

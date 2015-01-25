@@ -53,6 +53,22 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'services/
                     controllerUrl: 'services/pageServices',
                     resolve: {loginRequired: loginRequired}
                 }))
+                .when("/backend/:page/:action/:id/:subaction", angularAMD.route({
+                    templateUrl: function(page) {
+                        return "view/" + page.page + "/new.html";
+                    },
+                    controller: 'pageController',
+                    controllerUrl: 'services/pageServices',
+                    resolve: {loginRequired: loginRequired}
+                }))
+                .when("/backend/:page/:action/:id/:subaction/:subid", angularAMD.route({
+                    templateUrl: function(page) {
+                        return "view/" + page.page + "/new.html";
+                    },
+                    controller: 'pageController',
+                    controllerUrl: 'services/pageServices',
+                    resolve: {loginRequired: loginRequired}
+                }))
                 .otherwise({
                     redirectTo: "/"
                 });
