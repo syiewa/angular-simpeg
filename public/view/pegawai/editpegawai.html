@@ -74,7 +74,7 @@
                             </div>
                             <div class="col-lg-5">
                                 <p class="input-group">
-                                    <input type="date" 
+                                    <input type="text" 
                                            class="form-control" 
                                            datepicker-popup="dd MMMM yyyy" 
                                            ng-model="statusData.tanggal_lahir" 
@@ -111,7 +111,7 @@
                             <label for="tgl_pns" class="col-lg-2 control-label">Tgl Pengangkatan CPNS</label>
                             <div class="col-lg-5">
                                 <p class="input-group">
-                                    <input type="date" 
+                                    <input type="text" 
                                            class="form-control" 
                                            datepicker-popup="dd MMMM yyyy" 
                                            ng-model="statusData.tanggal_pengangkatan_cpns" 
@@ -194,7 +194,68 @@
                     </fieldset>
                 </tab>
                 <tab heading="Data Jabatan">
-
+                    <br />
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Status Jabatan</label>
+                            <div class="col-lg-10">
+                                <select ng-model="statusData.agama" class="form-control" id="select" name="agama">
+                                    <option selected="selected" value="">Pilih Status Jabatan</option>
+                                    <option value="2">STRUKTURAL</option>
+                                    <option value="3">DPK</option>
+                                    <option value="4">DPB</option>
+                                    <option value="5">DITUGASKAN</option>
+                                    <option value="6">FUNGSIONAL</option>
+                                    <option value="7">-</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Jabatan</label>
+                            <div class="col-lg-10">
+                                <select name="status" class="form-control" ng-model="statusData.golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Unit Kerja</label>
+                            <div class="col-lg-10">
+                                <select name="status" class="form-control" ng-model="statusData.golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Satuan Kerja</label>
+                            <div class="col-lg-10">
+                                <select name="status" class="form-control" ng-model="statusData.golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Lokasi Kerja</label>
+                            <div class="col-lg-10">
+                                <select name="status" class="form-control" ng-model="statusData.golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Eselon</label>
+                            <div class="col-lg-10">
+                                <select name="status" class="form-control" ng-model="statusData.golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
                 </tab>
                 <tab heading="Foto Pegawai">Static content</tab>
             </tabset>

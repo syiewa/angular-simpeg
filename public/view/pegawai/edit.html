@@ -11,18 +11,18 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="backend/pegawai/edit/{{statusId}}/pegawai">Pegawai</a></li>
-                <li><a href="backend/pegawai/keluarga/{{statusId}}">Keluarga</a></li>
-                <li><a href="backend/pegawai/edit/{{statusId}}/riwayatpangkat">Riwayat Pangkat</a></li>
-                <li><a href="backend/pegawai/edit/{{statusId}}/riwayatjabatan">Riwayat Jabatan</a></li>
-                <li><a href="backend/pegawai/edit/{{statusId}}/pendidikan">Pendidikan</a></li>
-                <li><a href="http://localhost/simpeg/data_pelatihan/index/2">Pelatihan</a></li>
-                <li><a href="http://localhost/simpeg/data_penghargaan/index/2">Penghargaan</a></li>
-                <li><a href="http://localhost/simpeg/data_seminar/index/2">Seminar</a></li>
-                <li><a href="http://localhost/simpeg/data_organisasi/index/2">Organisasi</a></li>
-                <li><a href="http://localhost/simpeg/data_gaji_pokok/index/2">Gaji Pokok</a></li>
-                <li><a href="http://localhost/simpeg/data_hukuman/index/2">Hukuman</a></li>
-                <li><a href="http://localhost/simpeg/data_dp3/index/2">DP3</a></li>
+                <li ng-class="{ 'active' : data == 'pegawai'}"><a href="backend/pegawai/edit/{{statusId}}/pegawai">Pegawai</a></li>
+                <li ng-class="{ 'active' : data == 'keluarga'}"><a href="backend/pegawai/edit/{{statusId}}/keluarga">Keluarga</a></li>
+                <li ng-class="{ 'active' : data == 'riwayatpangkat'}"><a href="backend/pegawai/edit/{{statusId}}/riwayatpangkat">Riwayat Pangkat</a></li>
+                <li ng-class="{ 'active' : data == 'riwayatjabatan'}"><a href="backend/pegawai/edit/{{statusId}}/riwayatjabatan">Riwayat Jabatan</a></li>
+                <li ng-class="{ 'active' : data == 'pendidikan'}"><a href="backend/pegawai/edit/{{statusId}}/pendidikan">Pendidikan</a></li>
+                <li ng-class="{ 'active' : data == 'pelatihan'}"><a href="backend/pegawai/edit/{{statusId}}/pelatihan">Pelatihan</a></li>
+                <li ng-class="{ 'active' : data == 'penghargaan'}"><a href="backend/pegawai/edit/{{statusId}}/penghargaan">Penghargaan</a></li>
+                <li ng-class="{ 'active' : data == 'seminar'}"><a href="backend/pegawai/edit/{{statusId}}/seminar">Seminar</a></li>
+                <li ng-class="{ 'active' : data == 'organisasi'}"><a href="backend/pegawai/edit/{{statusId}}/organisasi">Organisasi</a></li>
+                <li ng-class="{ 'active' : data == 'gajipokok'}"><a href="backend/pegawai/edit/{{statusId}}/gajipokok">Gaji Pokok</a></li>
+                <li ng-class="{ 'active' : data == 'hukuman'}"><a href="backend/pegawai/edit/{{statusId}}/hukuman">Hukuman</a></li>
+                <li ng-class="{ 'active' : data == 'dp3'}"><a href="backend/pegawai/edit/{{statusId}}/DP3">DP3</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

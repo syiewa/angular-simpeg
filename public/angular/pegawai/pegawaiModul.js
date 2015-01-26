@@ -11,14 +11,15 @@ define(['app'], function(app) {
             restrict: 'E',
             templateUrl: 'view/pegawai/editpegawai.html',
             controller: function($scope, $routeParams, dataService, $location) {
-                $scope.header = "Edit Data " + $scope.data;
+                if(!$routeParams.action){
+                    $scope.header = 'Edit Data '+$routeParams.data;
+                }
             }
         }
     })
     app.controller('editpegawaiController', function($scope, $routeParams, dataService, $location) {
         $scope.data = $routeParams.data;
         $scope.kampret = true;
-
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams.id;
         $scope.loading = true;
@@ -48,6 +49,7 @@ define(['app'], function(app) {
 
     app.controller('newpegawaiController', function($scope, dataService, $location) {
         $scope.kampret = false;
+        $scope.data = 'pegawai';
         $scope.header = "Tambah Data Pegawai";
         $scope.opened = false;
         $scope.openedtgl = false;
