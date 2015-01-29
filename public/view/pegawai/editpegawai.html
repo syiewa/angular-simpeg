@@ -213,51 +213,73 @@
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Jabatan</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.golongan">
-                                    <option value="">Pilih Golongan</option>
-                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                <select name="status" class="form-control" ng-model="statusData.jabatan">
+                                    <option value="">Pilih Jabatan</option>
+                                    <option ng-repeat="unit in jabatan" ng-selected="{{unit.id == statusData.jabatan}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Unit Kerja</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.golongan">
-                                    <option value="">Pilih Golongan</option>
-                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                <select name="status" class="form-control" ng-model="statusData.unitkerja">
+                                    <option value="">Pilih Unit Kerja</option>
+                                    <option ng-repeat="unit in unitkerja" ng-selected="{{unit.id == statusData.unitkerja}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Satuan Kerja</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.golongan">
-                                    <option value="">Pilih Golongan</option>
-                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                <select name="status" class="form-control" ng-model="statusData.satuankerja">
+                                    <option value="">Pilih Satuan Kerja</option>
+                                    <option ng-repeat="unit in satuankerja" ng-selected="{{unit.id == statusData.satuankerja}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Lokasi Kerja</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.golongan">
-                                    <option value="">Pilih Golongan</option>
-                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                <select name="status" class="form-control" ng-model="statusData.lokasikerja">
+                                    <option value="">Pilih Lokasi Kerja</option>
+                                    <option ng-repeat="unit in lokasikerja" ng-selected="{{unit.id == statusData.lokasikerja}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="select" class="col-lg-2 control-label">Eselon</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.golongan">
-                                    <option value="">Pilih Golongan</option>
-                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                <select name="status" class="form-control" ng-model="statusData.eselon">
+                                    <option value="">Pilih Eselon</option>
+                                    <option ng-repeat="unit in eselon" ng-selected="{{unit.id == statusData.eselon}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <a class="btn btn-default" href="/">Cancel</a>
+                                <button class="btn btn-primary" type="submit">Submit</button>
                             </div>
                         </div>
                     </fieldset>
                 </tab>
-                <tab heading="Foto Pegawai">Static content</tab>
+                <tab heading="Foto Pegawai">
+                    <br />
+                    <fieldset>
+                        <div class="form-group">
+                            <label for="select" class="col-lg-2 control-label">Foto</label>
+                            <div class="col-lg-10">
+                                <input type="file" id="exampleInputFile">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <a class="btn btn-default" href="/">Cancel</a>
+                                <button class="btn btn-primary" type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </tab>
             </tabset>
         </form>
     </div>

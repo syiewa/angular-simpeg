@@ -26,6 +26,11 @@ class PegawaiController extends \BaseController {
         $data = array(
             'status' => StatusPegawai::DropdownStatusPegawai(),
             'golongan' => Golongan::DropdownGolongan(),
+            'jabatan' => Jabatan::DropdownJabatan(),
+            'unitkerja' => UnitKerja::DropdownUnit(),
+            'satuankerja' => SatuanKerja::DropdownSatKer(),
+            'lokasikerja' => LokasiKerja::DropdownLokasiKerja(),
+            'eselon' => Eselon::DropdownEselon()
         );
         return Response::json($data);
     }

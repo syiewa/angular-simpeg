@@ -61,6 +61,11 @@ define(['app'], function(app) {
         dataService.get('admin/pegawai/create').success(function(data) {
             $scope.status = data.status;
             $scope.golongan = data.golongan;
+            $scope.jabatan = data.jabatan;
+            $scope.unitkerja = data.unitkerja;
+            $scope.satuankerja = data.satuankerja;
+            $scope.lokasikerja = data.lokasikerja;
+            $scope.eselon = data.eselon;
         });
         $scope.maxDate = new Date();
         $scope.statusData = {}; //data awal bernilai array kosong;
