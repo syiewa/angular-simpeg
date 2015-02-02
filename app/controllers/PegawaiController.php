@@ -42,6 +42,7 @@ class PegawaiController extends \BaseController {
      */
     public function store() {
         //
+        dd(Input::All());
     }
 
     /**

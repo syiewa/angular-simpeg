@@ -3,49 +3,69 @@
         <h1>{{header}}</h1>
     </div>
     <div class="panel-body">
-        <form class="form-horizontal" name="pegawaiForm">
+        <alert ng-show="pegawaiForm.nip.$invalid && pegawaiForm.nip.$dirty || submitted && pegawaiForm.nip.$invalid" type="danger" >NIP Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.nip_lama.$invalid && pegawaiForm.nip_lama.$dirty || submitted && pegawaiForm.nip_lama.$invalid" type="danger" >NIP Lama Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.no_kartu_pegawai.$invalid && pegawaiForm.no_kartu_pegawai.$dirty || submitted && pegawaiForm.no_kartu_pegawai.$invalid" type="danger" >Nomor Kartu Pegawai Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.nama_pegawai.$invalid && pegawaiForm.nama_pegawai.$dirty || submitted && pegawaiForm.nama_pegawai.$invalid" type="danger" >Nama Pegawai Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.jenis_kelamin.$invalid && pegawaiForm.jenis_kelamin.$dirty || submitted && pegawaiForm.jenis_kelamin.$invalid" type="danger" >Jenis Kelamin Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.agama.$invalid && pegawaiForm.agama.$dirty || submitted && pegawaiForm.agama.$invalid" type="danger" >Agama Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.status.$invalid && pegawaiForm.status.$dirty || submitted && pegawaiForm.status.$invalid" type="danger" >Status Pegawai Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.tempat_lahir.$invalid && pegawaiForm.tempat_lahir.$dirty || submitted && pegawaiForm.tempat_lahir.$invalid" type="danger" >Tempat Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.tanggal_lahir.$invalid && pegawaiForm.tanggal_lahir.$dirty || submitted && pegawaiForm.tanggal_lahir.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.usia.$invalid && pegawaiForm.usia.$dirty || submitted && pegawaiForm.usia.$invalid" type="danger" >Usia Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.no_npwp.$invalid && pegawaiForm.no_npwp.$dirty || submitted && pegawaiForm.no_npwp.$invalid" type="danger" >Nomor NPWP Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.kartu_askes_pegawai.$invalid && pegawaiForm.kartu_askes_pegawai.$dirty || submitted && pegawaiForm.kartu_askes_pegawai.$invalid" type="danger" >Kartu Askes Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.tanggal_pengangakatan_pegawai.$invalid && pegawaiForm.tanggal_pengangakatan_pegawai.$dirty || submitted && pegawaiForm.tanggal_pengangakatan_pegawai.$invalid" type="danger" >Tanggal Pengangkatan Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Alamat Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+
+        <form class="form-horizontal" name="pegawaiForm" ng-submit="processForm(pegawaiForm.$valid)" novalidate>
             <tabset justified="true">
                 <tab heading="Data Pegawai">
                     <fieldset>
                         <br />
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.nip.$invalid && pegawaiForm.nip.$dirty || submitted && pegawaiForm.nip.$invalid}">
                             <label for="inputNIP" class="col-lg-2 control-label">NIP</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.nip" class="form-control" id="inputNIP" placeholder="NIP" type="text" name="nip">
+                                <input ng-model="statusData.nip" class="form-control" id="inputNIP" placeholder="NIP" type="text" name="nip" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.nip_lama.$invalid && pegawaiForm.nip_lama.$dirty || submitted && pegawaiForm.nip_lama.$invalid}">
                             <label for="inputNIPLama" class="col-lg-2 control-label">NIP Lama</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.nip_lama" class="form-control" id="inputNIPLama" placeholder="NIP Lama" type="text" name="nip_lama">
+                                <input ng-model="statusData.nip_lama" class="form-control" id="inputNIPLama" placeholder="NIP Lama" type="text" name="nip_lama" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.no_kartu_pegawai.$invalid && pegawaiForm.no_kartu_pegawai.$dirty || submitted && pegawaiForm.no_kartu_pegawai.$invalid}">
                             <label for="NoPegawai" class="col-lg-2 control-label">Nomor Pegawai</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.no_kartu_pegawai" class="form-control" name="no_kartu_pegawai" placeholder="Nomor Pegawai" type="text">
+                                <input ng-model="statusData.no_kartu_pegawai" class="form-control" name="no_kartu_pegawai" placeholder="Nomor Pegawai" type="text" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.nama_pegawai.$invalid && pegawaiForm.nama_pegawai.$dirty || submitted && pegawaiForm.nama_pegawai.$invalid}">
                             <label for="NamaPegawai" class="col-lg-2 control-label">Nama Pegawai</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.nama_pegawai" class="form-control" id="nama_pegawai" placeholder="Nama Pegawai" type="text">
+                                <input ng-model="statusData.nama_pegawai" class="form-control" id="nama_pegawai" placeholder="Nama Pegawai" type="text" name="nama_pegawai" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.jenis_kelamin.$invalid && pegawaiForm.jenis_kelamin.$dirty || submitted && pegawaiForm.jenis_kelamin.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Jenis Kelamin</label>
                             <div class="col-lg-10">
-                                <select ng-model="statusData.jenis_kelamin" class="form-control" id="select" name="jenis_kelamin">
+                                <select ng-model="statusData.jenis_kelamin" class="form-control" name="jenis_kelamin" required>
                                     <option selected="selected" value="">Pilih Jenis Kelamin</option>
                                     <option value="L">Laki Laki</option>
                                     <option value="P">Perempuan</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.agama_select.$invalid && pegawaiForm.agama_select.$dirty || submitted && pegawaiForm.agama_select.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Agama</label>
                             <div class="col-lg-10">
-                                <select ng-model="statusData.agama" class="form-control" id="select" name="agama">
+                                <select ng-model="statusData.agama" class="form-control" name="agama_select" required>
                                     <option selected="selected" value="">Pilih Agama</option>
                                     <option value="I">Islam</option>
                                     <option value="H">Hindu</option>
@@ -58,62 +78,63 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.status_select.$invalid && pegawaiForm.status_select.$dirty || submitted && pegawaiForm.status_select.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Status Pegawai</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.status" name="status.pegawai">
+                                <select name="status_select" class="form-control" ng-model="statusData.status" required>
                                     <option value="">Pilih Status Pegawai</option>
                                     <option ng-repeat="unit in status" ng-selected="{{unit.id == statusData.status}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.tempat_lahir.$invalid && pegawaiForm.tempat_lahir.$dirty || submitted && pegawaiForm.tempat_lahir.$invalid}">
                             <label for="tempat_lahir" class="col-lg-2 control-label">Tempat Lahir / Tgl Lahir</label>
-                            <div class="col-lg-5">
-                                <input ng-model="statusData.tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" type="text" name="tempat_lahir">
+                            <div class="col-lg-7">
+                                <input ng-model="statusData.tempat_lahir" class="form-control" id="tempat_lahir" placeholder="Tempat Lahir" type="text" name="tempat_lahir" required>
                             </div>
-                            <div class="col-lg-5">
-                                <p class="input-group">
-                                    <input type="text" 
-                                           class="form-control" 
-                                           datepicker-popup="dd MMMM yyyy" 
-                                           ng-model="statusData.tanggal_lahir" 
-                                           is-open="opened" 
-                                           datepicker-options="dateOptions"  
-                                           ng-required="true" 
-                                           close-text="Close" 
-                                           ng-click="opened = true"
-                                           max-date="maxDate"
-                                           name="tanggal_lahir"
-                                           />
-                                </p>
+                            <div class="col-lg-3" ng-class="{ 'has-error' : pegawaiForm.tanggal_lahir.$invalid && pegawaiForm.tanggal_lahir.$dirty || submitted && pegawaiForm.tanggal_lahir.$invalid}">
+                                <input type="text" 
+                                       class="form-control" 
+                                       placeholder="dd/mm/yyyy"
+                                       datepicker-popup="dd/MM/yyyy" 
+                                       ng-model="statusData.tanggal_lahir" 
+                                       is-open="opened" 
+                                       datepicker-options="dateOptions"  
+                                       ng-required="true" 
+                                       close-text="Close" 
+                                       ng-click="opened = true"
+                                       max-date="maxDate"
+                                       name="tanggal_lahir"
+                                       required
+                                       date-validator
+                                       />
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.usia.$invalid && pegawaiForm.usia.$dirty || submitted && pegawaiForm.usia.$invalid}">
                             <label for="usia" class="col-lg-2 control-label">Usia</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.usia" class="form-control" id="usia" placeholder="Usia" type="text" name="usia">
+                                <input ng-model="statusData.usia" class="form-control" id="usia" placeholder="Usia" type="text" name="usia" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.no_npwp.$invalid && pegawaiForm.no_npwp.$dirty || submitted && pegawaiForm.no_npwp.$invalid}">
                             <label for="NoNPWP" class="col-lg-2 control-label">Nomor NPWP</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.no_npwp" class="form-control" id="NoNPWP" placeholder="Nomor NPWP" type="text" name="no_npwp">
+                                <input ng-model="statusData.no_npwp" class="form-control" id="NoNPWP" placeholder="Nomor NPWP" type="text" name="no_npwp" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.kartu_askes_pegawai.$invalid && pegawaiForm.kartu_askes_pegawai.$dirty || submitted && pegawaiForm.kartu_askes_pegawai.$invalid}">
                             <label for="KAP" class="col-lg-2 control-label">Kartu Askes Pegawai</label>
                             <div class="col-lg-10">
-                                <input ng-model="statusData.kartu_askes_pegawai" class="form-control" id="KAP" placeholder="Kartu Akses Pegawai" type="text" name="kartu_askes_pegawai">
+                                <input ng-model="statusData.kartu_askes_pegawai" class="form-control" id="KAP" placeholder="Kartu Akses Pegawai" type="text" name="kartu_askes_pegawai" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.tanggal_pengangkatan_cpns.$invalid && pegawaiForm.tanggal_pengangkatan_cpns.$dirty || submitted && pegawaiForm.tanggal_pengangkatan_cpns.$invalid}">
                             <label for="tgl_pns" class="col-lg-2 control-label">Tgl Pengangkatan CPNS</label>
                             <div class="col-lg-5">
-                                <p class="input-group">
                                     <input type="text" 
+                                           placeholder="dd/mm/yyyy"
                                            class="form-control" 
-                                           datepicker-popup="dd MMMM yyyy" 
+                                           datepicker-popup="dd/MM/yyyy" 
                                            ng-model="statusData.tanggal_pengangkatan_cpns" 
                                            is-open="openedtgl" 
                                            datepicker-options="dateOptions"  
@@ -122,14 +143,15 @@
                                            ng-click="openedtgl = true"
                                            max-date="maxDate"
                                            name="tanggal_pengangkatan_cpns"
+                                           required
+                                           date-validator
                                            />
-                                </p>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid}">
                             <label for="KAP" class="col-lg-2 control-label">Alamat</label>
                             <div class="col-lg-10">
-                                <textarea ng-model="statusData.alamat" class="form-control" id="KAP" placeholder="Alamat" name="alamat"></textarea>
+                                <textarea ng-model="statusData.alamat" class="form-control" id="KAP" placeholder="Alamat" name="alamat" required></textarea>
                             </div>
                         </div>
                         <div class="form-group">

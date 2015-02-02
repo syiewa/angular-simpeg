@@ -11,12 +11,40 @@ define(['app'], function(app) {
             restrict: 'E',
             templateUrl: 'view/pegawai/editpegawai.html',
             controller: function($scope, $routeParams, dataService, $location) {
-                if(!$routeParams.action){
-                    $scope.header = 'Edit Data '+$routeParams.data;
+                if (!$routeParams.action) {
+                    $scope.header = 'Edit Data ' + $routeParams.data;
                 }
             }
         }
     })
+    app.directive('dateValidator', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, elem, attr, ngModel) {
+                function validate(value) {
+                    // it is a date
+                    if (value !== undefined && value != null) {
+                        ngModel.$setValidity('badDate', true);
+                        if (value instanceof Date) {
+                            var d = Date.parse(value);
+                            // it is a date
+                            if (isNaN(d)) {
+                                ngModel.$setValidity('badDate', false);
+                            }
+                        } else {
+                            var myPattern = new RegExp(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/);
+                            if (value != '' && !myPattern.test(value)) {
+                                ngModel.$setValidity('badDate', false);
+                            }
+                        }
+                    }
+                }
+                scope.$watch(function() {
+                    return ngModel.$viewValue;
+                }, validate);
+            }
+        };
+    });
     app.controller('editpegawaiController', function($scope, $routeParams, dataService, $location) {
         $scope.data = $routeParams.data;
         $scope.kampret = true;
