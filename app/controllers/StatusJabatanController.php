@@ -1,6 +1,6 @@
 <?php
 
-class PegawaiController extends \BaseController {
+class StatusJabatanController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,8 +10,8 @@ class PegawaiController extends \BaseController {
     public function index() {
         //
         $data = array(
-            'field' => array('nip', 'nama_pegawai', 'golongan', 'nama_status_pegawai'),
-            'values' => Pegawai::orderBy('nama_pegawai')->get()
+            'field' => StatusJabatan::getColumn(),
+            'values' => StatusJabatan::orderBy('nama_jabatan')->get()
         );
         return Response::json($data);
     }
@@ -23,17 +23,6 @@ class PegawaiController extends \BaseController {
      */
     public function create() {
         //
-        $data = array(
-            'status' => StatusPegawai::DropdownStatusPegawai(),
-            'golongan' => Golongan::DropdownGolongan(),
-            'jabatan' => Jabatan::DropdownJabatan(),
-            'unitkerja' => UnitKerja::DropdownUnit(),
-            'satuankerja' => SatuanKerja::DropdownSatKer(),
-            'lokasikerja' => LokasiKerja::DropdownLokasiKerja(),
-            'eselon' => Eselon::DropdownEselon(),
-            'statusjabatan' => StatusJabatan::DropdownStatusJabatan()
-        );
-        return Response::json($data);
     }
 
     /**
@@ -43,8 +32,10 @@ class PegawaiController extends \BaseController {
      */
     public function store() {
         //
-        $file = Input::All();
-        dd($file);
+        $jabatan = new StatusJabatan(Input::All());
+        if ($jabatan->save()) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     /**
@@ -65,8 +56,8 @@ class PegawaiController extends \BaseController {
      */
     public function edit($id) {
         //
-        $pegawai = Pegawai::find($id);
-        return Response::json($pegawai);
+        $jabatan = StatusJabatan::find($id);
+        return Response::json($jabatan);
     }
 
     /**
@@ -77,6 +68,10 @@ class PegawaiController extends \BaseController {
      */
     public function update($id) {
         //
+        $jabatan = StatusJabatan::find($id);
+        if ($jabatan->update(Input::All())) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     /**
@@ -87,6 +82,10 @@ class PegawaiController extends \BaseController {
      */
     public function destroy($id) {
         //
+        $jabatan = StatusJabatan::find($id);
+        if ($jabatan->delete()) {
+            return Response::json(array('success' => TRUE));
+        };
     }
 
 }

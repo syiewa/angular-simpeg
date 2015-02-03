@@ -8,6 +8,7 @@ class Pegawai extends Eloquent {
      * @var string
      */
     protected $table = 'tbl_data_pegawai';
+    protected $primaryKey = 'id_pegawai';
     protected $appends = ['golongan', 'nama_status_pegawai'];
 
     /**

@@ -22,16 +22,17 @@
                 border-radius: 0;
                 border-width: 0 0 1px;
                 left: 0;
-                position: fixed;
+                margin-bottom: 20px;
+                width: 100%;
                 right: 0;
                 top: 40px;
-                z-index: 1020;
+                z-index: 1030;
             }
         </style>
         <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>
     </head>
     <body>
-    <ng-header class="navbar navbar-default navbar-fixed-top ui-scrollfix" role="navigation" ui-scrollfix="+0"></ng-header> 
+    <ng-header class="navbar navbar-default navbar-fixed-top" role="navigation"></ng-header> 
 </div>
 <div class="container">
     <!--        Loading icon -->

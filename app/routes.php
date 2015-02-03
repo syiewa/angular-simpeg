@@ -21,6 +21,7 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function() {
     Route::resource('ppk', 'PpkController');
     Route::resource('pelatihan', 'PelatihanController');
     Route::resource('jabatan', 'JabatanController');
+    Route::resource('statusjabatan', 'StatusJabatanController');
     Route::resource('penghargaan', 'PenghargaanController');
     Route::resource('hukuman', 'HukumanController');
     Route::resource('lokasipelatihan', 'LokasiPelatihanController');
