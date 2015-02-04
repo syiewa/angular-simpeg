@@ -17,6 +17,62 @@ define(['app'], function(app) {
             }
         }
     })
+    app.directive('ngKeluarga', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'view/pegawai/datakeluarga.html',
+            controller: function($scope, $routeParams, dataService, $location,$filter) {
+                console.log($routeParams.id);
+                if (!$routeParams.action) {
+                    $scope.header = 'Edit Data ' + $routeParams.data;
+                    dataService.get('admin/pegawai/edit/'+$routeParams.id+'/keluarga').success(function(data) {
+                        $scope.fields = data.field;
+                        $scope.statuses = data.values;
+                        $scope.totalItems = $scope.statuses.length;
+                        $scope.currentPage = 1;
+                        $scope.numPerPage = 20;
+                        // fungsi sorting data ASC/DESC
+                        $scope.paginate = function(value) {
+                            var begin, end, index;
+                            begin = ($scope.currentPage - 1) * $scope.numPerPage;
+                            end = begin + $scope.numPerPage;
+                            index = $scope.statuses.indexOf(value);
+                            return (begin <= index && index < end);
+                        };
+                        $scope.$watch('query', function(query) {
+                            $scope.statuses = data.values;
+                            $scope.statuses = $filter('filter')($scope.statuses, $scope.query);
+                            $scope.totalItems = $scope.statuses.length;
+                            $scope.currentPage = 1;
+                            $scope.numPerPage = 20;
+                        }, true);
+                        $scope.loading = false;
+                    })
+                    $scope.edit = function(id) {
+                        $location.path('/backend/pegawai/edit/' + id);
+                    };
+                    $scope.sort = function(field) {
+                        $scope.statuses = $filter('orderBy')($scope.statuses, field, $scope.sort.order);
+                        $scope.sort.field = field;
+                        $scope.sort.order = !$scope.sort.order;
+                    }
+                    $scope.sort.field = 'nama_pegawai';
+                    $scope.sort.order = false;
+                    // fungsi untuk delete data
+                    $scope.delete = function(id) {
+                        if (confirm("Anda yakin untuk menghapus data?") === true) {
+                            dataService.destroy(url, id).success(function(data) {
+                                $scope.loading = true;
+                                if (data.success) {
+                                    getPegawai();
+                                }
+                            });
+                        }
+                    };
+                }
+            },
+        }
+    })
     app.directive('dateValidator', function() {
         return {
             require: 'ngModel',
@@ -52,6 +108,27 @@ define(['app'], function(app) {
         $scope.statusId = $routeParams.id;
         $scope.loading = true;
         $scope.submitted = false;
+        $scope.opened = false;
+        $scope.openedtgl = false;
+        $scope.openedsk = false;
+        $scope.openedmulai = false;
+        $scope.openedselesai = false;
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+        $scope.status = [];
+        dataService.get('admin/pegawai/create').success(function(data) {
+            $scope.status = data.status;
+            $scope.golongan = data.golongan;
+            $scope.jabatan = data.jabatan;
+            $scope.statusjabatan = data.statusjabatan;
+            $scope.unitkerja = data.unitkerja;
+            $scope.satuankerja = data.satuankerja;
+            $scope.lokasikerja = data.lokasikerja;
+            $scope.eselon = data.eselon;
+        });
+        $scope.maxDate = new Date();
         // ambil data dari database dengan ajax
         dataService.edit(url, $scope.statusId).success(function(data) {
             $scope.statusData = data;
@@ -73,14 +150,18 @@ define(['app'], function(app) {
                 $scope.submitted = true;
             }
         };
+
     });
 
-    app.controller('newpegawaiController', function($scope, dataService, $location) {
+    app.controller('newpegawaiController', function($scope, dataService, $location, $compile, $upload) {
         $scope.kampret = false;
         $scope.data = 'pegawai';
         $scope.header = "Tambah Data Pegawai";
         $scope.opened = false;
         $scope.openedtgl = false;
+        $scope.openedsk = false;
+        $scope.openedmulai = false;
+        $scope.openedselesai = false;
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
@@ -90,6 +171,7 @@ define(['app'], function(app) {
             $scope.status = data.status;
             $scope.golongan = data.golongan;
             $scope.jabatan = data.jabatan;
+            $scope.statusjabatan = data.statusjabatan;
             $scope.unitkerja = data.unitkerja;
             $scope.satuankerja = data.satuankerja;
             $scope.lokasikerja = data.lokasikerja;
@@ -98,17 +180,30 @@ define(['app'], function(app) {
         $scope.maxDate = new Date();
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.submitted = false; // submitted bernilai false 
+
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
             // jika valid maka akan mengirimkan data ke url admin/backend/pegawai dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
-                dataService.save(url, $scope.statusData).
-                        success(function(data) {
-                            if (data.success) {
-                                $location.path('/backend/pegawai');
-                            }
-                        }).
-                        error(function(data) {
-                        });
+                if ($scope.statusData.foto) {
+                    $upload.upload({
+                        url: url,
+                        method: 'POST',
+                        file: $scope.statusData.foto,
+                        data: $scope.statusData
+                    }).success(function(data, status, headers, config) {
+                        console.log(data);
+                    });
+
+                } else {
+                    dataService.save(url, $scope.statusData).
+                            success(function(data) {
+                                if (data.success) {
+                                    $location.path('/backend/pegawai');
+                                }
+                            }).
+                            error(function(data) {
+                            });
+                }
             } else {
                 $scope.submitted = true;
             }

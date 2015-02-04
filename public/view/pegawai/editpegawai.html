@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default telo">
     <div class="panel-heading" ng-init="edit = true">
         <h1>{{header}}</h1>
     </div>
@@ -17,13 +17,19 @@
         <alert ng-show="pegawaiForm.kartu_askes_pegawai.$invalid && pegawaiForm.kartu_askes_pegawai.$dirty || submitted && pegawaiForm.kartu_askes_pegawai.$invalid" type="danger" >Kartu Askes Diperlukan.</alert>
         <alert ng-show="pegawaiForm.tanggal_pengangakatan_pegawai.$invalid && pegawaiForm.tanggal_pengangakatan_pegawai.$dirty || submitted && pegawaiForm.tanggal_pengangakatan_pegawai.$invalid" type="danger" >Tanggal Pengangkatan Diperlukan.</alert>
         <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Alamat Diperlukan.</alert>
-        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
-        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
-        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
-        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
-        <alert ng-show="pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid" type="danger" >Tanggal Lahir Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.golongan_select.$invalid && pegawaiForm.golongan_select.$dirty || submitted && pegawaiForm.golongan_select.$invalid" type="danger" >Golongan Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.nomor_sk_pangkat.$invalid && pegawaiForm.nomor_sk_pangkat.$dirty || submitted && pegawaiForm.nomor_sk_pangkat.$invalid" type="danger" >Nomor SK Pangkat Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.tanggal_sk_pangkat.$invalid && pegawaiForm.tanggal_sk_pangkat.$dirty || submitted && pegawaiForm.tanggal_sk_pangkat.$invalid" type="danger" >Tanggal SK Pangkat Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.tanggal_mulai_pangkat.$invalid && pegawaiForm.tanggal_mulai_pangkat.$dirty || submitted && pegawaiForm.tanggal_mulai_pangkat.$invalid" type="danger" >Tanggal Mulai Pangkat Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.tanggal_selesai_pangkat.$invalid && pegawaiForm.tanggal_selesai_pangkat.$dirty || submitted && pegawaiForm.tanggal_selesai_pangkat.$invalid" type="danger" >Tanggal Selesai Pangkat Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.id_status_jabatan.$invalid && pegawaiForm.id_status_jabatan.$dirty || submitted && pegawaiForm.id_status_jabatan.$invalid" type="danger" >Status Jabatan Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.jabatan.$invalid && pegawaiForm.jabatan.$dirty || submitted && pegawaiForm.jabatan.$invalid" type="danger" >Jabatan Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.unitkerja.$invalid && pegawaiForm.unitkerja.$dirty || submitted && pegawaiForm.unitkerja.$invalid" type="danger" >Unit Kerja Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.satuankerja.$invalid && pegawaiForm.satuankerja.$dirty || submitted && pegawaiForm.satuankerja.$invalid" type="danger" >Satuan Kerja Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.lokasikerja.$invalid && pegawaiForm.lokasikerja.$dirty || submitted && pegawaiForm.lokasikerja.$invalid" type="danger" >Lokasi Kerja Diperlukan.</alert>
+        <alert ng-show="pegawaiForm.eselon.$invalid && pegawaiForm.eselon.$dirty || submitted && pegawaiForm.eselon.$invalid" type="danger" >Eselon Diperlukan.</alert>
 
-        <form class="form-horizontal" name="pegawaiForm" ng-submit="processForm(pegawaiForm.$valid)" novalidate>
+        <form class="form-horizontal" name="pegawaiForm" ng-submit="processForm(pegawaiForm.$valid)" enctype="multipart/form-data" novalidate>
             <tabset justified="true">
                 <tab heading="Data Pegawai">
                     <fieldset>
@@ -81,9 +87,9 @@
                         <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.status_select.$invalid && pegawaiForm.status_select.$dirty || submitted && pegawaiForm.status_select.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Status Pegawai</label>
                             <div class="col-lg-10">
-                                <select name="status_select" class="form-control" ng-model="statusData.status" required>
+                                <select name="status_select" class="form-control" ng-model="statusData.status_pegawai" required>
                                     <option value="">Pilih Status Pegawai</option>
-                                    <option ng-repeat="unit in status" ng-selected="{{unit.id == statusData.status}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in status" ng-selected="{{unit.id == statusData.status_pegawai}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
@@ -131,21 +137,21 @@
                         <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.tanggal_pengangkatan_cpns.$invalid && pegawaiForm.tanggal_pengangkatan_cpns.$dirty || submitted && pegawaiForm.tanggal_pengangkatan_cpns.$invalid}">
                             <label for="tgl_pns" class="col-lg-2 control-label">Tgl Pengangkatan CPNS</label>
                             <div class="col-lg-5">
-                                    <input type="text" 
-                                           placeholder="dd/mm/yyyy"
-                                           class="form-control" 
-                                           datepicker-popup="dd/MM/yyyy" 
-                                           ng-model="statusData.tanggal_pengangkatan_cpns" 
-                                           is-open="openedtgl" 
-                                           datepicker-options="dateOptions"  
-                                           ng-required="true" 
-                                           close-text="Close" 
-                                           ng-click="openedtgl = true"
-                                           max-date="maxDate"
-                                           name="tanggal_pengangkatan_cpns"
-                                           required
-                                           date-validator
-                                           />
+                                <input type="text" 
+                                       placeholder="dd/mm/yyyy"
+                                       class="form-control" 
+                                       datepicker-popup="dd/MM/yyyy" 
+                                       ng-model="statusData.tanggal_pengangkatan_cpns" 
+                                       is-open="openedtgl" 
+                                       datepicker-options="dateOptions"  
+                                       ng-required="true" 
+                                       close-text="Close" 
+                                       ng-click="openedtgl = true"
+                                       max-date="maxDate"
+                                       name="tanggal_pengangkatan_cpns"
+                                       required
+                                       date-validator
+                                       />
                             </div>
                         </div>
                         <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.alamat.$invalid && pegawaiForm.alamat.$dirty || submitted && pegawaiForm.alamat.$invalid}">
@@ -165,46 +171,88 @@
                 <tab heading="Data Pangkat">
                     <br />
                     <fieldset>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.status_select.$invalid && pegawaiForm.status_select.$dirty || submitted && pegawaiForm.status_select.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Status Pegawai</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.status">
+                                <select name="status_select" class="form-control" ng-model="statusData.status_pegawai" required>
                                     <option value="">Pilih Status Pegawai</option>
-                                    <option ng-repeat="unit in status" ng-selected="{{unit.id == statusData.status}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in status" ng-selected="{{unit.id == statusData.status_pegawai}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.golongan_select.$invalid && pegawaiForm.golongan_select.$dirty || submitted && pegawaiForm.golongan_select.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Golongan</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.golongan">
+                                <select name="golongan_select" class="form-control" ng-model="statusData.id_golongan" required>
                                     <option value="">Pilih Golongan</option>
-                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.id_golongan}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.nomor_sk_pangkat.$invalid && pegawaiForm.nomor_sk_pangkat.$dirty || submitted && pegawaiForm.nomor_sk_pangkat.$invalid}">
                             <label for="inputNIPLama" class="col-lg-2 control-label">Nomor SK</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputNIPLama" placeholder="Nomor SK" type="text">
+                                <input class="form-control" name="nomor_sk_pangkat" ng-model="statusData.nomor_sk_pangkat" placeholder="Nomor SK" type="text" required>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.tanggal_sk_pangkat.$invalid && pegawaiForm.tanggal_sk_pangkat.$dirty || submitted && pegawaiForm.tanggal_sk_pangkat.$invalid}">
                             <label for="inputNIPLama" class="col-lg-2 control-label">Tanggal SK</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputNIPLama" placeholder="Tanggal SK" type="text">
+                                <input type="text" 
+                                       placeholder="dd/mm/yyyy"
+                                       class="form-control" 
+                                       datepicker-popup="dd/MM/yyyy" 
+                                       ng-model="statusData.tanggal_sk_pangkat" 
+                                       is-open="openedsk" 
+                                       datepicker-options="dateOptions"  
+                                       ng-required="true" 
+                                       close-text="Close" 
+                                       ng-click="openedsk = true"
+                                       max-date="maxDate"
+                                       name="tanggal_sk_pangkat"
+                                       required
+                                       date-validator
+                                       /> 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.tanggal_mulai_pangkat.$invalid && pegawaiForm.tanggal_mulai_pangkat.$dirty || submitted && pegawaiForm.tanggal_mulai_pangkat.$invalid}">
                             <label for="inputNIPLama" class="col-lg-2 control-label">Tanggal Mulai</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputNIPLama" placeholder="Tanggal Mulai" type="text">
+                                <input type="text" 
+                                       placeholder="dd/mm/yyyy"
+                                       class="form-control" 
+                                       datepicker-popup="dd/MM/yyyy" 
+                                       ng-model="statusData.tanggal_mulai_pangkat" 
+                                       is-open="openedmulai" 
+                                       datepicker-options="dateOptions"  
+                                       ng-required="true" 
+                                       close-text="Close" 
+                                       ng-click="openedmulai = true"
+                                       max-date="maxDate"
+                                       name="tanggal_mulai_pangkat"
+                                       required
+                                       date-validator
+                                       /> 
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.tanggal_selesai_pangkat.$invalid && pegawaiForm.tanggal_selesai_pangkat.$dirty || submitted && pegawaiForm.tanggal_selesai_pangkat.$invalid}">
                             <label for="inputNIPLama" class="col-lg-2 control-label">Tanggal Selesai</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputNIPLama" placeholder="Tanggal Selesai" type="text">
+                                <input type="text" 
+                                       placeholder="dd/mm/yyyy"
+                                       class="form-control" 
+                                       datepicker-popup="dd/MM/yyyy" 
+                                       ng-model="statusData.tanggal_selesai_pangkat" 
+                                       is-open="openedselesai" 
+                                       datepicker-options="dateOptions"  
+                                       ng-required="true" 
+                                       close-text="Close" 
+                                       ng-click="openedselesai = true"
+                                       max-date="maxDate"
+                                       name="tanggal_selesai_pangkat"
+                                       required
+                                       date-validator
+                                       /> 
                             </div>
                         </div>
                         <div class="form-group">
@@ -218,62 +266,57 @@
                 <tab heading="Data Jabatan">
                     <br />
                     <fieldset>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.id_status_jabatan.$invalid && pegawaiForm.id_status_jabatan.$dirty || submitted && pegawaiForm.id_status_jabatan.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Status Jabatan</label>
                             <div class="col-lg-10">
-                                <select ng-model="statusData.agama" class="form-control" id="select" name="agama">
-                                    <option selected="selected" value="">Pilih Status Jabatan</option>
-                                    <option value="2">STRUKTURAL</option>
-                                    <option value="3">DPK</option>
-                                    <option value="4">DPB</option>
-                                    <option value="5">DITUGASKAN</option>
-                                    <option value="6">FUNGSIONAL</option>
-                                    <option value="7">-</option>
+                                <select name="id_status_jabatan" class="form-control" ng-model="statusData.id_status_jabatan" required>
+                                    <option value="">Pilih Status Jabatan</option>
+                                    <option ng-repeat="unit in statusjabatan" ng-selected="{{unit.id == statusData.id_status_jabatan}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.jabatan.$invalid && pegawaiForm.jabatan.$dirty || submitted && pegawaiForm.jabatan.$invalid}">
                             <label for="select" class="col-lg-2 control-label">Jabatan</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.jabatan">
+                                <select name="jabatan" class="form-control" ng-model="statusData.id_jabatan" required>
                                     <option value="">Pilih Jabatan</option>
-                                    <option ng-repeat="unit in jabatan" ng-selected="{{unit.id == statusData.jabatan}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in jabatan" ng-selected="{{unit.id == statusData.id_jabatan}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="select" class="col-lg-2 control-label">Unit Kerja</label>
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.unitkerja.$invalid && pegawaiForm.unitkerja.$dirty || submitted && pegawaiForm.unitkerja.$invalid}">
+                           <label for="select" class="col-lg-2 control-label">Unit Kerja</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.unitkerja">
+                                <select name="unitkerja" class="form-control" ng-model="statusData.id_unit_kerja" required>
                                     <option value="">Pilih Unit Kerja</option>
-                                    <option ng-repeat="unit in unitkerja" ng-selected="{{unit.id == statusData.unitkerja}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in unitkerja" ng-selected="{{unit.id == statusData.id_unit_kerja}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="select" class="col-lg-2 control-label">Satuan Kerja</label>
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.satuankerja.$invalid && pegawaiForm.satuankerja.$dirty || submitted && pegawaiForm.satuankerja.$invalid}">
+                           <label for="select" class="col-lg-2 control-label">Satuan Kerja</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.satuankerja">
+                                <select name="satuankerja" class="form-control" ng-model="statusData.id_satuan_kerja" required>
                                     <option value="">Pilih Satuan Kerja</option>
-                                    <option ng-repeat="unit in satuankerja" ng-selected="{{unit.id == statusData.satuankerja}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in satuankerja" ng-selected="{{unit.id == statusData.id_satuan_kerja}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="select" class="col-lg-2 control-label">Lokasi Kerja</label>
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.lokasikerja.$invalid && pegawaiForm.lokasikerja.$dirty || submitted && pegawaiForm.lokasikerja.$invalid}">
+                          <label for="select" class="col-lg-2 control-label">Lokasi Kerja</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.lokasikerja">
+                                <select name="lokasikerja" class="form-control" ng-model="statusData.lokasi_kerja" required>
                                     <option value="">Pilih Lokasi Kerja</option>
-                                    <option ng-repeat="unit in lokasikerja" ng-selected="{{unit.id == statusData.lokasikerja}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in lokasikerja" ng-selected="{{unit.id == statusData.lokasi_kerja}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="select" class="col-lg-2 control-label">Eselon</label>
+                        <div class="form-group" ng-class="{ 'has-error' : pegawaiForm.eselon.$invalid && pegawaiForm.eselon.$dirty || submitted && pegawaiForm.eselon.$invalid}">
+                          <label for="select" class="col-lg-2 control-label">Eselon</label>
                             <div class="col-lg-10">
-                                <select name="status" class="form-control" ng-model="statusData.eselon">
+                                <select name="eselon" class="form-control" ng-model="statusData.id_eselon" required>
                                     <option value="">Pilih Eselon</option>
-                                    <option ng-repeat="unit in eselon" ng-selected="{{unit.id == statusData.eselon}}" value="{{unit.id}}">{{unit.label}}</option>
+                                    <option ng-repeat="unit in eselon" ng-selected="{{unit.id == statusData.id_eselon}}" value="{{unit.id}}">{{unit.label}}</option>
                                 </select>
                             </div>
                         </div>
@@ -289,15 +332,15 @@
                     <br />
                     <fieldset>
                         <div class="form-group">
-                            <label for="select" class="col-lg-2 control-label">Foto</label>
+                            <label for="select" class="col-lg-2 control-label">Foto Pegawai</label>
                             <div class="col-lg-10">
-                                <input type="file" id="exampleInputFile">
+                                <input  ng-file-select="" ng-model="statusData.foto" name="file" accept="image/*" type="file">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
                                 <a class="btn btn-default" href="/">Cancel</a>
-                                <button class="btn btn-primary" type="submit">Submit</button>
+                                <button class="btn btn-primary"  type="submit">Submit</button>
                             </div>
                         </div>
                     </fieldset>

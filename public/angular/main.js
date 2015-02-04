@@ -9,6 +9,8 @@ require.config({
         'angularAMD': 'services/angularAMD.min',
         'ui-bootstrap': 'services/ui-bootstrap-tpls-0.12.0.min',
         'ngScrollSpy' : 'services/ngScrollSpy.min',
+        'angularFileUpload' : 'services/angular-file-upload.min',
+        'angularFileUploadShim' : 'services/angular-file-upload-shim.min',
         'golongan': 'golongan/golonganModul',
         'statuspegawai': 'statuspegawai/statusPegawaiModul',
         'eselon': 'eselon/eselonModul',
@@ -17,6 +19,7 @@ require.config({
         'ppk': 'ppk/ppkModul',
         'pelatihan': 'pelatihan/pelatihanModul',
         'jabatan': 'jabatan/jabatanModul',
+        'statusjabatan': 'statusjabatan/statusjabatanModul',
         'penghargaan': 'penghargaan/penghargaanModul',
         'hukuman': 'hukuman/hukumanModul',
         'lokasipelatihan': 'lokasipelatihan/lokasipelatihanModul',
@@ -29,11 +32,13 @@ require.config({
         'angular-route': ['angular'],
         'ui-bootstrap': ['angular'],
         'ngScrollSpy' : ['angular'],
+        'angularFileUpload' : ['angular'],
+        'angularFileUploadShim' : ['angular'],
         'bootstrap': {"deps": ['jquery']},
     },
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap', 'golongan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'penghargaan','hukuman','lokasipelatihan','lokasikerja','pegawai'], function($) {
+require(['jquery', 'bootstrap', 'golongan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan','penghargaan','hukuman','lokasipelatihan','lokasikerja','pegawai'], function($) {
     return {};
 });

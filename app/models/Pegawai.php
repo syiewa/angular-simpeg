@@ -9,7 +9,9 @@ class Pegawai extends Eloquent {
      */
     protected $table = 'tbl_data_pegawai';
     protected $primaryKey = 'id_pegawai';
+    protected $fillable = array("nip", "nip_lama", "no_kartu_pegawai", "nama_pegawai", "jenis_kelamin", "agama", "status_pegawai", "tempat_lahir", "tanggal_lahir", "usia", "no_npwp", "kartu_askes_pegawai", "tanggal_pengangkatan_cpns", "alamat", "id_golongan", "nomor_sk_pangkat", "tanggal_sk_pangkat", "tanggal_mulai_pangkat", "tanggal_selesai_pangkat", "id_status_jabatan", "id_unit_kerja", "id_jabatan", "id_satuan_kerja", "lokasi_kerja", "id_eselon", "foto");
     protected $appends = ['golongan', 'nama_status_pegawai'];
+    public $timestamps = false;
 
     /**
      * The attributes excluded from the model's JSON form.

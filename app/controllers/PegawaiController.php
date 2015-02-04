@@ -16,6 +16,14 @@ class PegawaiController extends \BaseController {
         return Response::json($data);
     }
 
+    public function getKeluarga($id = null) {
+        $data = array(
+            'field' => array('nama_anggota_keluarga','tanggal_lahir','status_kawin','pekerjaan'),
+            'values' => Keluarga::orderBy('nama_anggota_keluarga')->where('id_pegawai', '=', $id)->get()
+        );
+        return Response::json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,8 +51,28 @@ class PegawaiController extends \BaseController {
      */
     public function store() {
         //
-        $file = Input::All();
-        dd($file);
+        $destinationPath = public_path() . '/upload';
+        $data = Input::except('file');
+        $data['tanggal_lahir'] = $this->formatDate($data['tanggal_lahir']);
+        $data['tanggal_pengangkatan_cpns'] = $this->formatDate($data['tanggal_pengangkatan_cpns']);
+        $data["tanggal_sk_pangkat"] = $this->formatDate($data['tanggal_sk_pangkat']);
+        $data["tanggal_mulai_pangkat"] = $this->formatDate($data['tanggal_mulai_pangkat']);
+        $data["tanggal_selesai_pangkat"] = $this->formatDate($data['tanggal_selesai_pangkat']);
+        $pegawai = new Pegawai($data);
+        if (Input::hasFile('file')) {
+            Input::file('file')->move($destinationPath);
+            $pegawai->foto = Input::file('file')->getClientOriginalName();
+        }
+        if ($pegawai->save()) {
+            return Response::json(array('success' => TRUE));
+        };
+    }
+
+    private function formatDate($array) {
+        $telo = explode(' ', $array);
+        $kampret = $telo[2] . ' ' . $telo[1] . ' ' . $telo[3];
+        $string = date('d/m/Y', strtotime($kampret));
+        return $string;
     }
 
     /**

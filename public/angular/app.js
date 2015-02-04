@@ -1,6 +1,6 @@
 //var app = angular.module("myApp", ['routes','filter','statusPegawaiModul','golonganModul']); // load aplikasi dengan nama myApp dan plugin ngRoute dan ui.bootstrap
-define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'services/dataServices'], function(angularAMD) {
-    var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap', 'ngScrollSpy']);
+define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFileUploadShim', 'angularFileUpload', 'services/dataServices'], function(angularAMD) {
+    var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap', 'ngScrollSpy', 'angularFileUpload']);
     var loginRequired = function($location, $q) {
         var deferred = $q.defer();
         var userIsAuthenticated = function() {

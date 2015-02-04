@@ -17,17 +17,20 @@
                 border-bottom-color: transparent;
                 cursor: default;
             }
-            .affix {
-                border-color: #d5d5d5;
-                border-radius: 0;
-                border-width: 0 0 1px;
-                left: 0;
-                margin-bottom: 20px;
+            .subnav.affix {
                 width: 100%;
+                left: 0;
                 right: 0;
                 top: 40px;
-                z-index: 1030;
+                z-index:10;
+                background: white;
+                border: 1px solid #e5e5e5;
             }
+            .subnav{
+                margin-bottom: 20px;
+            }
+
+
         </style>
         <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>
     </head>
