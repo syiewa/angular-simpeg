@@ -18,7 +18,7 @@ class PegawaiController extends \BaseController {
 
     public function getKeluarga($id = null) {
         $data = array(
-            'field' => array('nama_anggota_keluarga','tanggal_lahir','status_kawin','pekerjaan'),
+            'field' => array('nama_anggota_keluarga', 'tanggal_lahir', 'status_kawin', 'pekerjaan'),
             'values' => Keluarga::orderBy('nama_anggota_keluarga')->where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
@@ -66,6 +66,17 @@ class PegawaiController extends \BaseController {
         if ($pegawai->save()) {
             return Response::json(array('success' => TRUE));
         };
+    }
+
+    public function storeKeluarga() {
+        $data = Input::All();
+        $data['tanggal_lahir'] = $this->formatDate($data['tanggal_lahir']);
+        $data['tanggal_nikah'] = $this->formatDate($data['tanggal_nikah']);
+        $data['tanggal_cerai_meninggal'] = $this->formatDate($data['tanggal_cerai_meninggal']);
+        $keluarga = new Keluarga($data);
+        if ($keluarga->save()) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     private function formatDate($array) {

@@ -27,6 +27,7 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function() {
     Route::resource('lokasipelatihan', 'LokasiPelatihanController');
     Route::resource('lokasikerja', 'LokasiKerjaController');
     Route::get('pegawai/edit/{id}/keluarga','PegawaiController@getKeluarga');
+    Route::post('keluarga','PegawaiController@storeKeluarga');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
     Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');
     Route::get('/dropdowneselon', 'EselonController@getEselon');

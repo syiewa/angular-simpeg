@@ -18,6 +18,7 @@
                 cursor: default;
             }
             .subnav.affix {
+                position :fixed;
                 width: 100%;
                 left: 0;
                 right: 0;
@@ -25,12 +26,14 @@
                 z-index:10;
                 background: white;
                 border: 1px solid #e5e5e5;
+                margin-bottom: 40px;
             }
             .subnav{
                 margin-bottom: 20px;
             }
-
-
+            .panel{
+                margin-top: 40px;
+            }
         </style>
         <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>
     </head>

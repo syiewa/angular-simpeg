@@ -9,7 +9,7 @@ class Keluarga extends Eloquent {
      */
     protected $table = 'tbl_data_keluarga';
     protected $primaryKey = 'id_data_keluarga';
-    protected $fillable = array('nama_anggota_keluarga', 'tanggal_lahir','status_kawin','tanggal_nikah','uraian','tanggal_cerai_meninggal','pekerjaan');
+    protected $fillable = array('id_pegawai','nama_anggota_keluarga', 'tanggal_lahir','status_kawin','tanggal_nikah','uraian','tanggal_cerai_meninggal','pekerjaan');
     public $timestamps = false;
 
     /**
