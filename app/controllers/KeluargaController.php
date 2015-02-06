@@ -1,22 +1,14 @@
 <?php
 
-class PegawaiController extends \BaseController {
+class KeluargaController extends \BaseController {
 
     /**
      * Display a listing of the resource.
      *
      * @return Response
      */
-    public function index() {
+    public function index($id = null) {
         //
-        $data = array(
-            'field' => array('nip', 'nama_pegawai', 'golongan', 'nama_status_pegawai'),
-            'values' => Pegawai::orderBy('nama_pegawai')->get()
-        );
-        return Response::json($data);
-    }
-
-    public function getKeluarga($id = null) {
         $data = array(
             'field' => array('nama_anggota_keluarga', 'tanggal_lahir', 'status_kawin', 'pekerjaan'),
             'values' => Keluarga::orderBy('nama_anggota_keluarga')->where('id_pegawai', '=', $id)->get()
@@ -31,17 +23,6 @@ class PegawaiController extends \BaseController {
      */
     public function create() {
         //
-        $data = array(
-            'status' => StatusPegawai::DropdownStatusPegawai(),
-            'golongan' => Golongan::DropdownGolongan(),
-            'jabatan' => Jabatan::DropdownJabatan(),
-            'unitkerja' => UnitKerja::DropdownUnit(),
-            'satuankerja' => SatuanKerja::DropdownSatKer(),
-            'lokasikerja' => LokasiKerja::DropdownLokasiKerja(),
-            'eselon' => Eselon::DropdownEselon(),
-            'statusjabatan' => StatusJabatan::DropdownStatusJabatan()
-        );
-        return Response::json($data);
     }
 
     /**
@@ -51,24 +32,6 @@ class PegawaiController extends \BaseController {
      */
     public function store() {
         //
-        $destinationPath = public_path() . '/upload';
-        $data = Input::except('file');
-        $data['tanggal_lahir'] = $this->formatDate($data['tanggal_lahir']);
-        $data['tanggal_pengangkatan_cpns'] = $this->formatDate($data['tanggal_pengangkatan_cpns']);
-        $data["tanggal_sk_pangkat"] = $this->formatDate($data['tanggal_sk_pangkat']);
-        $data["tanggal_mulai_pangkat"] = $this->formatDate($data['tanggal_mulai_pangkat']);
-        $data["tanggal_selesai_pangkat"] = $this->formatDate($data['tanggal_selesai_pangkat']);
-        $pegawai = new Pegawai($data);
-        if (Input::hasFile('file')) {
-            Input::file('file')->move($destinationPath);
-            $pegawai->foto = Input::file('file')->getClientOriginalName();
-        }
-        if ($pegawai->save()) {
-            return Response::json(array('success' => TRUE));
-        };
-    }
-
-    public function storeKeluarga() {
         $data = Input::All();
         $data['tanggal_lahir'] = $this->formatDate($data['tanggal_lahir']);
         if (isset($data['tanggal_nikah']))
@@ -106,12 +69,6 @@ class PegawaiController extends \BaseController {
      */
     public function edit($id) {
         //
-
-        $pegawai = Pegawai::find($id);
-        return Response::json($pegawai);
-    }
-
-    public function editKeluarga($id) {
         $keluarga = Keluarga::find($id);
         return Response::json($keluarga);
     }
@@ -124,9 +81,6 @@ class PegawaiController extends \BaseController {
      */
     public function update($id) {
         //
-    }
-
-    public function updateKeluarga($id) {
         $data = Input::All();
         $keluarga = Keluarga::find($id);
         if ($keluarga->update($data)) {
@@ -143,7 +97,7 @@ class PegawaiController extends \BaseController {
     public function destroy($id) {
         //
         $keluarga = Keluarga::find($id);
-        if($keluarga->delete()){
+        if ($keluarga->delete()) {
             return Response::json(array('success' => TRUE));
         }
     }

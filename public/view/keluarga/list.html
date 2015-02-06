@@ -7,7 +7,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">{{header}}</a>
+                <a class="navbar-brand" href="#">{{header}} {{statusData.nama_pegawai}}</a>
             </div>
             <div class="navbar-collapse collapse navbar-inverse-collapse">
                 <a href="backend/keluarga/new/{{pegawaiId}}" class="btn btn-info navbar-btn"><i class="fa fa-plus"></i> Tambah Keluarga</a>
@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="status in statuses| filter:paginate ">
+                <tr ng-repeat="status in data | filter:paginate ">
                     <td ng-repeat="field in fields" ng-click="edit(status.id_data_keluarga)">
                         {{status[field]}}</td>
                     <td>
@@ -42,7 +42,7 @@
                                 Aksi <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="backend/keluarga/edit/{{status.id_data_keluarga}}"><i class="fa fa-pencil-square-o"></i> Edit Data</a></li>
+                                <li><a href="backend/keluarga/edit/{{status.id_data_keluarga}}/{{pegawaiId}}"><i class="fa fa-pencil-square-o"></i> Edit Data</a></li>
                                 <li><a href="#" ng-click="delete(status.id_data_keluarga)"><i class="fa fa-times"></i> Delete Data</a></li>
                             </ul>
                         </div>

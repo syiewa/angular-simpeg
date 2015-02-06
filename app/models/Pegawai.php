@@ -18,6 +18,10 @@ class Pegawai extends Eloquent {
      *
      * @var array
      */
+    
+    public function keluarga(){
+        return $this->hasMany('keluarga','id_pegawai');
+    }
     public function getGolonganAttribute() {
         $name = $this->attributes['id_golongan'];
         $data = Golongan::find($name);
