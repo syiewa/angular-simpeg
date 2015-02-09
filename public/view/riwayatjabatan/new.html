@@ -1,0 +1,103 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- riwayatpangkatForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="riwayatpangkatForm" ng-submit="processForm(riwayatpangkatForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : riwayatpangkatForm.golongan.$invalid && riwayatpangkatForm.golongan.$dirty || submitted && riwayatpangkatForm.golongan.$invalid}">
+                <label for="golongan">Golongan</label>
+                <!-- Input golongan  -->
+                <select name="golongan" class="form-control" ng-model="statusData.id_golongan" required>
+                    <option value="">Pilih Golongan</option>
+                    <option ng-repeat="unit in golongan" ng-selected="{{unit.id == statusData.id_golongan}}" value="{{unit.id}}">{{unit.label}}</option>
+                </select> <!-- validasi input -->
+                <p ng-show="riwayatpangkatForm.golongan.$invalid && riwayatpangkatForm.golongan.$dirty || submitted && riwayatpangkatForm.golongan.$invalid" class="help-block">Nama Golongan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : riwayatpangkatForm.status.$invalid && riwayatpangkatForm.status.$dirty || submitted && riwayatpangkatForm.status.$invalid}">
+                <label for="status">Status</label>
+                <!-- Input status  -->
+                <select name="status" class="form-control" ng-model="statusData.status" required>
+                    <option value="">Pilih status</option>
+                    <option ng-repeat="unit in status" ng-selected="{{unit.id == statusData.status}}" value="{{unit.id}}">{{unit.label}}</option>
+                </select> <!-- validasi input -->
+                <p ng-show="riwayatpangkatForm.status.$invalid && riwayatpangkatForm.status.$dirty || submitted && riwayatpangkatForm.status.$invalid" class="help-block">Nama status Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : riwayatpangkatForm.nomor_sk.$invalid && riwayatpangkatForm.nomor_sk.$dirty || submitted && riwayatpangkatForm.nomor_sk.$invalid}">
+                <label for="nomor_sk">Nomor SK</label>
+                <!-- Input nomor_sk  -->
+                <input type="text" class="form-control" ng-model="statusData.nomor_sk" name="nomor_sk" placeholder="Masukan nama nomor_sk" required>
+                <!-- validasi input -->
+                <p ng-show="riwayatpangkatForm.nomor_sk.$invalid && riwayatpangkatForm.nomor_sk.$dirty || submitted && riwayatpangkatForm.nomor_sk.$invalid" class="help-block">Nama Riwayat Pangkat Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : riwayatpangkatForm.tanggal_sk.$invalid && riwayatpangkatForm.tanggal_sk.$dirty || submitted && riwayatpangkatForm.tanggal_sk.$invalid}">
+                <label for="tanggal_sk">Tanggal SK</label>
+                <!-- Input tanggal_sk  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_sk" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="opened = true"
+                       max-date="maxDate"
+                       name="tanggal_sk"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="riwayatpangkatForm.tanggal_sk.$invalid && riwayatpangkatForm.tanggal_sk.$dirty || submitted && riwayatpangkatForm.tanggal_sk.$invalid" class="help-block">Nama Riwayat Pangkat Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : riwayatpangkatForm.tanggal_mulai.$invalid && riwayatpangkatForm.tanggal_mulai.$dirty || submitted && riwayatpangkatForm.tanggal_mulai.$invalid}">
+                <label for="tanggal_mulai">Tanggal Mulai</label>
+                <!-- Input tanggal_mulai  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_mulai" 
+                       is-open="openedtglnikah" 
+                       datepicker-options="dateOptions"  
+                       close-text="Close" 
+                       ng-click="openedtglnikah = true"
+                       max-date="statusData.tanggal_selesai"
+                       name="tanggal_mulai"
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="riwayatpangkatForm.tanggal_mulai.$invalid && riwayatpangkatForm.tanggal_mulai.$dirty || submitted && riwayatpangkatForm.tanggal_mulai.$invalid" class="help-block">Nama Riwayat Pangkat Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : riwayatpangkatForm.tanggal_selesai.$invalid && riwayatpangkatForm.tanggal_selesai.$dirty || submitted && riwayatpangkatForm.tanggal_selesai.$invalid}">
+                <label for="tanggal_selesai">Tanggal Selesai</label>
+                <!-- Input tanggal_selesai  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_selesai" 
+                       is-open="openedtglcerai" 
+                       datepicker-options="dateOptions"  
+                       close-text="Close" 
+                       ng-click="openedtglcerai = true"
+                       min-date="statusData.tanggal_mulai"
+                       max-date="maxDate"
+                       name="tanggal_selesai"
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="riwayatpangkatForm.tanggal_selesai.$invalid && riwayatpangkatForm.tanggal_selesai.$dirty || submitted && riwayatpangkatForm.tanggal_selesai.$invalid" class="help-block">Tanggal Cerai Meninggal Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="backend/pegawai/edit/{{idpegawai}}/riwayatpangkat" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

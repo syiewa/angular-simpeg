@@ -26,8 +26,12 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function() {
     Route::resource('hukuman', 'HukumanController');
     Route::resource('lokasipelatihan', 'LokasiPelatihanController');
     Route::resource('lokasikerja', 'LokasiKerjaController');
-    Route::get('pegawai/edit/{id}/keluarga','KeluargaController@index');
-    Route::resource('keluarga','KeluargaController');
+    Route::get('pegawai/edit/{id}/keluarga', 'KeluargaController@index');
+    Route::resource('keluarga', 'KeluargaController');
+    Route::get('pegawai/edit/{id}/riwayatpangkat', 'RiwayatPangkatController@index');
+    Route::resource('riwayatpangkat', 'RiwayatPangkatController');
+    Route::get('pegawai/edit/{id}/riwayatjabatan', 'RiwayatJabatanController@index');
+    Route::resource('riwayatjabatan', 'RiwayatJabatanController');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
     Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');
     Route::get('/dropdowneselon', 'EselonController@getEselon');

@@ -8,9 +8,9 @@ require.config({
         'angular-route': 'services/angular-route.min',
         'angularAMD': 'services/angularAMD.min',
         'ui-bootstrap': 'services/ui-bootstrap-tpls-0.12.0.min',
-        'ngScrollSpy' : 'services/ngScrollSpy.min',
-        'angularFileUpload' : 'services/angular-file-upload.min',
-        'angularFileUploadShim' : 'services/angular-file-upload-shim.min',
+        'ngScrollSpy': 'services/ngScrollSpy.min',
+        'angularFileUpload': 'services/angular-file-upload.min',
+        'angularFileUploadShim': 'services/angular-file-upload-shim.min',
         'golongan': 'golongan/golonganModul',
         'statuspegawai': 'statuspegawai/statusPegawaiModul',
         'eselon': 'eselon/eselonModul',
@@ -25,21 +25,23 @@ require.config({
         'lokasipelatihan': 'lokasipelatihan/lokasipelatihanModul',
         'lokasikerja': 'lokasikerja/lokasiKerjaModul',
         'pegawai': 'pegawai/pegawaiModul',
-        'keluarga' : 'keluarga/keluargaModul'
+        'keluarga': 'keluarga/keluargaModul',
+        'riwayatpangkat': 'riwayatpangkat/riwayatpangkatModul',
+        'riwayatjabatan': 'riwayatjabatan/riwayatjabatanModul',
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
     shim: {
         'angularAMD': ['angular'],
         'angular-route': ['angular'],
         'ui-bootstrap': ['angular'],
-        'ngScrollSpy' : ['angular'],
-        'angularFileUpload' : ['angular'],
-        'angularFileUploadShim' : ['angular'],
+        'ngScrollSpy': ['angular'],
+        'angularFileUpload': ['angular'],
+        'angularFileUploadShim': ['angular'],
         'bootstrap': {"deps": ['jquery']},
     },
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap', 'golongan','keluarga', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan','penghargaan','hukuman','lokasipelatihan','lokasikerja','pegawai'], function($) {
+require(['jquery', 'bootstrap', 'golongan', 'keluarga', 'riwayatpangkat', 'riwayatjabatan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
     return {};
 });

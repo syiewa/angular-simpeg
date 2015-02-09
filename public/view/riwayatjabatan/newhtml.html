@@ -1,0 +1,109 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- keluargaForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="keluargaForm" ng-submit="processForm(keluargaForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.nama_anggota_keluarga.$invalid && keluargaForm.nama_anggota_keluarga.$dirty || submitted && keluargaForm.nama_anggota_keluarga.$invalid}">
+                <label for="nama_anggota_keluarga">Nama Keluarga</label>
+                <!-- Input nama_anggota_keluarga  -->
+                <input type="text" class="form-control" ng-model="statusData.nama_anggota_keluarga" name="nama_anggota_keluarga" placeholder="Masukan nama nama_anggota_keluarga" required>
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.nama_anggota_keluarga.$invalid && keluargaForm.nama_anggota_keluarga.$dirty || submitted && keluargaForm.nama_anggota_keluarga.$invalid" class="help-block">Nama Keluarga Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.tanggal_lahir.$invalid && keluargaForm.tanggal_lahir.$dirty || submitted && keluargaForm.tanggal_lahir.$invalid}">
+                <label for="tanggal_lahir">Tanggal Lahir</label>
+                <!-- Input tanggal_lahir  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_lahir" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="opened = true"
+                       max-date="maxDate"
+                       name="tanggal_lahir"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.tanggal_lahir.$invalid && keluargaForm.tanggal_lahir.$dirty || submitted && keluargaForm.tanggal_lahir.$invalid" class="help-block">Nama Keluarga Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.status_kawin.$invalid && keluargaForm.status_kawin.$dirty || submitted && keluargaForm.status_kawin.$invalid}">
+                <label for="status_kawin">Status Kawin</label>
+                <!-- Input status_kawin  -->
+                <input type="text" class="form-control" ng-model="statusData.status_kawin" name="status_kawin" placeholder="Masukan nama status_kawin" required>
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.status_kawin.$invalid && keluargaForm.status_kawin.$dirty || submitted && keluargaForm.status_kawin.$invalid" class="help-block">Nama Keluarga Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.tanggal_nikah.$invalid && keluargaForm.tanggal_nikah.$dirty || submitted && keluargaForm.tanggal_nikah.$invalid}">
+                <label for="tanggal_nikah">Tanggal Nikah</label>
+                <!-- Input tanggal_nikah  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_nikah" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="openedtglnikah = true"
+                       max-date="maxDate"
+                       name="tanggal_nikah"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.tanggal_nikah.$invalid && keluargaForm.tanggal_nikah.$dirty || submitted && keluargaForm.tanggal_nikah.$invalid" class="help-block">Nama Keluarga Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.uraian.$invalid && keluargaForm.uraian.$dirty || submitted && keluargaForm.uraian.$invalid}">
+                <label for="uraian">Uraian</label>
+                <!-- Input uraian  -->
+                <textarea ng-model="statusData.uraian" class="form-control" id="KAP" placeholder="Uraian" name="uraian" required></textarea>
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.uraian.$invalid && keluargaForm.uraian.$dirty || submitted && keluargaForm.uraian.$invalid" class="help-block">Nama Keluarga Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.tanggal_cerai_meninggal.$invalid && keluargaForm.tanggal_cerai_meninggal.$dirty || submitted && keluargaForm.tanggal_cerai_meninggal.$invalid}">
+                <label for="tanggal_cerai_meninggal">Tanggal Cerai Meninggal</label>
+                <!-- Input tanggal_cerai_meninggal  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_cerai_meninggal" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="openedtglcerai = true"
+                       max-date="maxDate"
+                       name="tanggal_cerai_meninggal"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.tanggal_cerai_meninggal.$invalid && keluargaForm.tanggal_cerai_meninggal.$dirty || submitted && keluargaForm.tanggal_cerai_meninggal.$invalid" class="help-block">Tanggal Cerai Meninggal Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : keluargaForm.pekerjaan.$invalid && keluargaForm.pekerjaan.$dirty || submitted && keluargaForm.pekerjaan.$invalid}">
+                <label for="pekerjaan">Pekerjaan</label>
+                <!-- Input pekerjaan  -->
+                <input type="text" class="form-control" ng-model="statusData.pekerjaan" name="pekerjaan" placeholder="Masukan nama pekerjaan" required>
+                <!-- validasi input -->
+                <p ng-show="keluargaForm.pekerjaan.$invalid && keluargaForm.pekerjaan.$dirty || submitted && keluargaForm.pekerjaan.$invalid" class="help-block">Pekerjaan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="/backend/lokasipelatihan" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

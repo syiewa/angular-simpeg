@@ -47,6 +47,7 @@ define(['app'], function(app) {
     });
     app.controller('editpegawaiController', function($scope, $routeParams, dataService, $location) {
         $scope.data = $routeParams.data;
+        console.log($scope.data);
         $scope.kampret = true;
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams.id;
@@ -110,7 +111,6 @@ define(['app'], function(app) {
             formatYear: 'yy',
             startingDay: 1
         };
-        $scope.status = [];
         dataService.get('admin/pegawai/create').success(function(data) {
             $scope.status = data.status;
             $scope.golongan = data.golongan;

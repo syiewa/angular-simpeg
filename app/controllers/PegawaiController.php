@@ -68,19 +68,6 @@ class PegawaiController extends \BaseController {
         };
     }
 
-    public function storeKeluarga() {
-        $data = Input::All();
-        $data['tanggal_lahir'] = $this->formatDate($data['tanggal_lahir']);
-        if (isset($data['tanggal_nikah']))
-            $data['tanggal_nikah'] = $this->formatDate($data['tanggal_nikah']);
-        if (isset($data['tanggal_cerai_meninggal']))
-            $data['tanggal_cerai_meninggal'] = $this->formatDate($data['tanggal_cerai_meninggal']);
-        $keluarga = new Keluarga($data);
-        if ($keluarga->save()) {
-            return Response::json(array('success' => TRUE));
-        }
-    }
-
     private function formatDate($array) {
         $telo = explode(' ', $array);
         $kampret = $telo[2] . ' ' . $telo[1] . ' ' . $telo[3];
