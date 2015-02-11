@@ -1,15 +1,15 @@
 define(['app'], function(app) {
-    var url = 'admin/riwayatjabatan';
-    app.directive('ngRiwayatjabatan', function() {
+    var url = 'admin/pelatihanpegawai';
+    app.directive('ngPelatihanpegawai', function() {
         return {
             restrict: 'E',
-            templateUrl: 'view/riwayatjabatan/list.html',
+            templateUrl: 'view/pelatihanpegawai/list.html',
             controller: function($scope, $routeParams, dataService, $location, $filter) {
                 if (!$routeParams.action) {
                     $scope.data = {};
-                    $scope.header = 'Data Riwayat Jabatan';
+                    $scope.header = 'Data Pendidikan';
                     $scope.pegawaiId = $routeParams.id;
-                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/riwayatjabatan').success(function(data) {
+                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/pelatihanpegawai').success(function(data) {
                         $scope.fields = data.field;
                         $scope.data = data.values;
                         $scope.totalItems = $scope.data.length;
@@ -33,7 +33,7 @@ define(['app'], function(app) {
                         $scope.loading = false;
                     })
                     $scope.edit = function(id) {
-                        $location.path('/backend/riwayatjabatan/edit/' + id + '/' + pegawaiId);
+                        $location.path('/backend/pelatihanpegawai/edit/' + id + '/' + pegawaiId);
                     };
                     $scope.sort = function(field) {
                         $scope.data = $filter('orderBy')($scope.data, field, $scope.sort.order);
@@ -48,7 +48,7 @@ define(['app'], function(app) {
                             dataService.destroy(url, id).success(function(data) {
                                 $scope.loading = true;
                                 if (data.success) {
-                                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/riwayatjabatan').success(function(data) {
+                                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/pelatihanpegawai').success(function(data) {
                                         $scope.fields = data.field;
                                         $scope.data = data.values;
                                         $scope.totalItems = $scope.data.length;
@@ -79,24 +79,19 @@ define(['app'], function(app) {
             },
         };
     });
-    app.controller('editriwayatjabatanController', function($scope, $routeParams, dataService, $location) {
-        $scope.header = "Edit Data Riwayat Jabatan";
+    app.controller('editpelatihanpegawaiController', function($scope, $routeParams, dataService, $location) {
+        $scope.header = "Edit Data Pelatihan Pegawai";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams.id;
         $scope.idpegawai = $routeParams.subaction;
         $scope.loading = true;
-        $scope.submitted = false;
-
         dataService.get('admin/pegawai/create').success(function(data) {
-            $scope.jabatan = data.jabatan;
-            $scope.statusjabatan = data.statusjabatan;
-            $scope.unitkerja = data.unitkerja;
-            $scope.lokasikerja = data.lokasikerja;
-            $scope.eselon = data.eselon;
+            $scope.latihan = data.latihan;
+            $scope.lokasi = data.lokasi;
+            console.log($scope.lokasi);
         });
         // ambil data dari database dengan ajax
         dataService.edit(url, $scope.statusId).success(function(data) {
-            console.log(data);
             $scope.statusData = data;
             $scope.loading = false;
         });
@@ -106,7 +101,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/backend/pegawai/edit/' + $scope.idpegawai + '/riwayatjabatan');
+                                $location.path('/backend/pegawai/edit/' + $scope.idpegawai + '/pelatihanpegawai');
                             }
                         }).
                         error(function(data) {
@@ -118,34 +113,30 @@ define(['app'], function(app) {
         };
     });
 
-    app.controller('newriwayatjabatanController', function($scope, dataService, $location, $routeParams) {
+    app.controller('newpelatihanpegawaiController', function($scope, dataService, $location, $routeParams) {
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.idpegawai = $routeParams.id
-        $scope.header = "Tambah Data Riwayat Jabatan";
+        $scope.header = "Tambah Data Pendidikan";
         $scope.opened = false;
-        $scope.openedtglnikah = false;
-        $scope.openedtglcerai = false;
+        $scope.openedlulus = false;
         $scope.maxDate = new Date();
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
-        dataService.get('admin/pegawai/create').success(function(data) {
-            $scope.jabatan = data.jabatan;
-            $scope.statusjabatan = data.statusjabatan;
-            $scope.unitkerja = data.unitkerja;
-            $scope.lokasikerja = data.lokasikerja;
-            $scope.eselon = data.eselon;
+        dataService.get('admin/pelatihanpegawai/create').success(function(data) {
+            $scope.latihan = data.latihan;
+            $scope.lokasi = data.lokasi;
         });
         $scope.statusData['id_pegawai'] = $scope.idpegawai;
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
-            // jika valid maka akan mengirimkan data ke url admin/riwayatjabatan dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
+            // jika valid maka akan mengirimkan data ke url admin/pelatihanpegawai dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/backend/pegawai/edit/' + $scope.statusData['id_pegawai'] + '/riwayatjabatan');
+                                $location.path('/backend/pegawai/edit/' + $scope.statusData['id_pegawai'] + '/pelatihanpegawai');
                             }
                         }).
                         error(function(data) {
@@ -153,6 +144,7 @@ define(['app'], function(app) {
             } else {
                 $scope.submitted = true;
             }
-        };
+        }
+        ;
     });
 });

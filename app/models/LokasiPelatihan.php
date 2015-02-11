@@ -22,7 +22,7 @@ class LokasiPelatihan extends Eloquent {
         $lokasi_pelatihan = $query->select(array('id_lokasi_pelatihan', 'nama_lokasi'))->get();
         if (count($lokasi_pelatihan) > 0) {
             foreach ($lokasi_pelatihan as $ese) {
-                $data[] = array('id' => $ese->id_lokasi_pelatihan, 'label' => $ese->nama_lokasi_pelatihan);
+                $data[] = array('id' => $ese->id_lokasi_pelatihan, 'label' => $ese->nama_lokasi);
             }
         }
         return $data;

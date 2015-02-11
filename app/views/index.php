@@ -5,7 +5,7 @@
         <title>Sistem Informasi Pegawai</title>
 
         <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.css'); ?>"> <!-- load bootstrap via cdn -->
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"> 
+        <link rel="stylesheet" href="<?php echo asset('lib/font-awesome.min.css'); ?>"> 
         <style>
             .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
             body { padding-top: 70px; }
@@ -35,7 +35,7 @@
                 margin-top: 40px;
             }
         </style>
-        <script data-main="angular/main.js" src="//marcoslin.github.io/angularAMD/js/lib/requirejs/require.js"></script>
+        <script data-main="angular/main.js" src="<?php echo asset('lib/require.js'); ?>"></script>
     </head>
     <body>
     <ng-header class="navbar navbar-default navbar-fixed-top" role="navigation"></ng-header> 

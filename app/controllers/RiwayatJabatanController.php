@@ -10,7 +10,7 @@ class RiwayatJabatanController extends \BaseController {
     public function index($id = null) {
         //
         $data = array(
-            'field' => array('nama_status','penempatan', 'nama_jabatan', 'nama_unit_kerja', 'nama_eselon'),
+            'field' => array('nama_status', 'penempatan', 'nama_jabatan', 'nama_unit_kerja', 'nama_eselon'),
             'values' => RiwayatJabatan::orderBy('status')->where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
@@ -23,6 +23,14 @@ class RiwayatJabatanController extends \BaseController {
      */
     public function create() {
         //
+        $data = array(
+            'jabatan' => Jabatan::DropdownJabatan(),
+            'unitkerja' => UnitKerja::DropdownUnit(),
+            'lokasikerja' => LokasiKerja::DropdownLokasiKerja(),
+            'eselon' => Eselon::DropdownEselon(),
+            'statusjabatan' => StatusJabatan::DropdownStatusJabatan()
+        );
+        return Response::json($data);
     }
 
     /**
@@ -32,6 +40,14 @@ class RiwayatJabatanController extends \BaseController {
      */
     public function store() {
         //
+        $data = Input::All();
+        $data['tanggal_sk'] = formatDate($data['tanggal_sk']);
+        $data['tanggal_mulai'] = formatDate($data['tanggal_mulai']);
+        $data['tanggal_selesai'] = formatDate($data['tanggal_selesai']);
+        $riwayat = new RiwayatJabatan($data);
+        if ($riwayat->save()) {
+            return Response::json(array('success' => true));
+        }
     }
 
     /**
@@ -52,6 +68,8 @@ class RiwayatJabatanController extends \BaseController {
      */
     public function edit($id) {
         //
+        $riwayat = RiwayatJabatan::find($id);
+        return Response::json($riwayat);
     }
 
     /**
@@ -62,6 +80,12 @@ class RiwayatJabatanController extends \BaseController {
      */
     public function update($id) {
         //
+
+        $data = Input::All();
+        $riwayat = RiwayatJabatan::find($id);
+        if ($riwayat->update($data)) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     /**
@@ -72,6 +96,10 @@ class RiwayatJabatanController extends \BaseController {
      */
     public function destroy($id) {
         //
+        $riwayat = RiwayatJabatan::find($id);
+        if ($riwayat->delete()) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
 }

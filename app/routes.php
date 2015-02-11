@@ -32,6 +32,10 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function() {
     Route::resource('riwayatpangkat', 'RiwayatPangkatController');
     Route::get('pegawai/edit/{id}/riwayatjabatan', 'RiwayatJabatanController@index');
     Route::resource('riwayatjabatan', 'RiwayatJabatanController');
+    Route::get('pegawai/edit/{id}/pendidikan', 'PendidikanController@index');
+    Route::resource('pendidikan', 'PendidikanController');
+    Route::get('pegawai/edit/{id}/pelatihanpegawai', 'PelatihanPegawaiController@index');
+    Route::resource('pelatihanpegawai', 'PelatihanPegawaiController');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
     Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');
     Route::get('/dropdowneselon', 'EselonController@getEselon');

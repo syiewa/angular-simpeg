@@ -1,6 +1,6 @@
 <?php
 
-class RiwayatPangkatController extends \BaseController {
+class PendidikanController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,8 +10,8 @@ class RiwayatPangkatController extends \BaseController {
     public function index($id = null) {
         //
         $data = array(
-            'field' => array('nama_golongan', 'nama_status', 'nomor_sk', 'masa_kerja'),
-            'values' => RiwayatPangkat::orderBy('id_golongan')->where('id_pegawai', '=', $id)->get()
+            'field' => array('tingkat_pendidikan', 'jurusan', 'teknik', 'sekolah', 'tanggal_lulus'),
+            'values' => Pendidikan::where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
     }
@@ -23,11 +23,6 @@ class RiwayatPangkatController extends \BaseController {
      */
     public function create() {
         //
-        $data = array(
-            'status' => StatusPegawai::DropdownStatusPegawai(),
-            'golongan' => Golongan::DropdownGolongan(),
-        );
-        return Response::json($data);
     }
 
     /**
@@ -38,15 +33,10 @@ class RiwayatPangkatController extends \BaseController {
     public function store() {
         //
         $data = Input::All();
-        $data['tanggal_sk'] = formatDate($data['tanggal_sk']);
-        $data['tanggal_mulai'] = formatDate($data['tanggal_mulai']);
-        $data['tanggal_selesai'] = formatDate($data['tanggal_selesai']);
-        $diff = getDateDiff($data['tanggal_mulai'], $data['tanggal_selesai']);
-        if ($diff->y > 0) {
-            $data['masa_kerja'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
-        }
-        $riwayat = new RiwayatPangkat($data);
-        if ($riwayat->save()) {
+        $data['tanggal_sttb'] = formatDate($data['tanggal_sttb']);
+        $data['tanggal_lulus'] = formatDate($data['tanggal_lulus']);
+        $pendidikan = new Pendidikan($data);
+        if ($pendidikan->save()) {
             return Response::json(array('success' => true));
         }
     }
@@ -69,8 +59,8 @@ class RiwayatPangkatController extends \BaseController {
      */
     public function edit($id) {
         //
-        $riwayat = RiwayatPangkat::find($id);
-        return Response::json($riwayat);
+        $pendidikan = Pendidikan::find($id);
+        return Response::json($pendidikan);
     }
 
     /**
@@ -82,12 +72,8 @@ class RiwayatPangkatController extends \BaseController {
     public function update($id) {
         //
         $data = Input::All();
-        $riwayat = RiwayatPangkat::find($id);
-        $diff = $this->getDateDiff($data['tanggal_mulai'], $data['tanggal_selesai']);
-        if ($diff->y > 0) {
-            $data['masa_kerja'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
-        }
-        if ($riwayat->update($data)) {
+        $pendidikan = Pendidikan::find($id);
+        if ($pendidikan->update($data)) {
             return Response::json(array('success' => TRUE));
         }
     }
@@ -100,8 +86,8 @@ class RiwayatPangkatController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $riwayat = RiwayatPangkat::find($id);
-        if ($riwayat->delete()) {
+        $pendidikan = Pendidikan::find($id);
+        if ($pendidikan->delete()) {
             return Response::json(array('success' => TRUE));
         }
     }

@@ -2,8 +2,8 @@ require.config({
     baseUrl: "angular",
     // alias libraries paths.  Must set 'angular'
     paths: {
-        'jquery': '//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min',
-        'bootstrap': '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min',
+        'jquery': '../lib/jquery.min',
+        'bootstrap': '../bootstrap/js/bootstrap.min',
         'angular': '../lib/angular.min',
         'angular-route': 'services/angular-route.min',
         'angularAMD': 'services/angularAMD.min',
@@ -28,6 +28,8 @@ require.config({
         'keluarga': 'keluarga/keluargaModul',
         'riwayatpangkat': 'riwayatpangkat/riwayatpangkatModul',
         'riwayatjabatan': 'riwayatjabatan/riwayatjabatanModul',
+        'pendidikan': 'pendidikan/pendidikanModul',
+        'pelatihanpegawai': 'pelatihanpegawai/pelatihanpegawaiModul',
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
     shim: {
@@ -42,6 +44,6 @@ require.config({
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap', 'golongan', 'keluarga', 'riwayatpangkat', 'riwayatjabatan', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
+require(['jquery', 'bootstrap', 'golongan', 'keluarga', 'riwayatpangkat', 'riwayatjabatan', 'pendidikan','pelatihanpegawai', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
     return {};
 });

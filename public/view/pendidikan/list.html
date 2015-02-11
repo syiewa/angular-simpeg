@@ -10,7 +10,7 @@
                 <a class="navbar-brand" href="#">{{header}} {{statusData.nama_pegawai}}</a>
             </div>
             <div class="navbar-collapse collapse navbar-inverse-collapse">
-                <a href="backend/riwayatjabatan/new/{{pegawaiId}}" class="btn btn-info navbar-btn"><i class="fa fa-plus"></i> Tambah Riwayat Jabatan</a>
+                <a href="backend/pendidikan/new/{{pegawaiId}}" class="btn btn-info navbar-btn"><i class="fa fa-plus"></i> Tambah Pendidikan</a>
                 <ul class="nav navbar-nav navbar-right">
                     <form class="navbar-form">
                         <div class="input-group">
@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="status in data | filter:paginate ">
-                    <td ng-repeat="field in fields" ng-click="edit(status.id_riwayat_jabatan)">
+                    <td ng-repeat="field in fields" ng-click="edit(status.id_pendidikan)">
                         {{status[field]}}</td>
                     <td>
                         <div class="btn-group" dropdown is-open="status.isopen">
@@ -42,8 +42,8 @@
                                 Aksi <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="backend/riwayatjabatan/edit/{{status.id_riwayat_jabatan}}/{{pegawaiId}}"><i class="fa fa-pencil-square-o"></i> Edit Data</a></li>
-                                <li><a href="#" ng-click="delete(status.id_riwayat_jabatan)"><i class="fa fa-times"></i> Delete Data</a></li>
+                                <li><a href="backend/pendidikan/edit/{{status.id_pendidikan}}/{{pegawaiId}}"><i class="fa fa-pencil-square-o"></i> Edit Data</a></li>
+                                <li><a href="#" ng-click="delete(status.id_pendidikan)"><i class="fa fa-times"></i> Delete Data</a></li>
                             </ul>
                         </div>
                     </td>

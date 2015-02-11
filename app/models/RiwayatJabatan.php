@@ -9,7 +9,7 @@ class RiwayatJabatan extends Eloquent {
      */
     protected $table = 'tbl_data_riwayat_jabatan';
     protected $primaryKey = 'id_riwayat_jabatan';
-    protected $fillable = array('id_pegawai', 'penempatan', 'lokasi', 'status', 'id_jabatan', 'id_unit_kerja', 'uraian', 'id_eselon', 'nomor_sk', 'tanggal_sk', 'tanggal_mulai', 'tanggal_selesai', 'masa_kerja');
+    protected $fillable = array('id_pegawai', 'penempatan', 'lokasi', 'status', 'id_jabatan', 'id_unit_kerja', 'uraian', 'id_eselon','tmt_eselon', 'nomor_sk', 'tanggal_sk', 'tanggal_mulai', 'tanggal_selesai');
     public $timestamps = false;
     protected $appends = ['nama_status', 'nama_jabatan', 'nama_unit_kerja', 'nama_eselon'];
 
@@ -27,9 +27,9 @@ class RiwayatJabatan extends Eloquent {
         return '-';
     }
 
-    public function getEselonAttribute() {
+    public function getNamaEselonAttribute() {
         $name = $this->attributes['id_eselon'];
-        $data = Jabatan::find($name);
+        $data = Eselon::find($name);
         if ($data) {
             return $data->nama_eselon;
         }
@@ -38,7 +38,7 @@ class RiwayatJabatan extends Eloquent {
 
     public function getNamaUnitKerjaAttribute() {
         $name = $this->attributes['id_unit_kerja'];
-        $data = Jabatan::find($name);
+        $data = UnitKerja::find($name);
         if ($data) {
             return $data->nama_unit_kerja;
         }
@@ -73,7 +73,7 @@ class RiwayatJabatan extends Eloquent {
         return date('m/d/Y', strtotime($value));
     }
 
-    public function setTanggalLahirAttribute($value) {
+    public function setTanggalSkAttribute($value) {
         $this->attributes['tanggal_sk'] = date('Y-m-d', strtotime($value));
     }
 
