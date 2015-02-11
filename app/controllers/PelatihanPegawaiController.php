@@ -10,7 +10,7 @@ class PelatihanPegawaiController extends \BaseController {
     public function index($id = null) {
         //
         $data = array(
-            'field' => array('nama_pelatihan', 'lokasi', 'tanggal_sertifikat', 'jam_pelatihan', 'negara'),
+            'field' => array('nama_pelatihan', 'nama_lokasi', 'tanggal_sertifikat', 'jam_pelatihan', 'negara'),
             'values' => PelatihanPegawai::where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
@@ -37,6 +37,12 @@ class PelatihanPegawaiController extends \BaseController {
      */
     public function store() {
         //
+        $data = Input::All();
+        $data['tanggal_pelatihan'] = formatDate($data['tanggal_pelatihan']);
+        $riwayat = new PelatihanPegawai($data);
+        if ($riwayat->save()) {
+            return Response::json(array('success' => true));
+        }
     }
 
     /**
@@ -57,6 +63,8 @@ class PelatihanPegawaiController extends \BaseController {
      */
     public function edit($id) {
         //
+        $data = PelatihanPegawai::find($id);
+        return Response::json($data);
     }
 
     /**
@@ -67,6 +75,11 @@ class PelatihanPegawaiController extends \BaseController {
      */
     public function update($id) {
         //
+        $data = Input::All();
+        $riwayat = PelatihanPegawai::find($id);
+        if ($riwayat->update($data)) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
     /**
@@ -77,6 +90,11 @@ class PelatihanPegawaiController extends \BaseController {
      */
     public function destroy($id) {
         //
+        $data = Input::All();
+        $riwayat = PelatihanPegawai::find($id);
+        if ($riwayat->delete()) {
+            return Response::json(array('success' => TRUE));
+        }
     }
 
 }

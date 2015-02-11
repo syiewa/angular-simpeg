@@ -85,10 +85,9 @@ define(['app'], function(app) {
         $scope.statusId = $routeParams.id;
         $scope.idpegawai = $routeParams.subaction;
         $scope.loading = true;
-        dataService.get('admin/pegawai/create').success(function(data) {
+        dataService.get('admin/pelatihanpegawai/create').success(function(data) {
             $scope.latihan = data.latihan;
             $scope.lokasi = data.lokasi;
-            console.log($scope.lokasi);
         });
         // ambil data dari database dengan ajax
         dataService.edit(url, $scope.statusId).success(function(data) {

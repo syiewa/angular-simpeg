@@ -11,7 +11,7 @@ class PelatihanPegawai extends Eloquent {
     protected $primaryKey = 'id_pelatihan';
     protected $fillable = array('id_pegawai', 'id_master_pelatihan', 'uraian', 'lokasi', 'tanggal_sertifikat', 'jam_pelatihan', 'negara');
     public $timestamps = false;
-    protected $appends = ['nama_pelatihan'];
+    protected $appends = ['nama_pelatihan', 'nama_lokasi'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -31,6 +31,15 @@ class PelatihanPegawai extends Eloquent {
         return '-';
     }
 
+    public function getNamaLokasiAttribute() {
+        $value = $this->attributes['lokasi'];
+        $data = LokasiPelatihan::find($value);
+        if ($data) {
+            return $data->nama_lokasi;
+        }
+        return '-';
+    }
+
     public function scopeDropdownRiwayatPangkat($query) {
         $data = array();
         $jabatan = $query->select(array('id_riwayat_jabatan', 'nama_anggota_riwayat_jabatan'))->get();
@@ -42,26 +51,18 @@ class PelatihanPegawai extends Eloquent {
         return $data;
     }
 
-    public function getTanggalSttbAttribute($value) {
-        return date('d/m/Y', strtotime($value));
-    }
-
-    public function setTanggalSttbAttribute($value) {
-        $this->attributes['tanggal_sttb'] = date('Y-m-d', strtotime($value));
-    }
-
-    public function getTanggalLulusAttribute($value) {
+    public function getTanggalSertifikatAttribute($value) {
         if ($value == '') {
             return $value;
         }
         return date('d/m/Y', strtotime($value));
     }
 
-    public function setTanggalLulusAttribute($value) {
+    public function setTanggalSertifikatAttribute($value) {
         if ($value == '') {
-            $this->attributes['tanggal_lulus'] = $value;
+            $this->attributes['tanggal_sertifikat'] = $value;
         } else {
-            $this->attributes['tanggal_lulus'] = date('Y-m-d', strtotime($value));
+            $this->attributes['tanggal_sertifikat'] = date('Y-m-d', strtotime($value));
         }
     }
 
