@@ -92,8 +92,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFi
                         if (response.success) {
                             SessionService.unset('auth');
                             SessionService.unset('data');
-                            $location.path('/');
-                            $window.location.reload()
+                            window.location.replace('/');
                         }
                     });
                 }

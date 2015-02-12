@@ -6,7 +6,7 @@ define(['app'], function(app) {
                 if (response.id) {
                     SessionService.set('auth', true); //This sets our session key/val pair as authenticated
                     SessionService.set('data', response);
-                    $location.path('backend/pegawai');
+                    window.location.replace('backend/pegawai');
                 } else
                     alert(response);
             });
