@@ -1,0 +1,62 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- penghargaanForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="penghargaanForm" ng-submit="processForm(penghargaanForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : penghargaanForm.pelatihan.$invalid && penghargaanForm.pelatihan.$dirty || submitted && penghargaanForm.pelatihan.$invalid}">
+                <label for="pelatihan">Penghargaan</label>
+                <!-- Input pelatihan  -->
+                <select name="pelatihan" class="form-control" ng-model="statusData.id_master_penghargaan" required>
+                    <option value="">Pilih Penghargaan</option>
+                    <option ng-repeat="unit in penghargaan" ng-selected="{{unit.id == statusData.id_master_penghargaan}}" value="{{unit.id}}">{{unit.label}}</option>
+                </select> <!-- validasi input -->
+                <p ng-show="penghargaanForm.pelatihan.$invalid && penghargaanForm.pelatihan.$dirty || submitted && penghargaanForm.pelatihan.$invalid" class="help-block">Pelatihan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : penghargaanForm.uraian.$invalid && penghargaanForm.uraian.$dirty || submitted && penghargaanForm.uraian.$invalid}">
+                <label for="uraian">Uraian</label>
+                <!-- Input uraian  -->
+                <textarea class="form-control" ng-model="statusData.uraian" name="uraian" placeholder="Masukan nama uraian"></textarea>
+                <!-- validasi input -->
+                <p ng-show="penghargaanForm.uraian.$invalid && penghargaanForm.uraian.$dirty || submitted && penghargaanForm.uraian.$invalid" class="help-block">Uraian Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : penghargaanForm.tanggal_sk.$invalid && penghargaanForm.tanggal_sk.$dirty || submitted && penghargaanForm.tanggal_sk.$invalid}">
+                <label for="tanggal_sk">Tanggal SK</label>
+                <!-- Input tanggal_sk  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_sk" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="opened = true"
+                       max-date="maxDate"
+                       name="tanggal_sk"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="penghargaanForm.tanggal_sk.$invalid && penghargaanForm.tanggal_sk.$dirty || submitted && penghargaanForm.tanggal_sk.$invalid" class="help-block">Tanggal Pelatihan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : penghargaanForm.nomor_sk.$invalid && penghargaanForm.nomor_sk.$dirty || submitted && penghargaanForm.nomor_sk.$invalid}">
+                <label for="nomor_sk">Nomor SK</label>
+                <!-- Input nomor_sk  -->
+                <input type="text" class="form-control" ng-model="statusData.nomor_sk" name="nomor_sk" placeholder="Masukan nama nomor_sk" required>
+                <!-- validasi input -->
+                <p ng-show="penghargaanForm.nomor_sk.$invalid && penghargaanForm.nomor_sk.$dirty || submitted && penghargaanForm.nomor_sk.$invalid" class="help-block">Jam Pelatihan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="backend/pegawai/edit/{{idpegawai}}/penghargaanpegawai" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

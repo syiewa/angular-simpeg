@@ -39,13 +39,12 @@
     </head>
     <body>
     <ng-header class="navbar navbar-default navbar-fixed-top" role="navigation"></ng-header> 
-</div>
-<div class="container">
-    <!--        Loading icon -->
-    <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
-    <!--        div dimana untuk menampilkan konten-->
-    <div ng-view ng-hide="loading"></div>
-</div>
-<ng-footer class="footer"></ng-footer>
+    <div class="container">
+        <!--        Loading icon -->
+        <p class="text-center" ng-show="loading"><span class="fa fa-meh-o fa-5x fa-spin"></span></p>
+        <!--        div dimana untuk menampilkan konten-->
+        <div ng-view ng-hide="loading"></div>
+    </div>
+    <ng-footer class="footer"></ng-footer>
 </body>
 </html>

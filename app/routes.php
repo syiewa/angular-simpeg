@@ -36,6 +36,8 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function() {
     Route::resource('pendidikan', 'PendidikanController');
     Route::get('pegawai/edit/{id}/pelatihanpegawai', 'PelatihanPegawaiController@index');
     Route::resource('pelatihanpegawai', 'PelatihanPegawaiController');
+    Route::get('pegawai/edit/{id}/penghargaanpegawai', 'PenghargaanPegawaiController@index');
+    Route::resource('penghargaanpegawai', 'PenghargaanPegawaiController');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
     Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');
     Route::get('/dropdowneselon', 'EselonController@getEselon');
@@ -46,6 +48,8 @@ Route::get('/', function() {
     return View::make('index'); // will return app/views/index.php
 });
 
+Route::post('login/auth', 'HomeController@Login');
+Route::get('login/destroy', 'HomeController@Logout');
 
 // =============================================
 // CATCH ALL ROUTE =============================

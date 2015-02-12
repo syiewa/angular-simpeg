@@ -1,33 +1,32 @@
 //var app = angular.module("myApp", ['routes','filter','statusPegawaiModul','golonganModul']); // load aplikasi dengan nama myApp dan plugin ngRoute dan ui.bootstrap
-define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFileUploadShim', 'angularFileUpload', 'services/dataServices'], function(angularAMD) {
+define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFileUploadShim', 'angularFileUpload', 'services/dataServices', 'services/Login', 'services/SessionServices'], function(angularAMD) {
     var app = angular.module("webapp", ['ngRoute', 'ui.bootstrap', 'ngScrollSpy', 'angularFileUpload']);
-    var loginRequired = function($location, $q) {
+    var loginRequired = function($location, $q, SessionService) {
         var deferred = $q.defer();
         var userIsAuthenticated = function() {
-            return true;
+            return SessionService.get('auth');
         }
-
         if (!userIsAuthenticated()) {
             deferred.reject()
             $location.path('/');
         } else {
-            deferred.resolve()
+            deferred.resolve();
         }
-
         return deferred.promise;
     }
     app.config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
         $routeProvider
                 .when("/", angularAMD.route({
-                    templateUrl: "view/pegawai/list.html",
-                    controller: "listpegawaiController",
-                    controllerUrl: 'pegawai/pegawaiModul'
+                    templateUrl: "view/templates/home.html",
+                    controller: "homeController",
+                    controllerUrl: 'home/homeModul',
                 }))
                 .when("/backend/pegawai/edit/:id/:data", angularAMD.route({
                     templateUrl: "view/pegawai/new.html",
                     controller: 'editpegawaiController',
-                    controllerUrl: 'services/pegawai'
+                    controllerUrl: 'services/pegawai',
+                    resolve: {loginRequired: loginRequired}
                 }))
                 .when("/backend/:page", angularAMD.route({
                     templateUrl: function(page) {
@@ -80,16 +79,31 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFi
             return input[0].toUpperCase() + input.slice(1);
         };
     });
-    app.directive('ngHeader', function() {
+    app.directive('ngHeader', function(SessionService, $location, Login) {
         return {
             restrict: 'E',
-            templateUrl: 'view/templates/header.html'
+            templateUrl: 'view/templates/header.html',
+            controller: function($scope, $location, Login, SessionService, $window) {
+                $scope.auth = SessionService.get('auth');
+                $scope.user = JSON.parse(SessionService.get('data'));
+
+                $scope.logout = function() {
+                    Login.logout().success(function(response) {
+                        if (response.success) {
+                            SessionService.unset('auth');
+                            SessionService.unset('data');
+                            $location.path('/');
+                            $window.location.reload()
+                        }
+                    });
+                }
+            },
         }
     });
     app.directive('ngFooter', function() {
         return {
             restrict: 'E',
-            templateUrl: 'view/templates/footer.html'
+            templateUrl: 'view/templates/footer.html',
         }
     });
     return angularAMD.bootstrap(app);

@@ -152,7 +152,7 @@ define(['app'], function(app) {
             }
         };
     });
-    app.controller('listpegawaiController', function($scope, $filter, dataService, $location) {
+    app.controller('listpegawaiController', function($scope, $filter, dataService, $location, $window) {
         $scope.header = "Data Pegawai";
         $scope.statuses = {}; // data statuses awal yang merupakan array kosong.
         $scope.loading = true; // loading icon bernilai true

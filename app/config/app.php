@@ -107,6 +107,7 @@ return array(
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
         'Bllim\Datatables\DatatablesServiceProvider',
+        'Cartalyst\Sentry\SentryServiceProvider',
     ),
     /*
       |--------------------------------------------------------------------------
@@ -169,5 +170,6 @@ return array(
         'Validator' => 'Illuminate\Support\Facades\Validator',
         'View' => 'Illuminate\Support\Facades\View',
         'Datatables' => 'Bllim\Datatables\Facade\Datatables',
+        'Sentry' => 'Cartalyst\Sentry\Facades\Laravel\Sentry',
     ),
 );

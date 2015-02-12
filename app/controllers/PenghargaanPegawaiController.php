@@ -1,6 +1,6 @@
 <?php
 
-class PelatihanPegawaiController extends \BaseController {
+class PenghargaanPegawaiController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,8 +10,8 @@ class PelatihanPegawaiController extends \BaseController {
     public function index($id = null) {
         //
         $data = array(
-            'field' => array('nama_pelatihan', 'nama_lokasi', 'tanggal_sertifikat', 'jam_pelatihan', 'negara'),
-            'values' => PelatihanPegawai::where('id_pegawai', '=', $id)->get()
+            'field' => array('nama_penghargaan', 'nomor_sk', 'tanggal_sk'),
+            'values' => PenghargaanPegawai::where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
     }
@@ -24,8 +24,7 @@ class PelatihanPegawaiController extends \BaseController {
     public function create() {
         //
         $data = array(
-            'latihan' => Pelatihan::DropdownPelatihan(),
-            'lokasi' => LokasiPelatihan::DropdownLokasiPelatihan(),
+            'penghargaan' => Penghargaan::DropdownPenghargaan(),
         );
         return Response::json($data);
     }
@@ -38,8 +37,8 @@ class PelatihanPegawaiController extends \BaseController {
     public function store() {
         //
         $data = Input::All();
-        $data['tanggal_sertifikat'] = formatDate($data['tanggal_sertifikat']);
-        $riwayat = new PelatihanPegawai($data);
+        $data['tanggal_sk'] = formatDate($data['tanggal_sk']);
+        $riwayat = new PenghargaanPegawai($data);
         if ($riwayat->save()) {
             return Response::json(array('success' => true));
         }
@@ -63,7 +62,7 @@ class PelatihanPegawaiController extends \BaseController {
      */
     public function edit($id) {
         //
-        $data = PelatihanPegawai::find($id);
+        $data = PenghargaanPegawai::find($id);
         return Response::json($data);
     }
 
@@ -76,7 +75,7 @@ class PelatihanPegawaiController extends \BaseController {
     public function update($id) {
         //
         $data = Input::All();
-        $riwayat = PelatihanPegawai::find($id);
+        $riwayat = PenghargaanPegawai::find($id);
         if ($riwayat->update($data)) {
             return Response::json(array('success' => TRUE));
         }
@@ -91,7 +90,7 @@ class PelatihanPegawaiController extends \BaseController {
     public function destroy($id) {
         //
         $data = Input::All();
-        $riwayat = PelatihanPegawai::find($id);
+        $riwayat = PenghargaanPegawai::find($id);
         if ($riwayat->delete()) {
             return Response::json(array('success' => TRUE));
         }
