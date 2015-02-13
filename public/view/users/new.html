@@ -1,0 +1,114 @@
+<div class="panel panel-default telo">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <fieldset ng-show="edit == 'new'">
+            <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+            <form name="userForm" class="form-horizontal" ng-submit="processForm(userForm.$valid)" novalidate>
+                <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && userForm.email.$dirty || submitted && userForm.email.$invalid}">
+                     <label for="inputPassword3" class="col-sm-2 control-label">Email</label>
+                    <div class="col-sm-10">
+                        <input ng-model="statusData.email" name="email" type="email" class="form-control" id="inputPassword3" placeholder="Email" required>
+                        <p ng-show="userForm.email.$error.required && userForm.email.$dirty || submitted && userForm.email.$error.required" class="help-block">Email Diperlukan.</p>
+                        <p ng-show="userForm.email.$error.email && userForm.email.$dirty || submitted && userForm.email.$error.email" class="help-block">Format Email Salah</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : userForm.password.$error.required && userForm.password.$dirty || submitted && userForm.password.$error.required}">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input name="password" ng-model="statusData.password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                        <p ng-show="userForm.password.$error.required && userForm.password.$dirty || submitted && userForm.password.$error.required" class="help-block">Password Baru Diperlukan.</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$error.required && userForm.first_name.$dirty || submitted && userForm.first_name.$error.required}">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Nama Depan</label>
+                    <div class="col-sm-10">
+                        <input name="first_name" ng-model="statusData.first_name" type="text" class="form-control" id="inputPassword3" placeholder="Password" required>
+                        <p ng-show="userForm.first_name.$error.required && userForm.first_name.$dirty || submitted && userForm.first_name.$error.required" class="help-block">Nama Depan Diperlukan.</p>
+                    </div>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error' : userForm.last_name.$error.required && userForm.last_name.$dirty || submitted && userForm.last_name.$error.required}">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Nama Belakang</label>
+                    <div class="col-sm-10">
+                        <input name="last_name" ng-model="statusData.last_name" type="text" class="form-control" id="inputPassword3" placeholder="Password">
+                        <p ng-show="userForm.last_name.$error.required && userForm.last_name.$dirty || submitted && userForm.last_name.$error.required" class="help-block">Nama Belakang Diperlukan.</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Save</button>
+                        <a href="backend/users" class="btn btn-default">Back</a>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+        <tabset class="tabs-left" ng-show="edit == 'edit'">
+            <tab heading="Pengaturan Password">
+                <fieldset>
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+                    <form name="userForm" class="form-horizontal" ng-submit="processForm(userForm.$valid)" novalidate>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input ng-model="statusData.email" type="text" class="form-control" id="inputPassword3" placeholder="Email" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.old_password.$error.required && userForm.old_password.$dirty || submitted && userForm.old_password.$error.required}">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Password Lama</label>
+                            <div class="col-sm-10">
+                                <input name="old_password" ng-model="statusData.old_password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                                <p ng-show="userForm.old_password.$error.required && userForm.old_password.$dirty || submitted && userForm.old_password.$error.required" class="help-block">Password Lama Diperlukan.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.new_password.$error.required && userForm.new_password.$dirty || submitted && userForm.new_password.$error.required}">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Password Baru</label>
+                            <div class="col-sm-10">
+                                <input name="new_password" ng-model="statusData.new_password" type="password" class="form-control" id="inputPassword3" placeholder="Password" required>
+                                <p ng-show="userForm.new_password.$error.required && userForm.new_password.$dirty || submitted && userForm.new_password.$error.required" class="help-block">Password Baru Diperlukan.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </tab>
+            <tab heading="Pengaturan Nama Pengguna">
+                <fieldset>
+                    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+                    <form name="userForm" class="form-horizontal" ng-submit="processForm(userForm.$valid)" novalidate>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input ng-model="statusData.email" type="text" class="form-control" id="inputPassword3" placeholder="Email" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$error.required && userForm.first_name.$dirty || submitted && userForm.first_name.$error.required}">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Nama Depan</label>
+                            <div class="col-sm-10">
+                                <input name="first_name" ng-model="statusData.first_name" type="text" class="form-control" id="inputPassword3" placeholder="Password" required>
+                                <p ng-show="userForm.first_name.$error.required && userForm.first_name.$dirty || submitted && userForm.first_name.$error.required" class="help-block">Password Lama Diperlukan.</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error' : userForm.last_name.$error.required && userForm.last_name.$dirty || submitted && userForm.last_name.$error.required}">
+                            <label for="inputPassword3" class="col-sm-2 control-label">Nama Belakang</label>
+                            <div class="col-sm-10">
+                                <input name="last_name" ng-model="statusData.last_name" type="text" class="form-control" id="inputPassword3" placeholder="Password" required>
+                                <p ng-show="userForm.last_name.$error.required && userForm.last_name.$dirty || submitted && userForm.last_name.$error.required" class="help-block">Password Baru Diperlukan.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">Save</button>
+                                <a href="backend/users" class="btn btn-default">Back</a>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </tab>
+        </tabset>
+    </div>
+</div>

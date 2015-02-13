@@ -31,7 +31,8 @@ require.config({
         'pendidikan': 'pendidikan/pendidikanModul',
         'pelatihanpegawai': 'pelatihanpegawai/pelatihanpegawaiModul',
         'penghargaanpegawai': 'penghargaanpegawai/penghargaanpegawaiModul',
-        'home': 'home/homeModul'
+        'home': 'home/homeModul',
+        'users': 'users/usersModul'
     },
     // Add angular modules that does not support AMD out of the box, put it in a shim
     shim: {
@@ -46,6 +47,6 @@ require.config({
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap', 'home', 'golongan', 'keluarga', 'riwayatpangkat', 'riwayatjabatan', 'penghargaanpegawai', 'pendidikan', 'pelatihanpegawai', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
+require(['jquery', 'bootstrap', 'home', 'golongan', 'keluarga','users', 'riwayatpangkat', 'riwayatjabatan', 'penghargaanpegawai', 'pendidikan', 'pelatihanpegawai', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
     return {};
 });
