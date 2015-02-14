@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1> 
+    </div>
+    <div class="panel-body">
+        <!-- seminarForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="seminarForm" ng-submit="processForm(seminarForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : seminarForm.uraian.$invalid && seminarForm.uraian.$dirty || submitted && seminarForm.uraian.$invalid}">
+                <label for="uraian">Uraian</label>
+                <!-- Input uraian  -->
+                <textarea class="form-control" ng-model="statusData.uraian" name="uraian" placeholder="Masukan nama uraian" required></textarea>
+                <!-- validasi input -->
+                <p ng-show="seminarForm.uraian.$invalid && seminarForm.uraian.$dirty || submitted && seminarForm.uraian.$invalid" class="help-block">Uraian Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : seminarForm.tanggal.$invalid && seminarForm.tanggal.$dirty || submitted && seminarForm.tanggal.$invalid}">
+                <label for="tanggal">Tanggal</label>
+                <!-- Input tanggal  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="opened = true"
+                       max-date="maxDate"
+                       name="tanggal"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="seminarForm.tanggal.$invalid && seminarForm.tanggal.$dirty || submitted && seminarForm.tanggal.$invalid" class="help-block">Tanggal Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : seminarForm.lokasi.$invalid && seminarForm.lokasi.$dirty || submitted && seminarForm.lokasi.$invalid}">
+                <label for="lokasi">Lokasi</label>
+                <!-- Input lokasi  -->
+                <input type="text" class="form-control" ng-model="statusData.lokasi" name="lokasi" placeholder="Masukan nama lokasi" required>
+                <!-- validasi input -->
+                <p ng-show="seminarForm.lokasi.$invalid && seminarForm.lokasi.$dirty || submitted && seminarForm.lokasi.$invalid" class="help-block">Lokasi Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="backend/pegawai/edit/{{idpegawai}}/seminar" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

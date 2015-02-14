@@ -5,7 +5,7 @@
         <title>Sistem Informasi Pegawai</title>
 
         <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.css'); ?>"> <!-- load bootstrap via cdn -->
-        <link rel="stylesheet" href="<?php echo asset('lib/font-awesome.min.css'); ?>"> 
+        <link rel="stylesheet" href="<?php echo asset('lib/font-awesome-4.3.0/css/font-awesome.min.css'); ?>"> 
         <style>
             .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
             body { padding-top: 70px; }

@@ -79,7 +79,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFi
             return input[0].toUpperCase() + input.slice(1);
         };
     });
-    app.directive('ngHeader', function(SessionService, $location, Login) {
+    app.directive('ngHeader', function(SessionService, $location, Login, $templateCache) {
         return {
             restrict: 'E',
             templateUrl: 'view/templates/header.html',
@@ -92,6 +92,7 @@ define(['angularAMD', 'angular-route', 'ui-bootstrap', 'ngScrollSpy', 'angularFi
                         if (response.success) {
                             SessionService.unset('auth');
                             SessionService.unset('data');
+                            $templateCache.removeAll();
                             window.location.replace('/');
                         }
                     });

@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1> 
+    </div>
+    <div class="panel-body">
+        <!-- organisasiForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="organisasiForm" ng-submit="processForm(organisasiForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : organisasiForm.uraian.$invalid && organisasiForm.uraian.$dirty || submitted && organisasiForm.uraian.$invalid}">
+                <label for="uraian">Uraian</label>
+                <!-- Input uraian  -->
+                <textarea class="form-control" ng-model="statusData.uraian" name="uraian" placeholder="Masukan nama uraian" required></textarea>
+                <!-- validasi input -->
+                <p ng-show="organisasiForm.uraian.$invalid && organisasiForm.uraian.$dirty || submitted && organisasiForm.uraian.$invalid" class="help-block">Uraian Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : organisasiForm.tanggal.$invalid && organisasiForm.tanggal.$dirty || submitted && organisasiForm.tanggal.$invalid}">
+                <label for="tanggal">Tanggal</label>
+                <!-- Input tanggal  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="opened = true"
+                       max-date="maxDate"
+                       name="tanggal"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="organisasiForm.tanggal.$invalid && organisasiForm.tanggal.$dirty || submitted && organisasiForm.tanggal.$invalid" class="help-block">Tanggal Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : organisasiForm.lokasi.$invalid && organisasiForm.lokasi.$dirty || submitted && organisasiForm.lokasi.$invalid}">
+                <label for="lokasi">Lokasi</label>
+                <!-- Input lokasi  -->
+                <input type="text" class="form-control" ng-model="statusData.lokasi" name="lokasi" placeholder="Masukan nama lokasi" required>
+                <!-- validasi input -->
+                <p ng-show="organisasiForm.lokasi.$invalid && organisasiForm.lokasi.$dirty || submitted && organisasiForm.lokasi.$invalid" class="help-block">Lokasi Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="backend/pegawai/edit/{{idpegawai}}/organisasi" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>
