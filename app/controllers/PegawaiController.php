@@ -53,11 +53,11 @@ class PegawaiController extends \BaseController {
         //
         $destinationPath = public_path() . '/upload';
         $data = Input::except('file');
-        $data['tanggal_lahir'] = $this->formatDate($data['tanggal_lahir']);
-        $data['tanggal_pengangkatan_cpns'] = $this->formatDate($data['tanggal_pengangkatan_cpns']);
-        $data["tanggal_sk_pangkat"] = $this->formatDate($data['tanggal_sk_pangkat']);
-        $data["tanggal_mulai_pangkat"] = $this->formatDate($data['tanggal_mulai_pangkat']);
-        $data["tanggal_selesai_pangkat"] = $this->formatDate($data['tanggal_selesai_pangkat']);
+        $data['tanggal_lahir'] = formatDate($data['tanggal_lahir']);
+        $data['tanggal_pengangkatan_cpns'] = formatDate($data['tanggal_pengangkatan_cpns']);
+        $data["tanggal_sk_pangkat"] = formatDate($data['tanggal_sk_pangkat']);
+        $data["tanggal_mulai_pangkat"] = formatDate($data['tanggal_mulai_pangkat']);
+        $data["tanggal_selesai_pangkat"] = formatDate($data['tanggal_selesai_pangkat']);
         $pegawai = new Pegawai($data);
         if (Input::hasFile('file')) {
             Input::file('file')->move($destinationPath);
@@ -93,14 +93,8 @@ class PegawaiController extends \BaseController {
      */
     public function edit($id) {
         //
-
         $pegawai = Pegawai::find($id);
         return Response::json($pegawai);
-    }
-
-    public function editKeluarga($id) {
-        $keluarga = Keluarga::find($id);
-        return Response::json($keluarga);
     }
 
     /**
@@ -111,14 +105,16 @@ class PegawaiController extends \BaseController {
      */
     public function update($id) {
         //
-    }
-
-    public function updateKeluarga($id) {
-        $data = Input::All();
-        $keluarga = Keluarga::find($id);
-        if ($keluarga->update($data)) {
-            return Response::json(array('success' => TRUE));
+        $destinationPath = public_path() . '/upload';
+        $data = Input::except('file');
+        $pegawai = Pegawai::find($id);
+        if (Input::hasFile('file')) {
+            Input::file('file')->move($destinationPath);
+            $pegawai->foto = Input::file('file')->getClientOriginalName();
         }
+        if ($pegawai->update($data)) {
+            return Response::json(array('success' => TRUE));
+        };
     }
 
     /**
@@ -129,8 +125,8 @@ class PegawaiController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $keluarga = Keluarga::find($id);
-        if($keluarga->delete()){
+        $pegawai = Pegawai::find($id);
+        if ($pegawai->delete()) {
             return Response::json(array('success' => TRUE));
         }
     }

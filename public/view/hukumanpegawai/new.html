@@ -1,0 +1,108 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- hukumanForm ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="hukumanForm" ng-submit="processForm(hukumanForm.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.id_master_hukuman.$invalid && hukumanForm.id_master_hukuman.$dirty || submitted && hukumanForm.id_master_hukuman.$invalid}">
+                <label for="id_master_hukuman">Hukuman</label>
+                <!-- Input id_master_hukuman  -->
+                <select name="id_master_hukuman" class="form-control" ng-model="statusData.id_master_hukuman" required>
+                    <option value="">Pilih Hukuman</option>
+                    <option ng-repeat="unit in hukuman" ng-selected="{{unit.id == statusData.id_master_hukuman}}" value="{{unit.id}}">{{unit.label}}</option>
+                </select> <!-- validasi input -->
+                <p ng-show="hukumanForm.id_master_hukuman.$invalid && hukumanForm.id_master_hukuman.$dirty || submitted && hukumanForm.id_master_hukuman.$invalid" class="help-block">Nama Golongan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.uraian.$invalid && hukumanForm.uraian.$dirty || submitted && hukumanForm.uraian.$invalid}">
+                <label for="uraian">Uraian</label>
+                <!-- Input uraian  -->
+                <textarea class="form-control" ng-model="statusData.uraian" name="uraian" placeholder="Masukan nama uraian"></textarea>
+                <!-- validasi input -->
+                <p ng-show="hukumanForm.uraian.$invalid && hukumanForm.uraian.$dirty || submitted && hukumanForm.uraian.$invalid" class="help-block">Nama Riwayat Pangkat Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.nomor_sk.$invalid && hukumanForm.nomor_sk.$dirty || submitted && hukumanForm.nomor_sk.$invalid}">
+                <label for="nomor_sk">Nomor SK</label>
+                <!-- Input nomor_sk  -->
+                <input type="text" class="form-control" ng-model="statusData.nomor_sk" name="nomor_sk" placeholder="Masukan nama nomor_sk" required>
+                <!-- validasi input -->
+                <p ng-show="hukumanForm.nomor_sk.$invalid && hukumanForm.nomor_sk.$dirty || submitted && hukumanForm.nomor_sk.$invalid" class="help-block">Nomor SK Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.tanggal_sk.$invalid && hukumanForm.tanggal_sk.$dirty || submitted && hukumanForm.tanggal_sk.$invalid}">
+                <label for="tanggal_sk">Tanggal SK</label>
+                <!-- Input tanggal_sk  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_sk" 
+                       is-open="opened" 
+                       datepicker-options="dateOptions"  
+                       ng-required="true" 
+                       close-text="Close" 
+                       ng-click="opened = true"
+                       max-date="maxDate"
+                       name="tanggal_sk"
+                       required
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="hukumanForm.tanggal_sk.$invalid && hukumanForm.tanggal_sk.$dirty || submitted && hukumanForm.tanggal_sk.$invalid" class="help-block">Tanggal SK Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.tanggal_mulai.$invalid && hukumanForm.tanggal_mulai.$dirty || submitted && hukumanForm.tanggal_mulai.$invalid}">
+                <label for="tanggal_mulai">Tanggal Mulai</label>
+                <!-- Input tanggal_mulai  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_mulai" 
+                       is-open="openedtglnikah" 
+                       datepicker-options="dateOptions"  
+                       close-text="Close" 
+                       ng-click="openedtglnikah = true"
+                       max-date="statusData.tanggal_selesai"
+                       name="tanggal_mulai"
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="hukumanForm.tanggal_mulai.$invalid && hukumanForm.tanggal_mulai.$dirty || submitted && hukumanForm.tanggal_mulai.$invalid" class="help-block">Nama Riwayat Pangkat Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.tanggal_selesai.$invalid && hukumanForm.tanggal_selesai.$dirty || submitted && hukumanForm.tanggal_selesai.$invalid}">
+                <label for="tanggal_selesai">Tanggal Selesai</label>
+                <!-- Input tanggal_selesai  -->
+                <input type="text" 
+                       class="form-control" 
+                       placeholder="dd/mm/yyyy"
+                       datepicker-popup="dd/MM/yyyy" 
+                       ng-model="statusData.tanggal_selesai" 
+                       is-open="openedtglcerai" 
+                       datepicker-options="dateOptions"  
+                       close-text="Close" 
+                       ng-click="openedtglcerai = true"
+                       min-date="statusData.tanggal_mulai"
+                       max-date="maxDate"
+                       name="tanggal_selesai"
+                       date-validator
+                       />
+                <!-- validasi input -->
+                <p ng-show="hukumanForm.tanggal_selesai.$invalid && hukumanForm.tanggal_selesai.$dirty || submitted && hukumanForm.tanggal_selesai.$invalid" class="help-block">Tanggal Cerai Meninggal Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : hukumanForm.pejabat_menetapkan.$invalid && hukumanForm.pejabat_menetapkan.$dirty || submitted && hukumanForm.pejabat_menetapkan.$invalid}">
+                <label for="pejabat_menetapkan">Pejabat Menetapkan</label>
+                <!-- Input pejabat_menetapkan  -->
+                <input type="text" class="form-control" ng-model="statusData.pejabat_menetapkan" name="pejabat_menetapkan" placeholder="Masukan nama pejabat_menetapkan" required>
+                <!-- validasi input -->
+                <p ng-show="hukumanForm.pejabat_menetapkan.$invalid && hukumanForm.pejabat_menetapkan.$dirty || submitted && hukumanForm.pejabat_menetapkan.$invalid" class="help-block">Pejabat Menetapkan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="backend/pegawai/edit/{{idpegawai}}/hukumanpegawai" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

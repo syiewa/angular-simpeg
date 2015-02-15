@@ -1,15 +1,15 @@
 define(['app'], function(app) {
-    var url = 'admin/gajipokok';
-    app.directive('ngGajipokok', function() {
+    var url = 'admin/dp3';
+    app.directive('ngDp3', function() {
         return {
             restrict: 'E',
-            templateUrl: 'view/gajipokok/list.html',
+            templateUrl: 'view/dp3/list.html',
             controller: function($scope, $routeParams, dataService, $location, $filter) {
                 if (!$routeParams.action) {
                     $scope.data = {};
-                    $scope.header = 'Data Gaji Pokok';
+                    $scope.header = 'Data DP3';
                     $scope.pegawaiId = $routeParams.id;
-                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/gajipokok').success(function(data) {
+                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/dp3').success(function(data) {
                         $scope.fields = data.field;
                         $scope.data = data.values;
                         $scope.totalItems = $scope.data.length;
@@ -33,7 +33,7 @@ define(['app'], function(app) {
                         $scope.loading = false;
                     })
                     $scope.edit = function(id) {
-                        $location.path('/backend/gajipokok/edit/' + id + '/' + pegawaiId);
+                        $location.path('/backend/dp3/edit/' + id + '/' + pegawaiId);
                     };
                     $scope.sort = function(field) {
                         $scope.data = $filter('orderBy')($scope.data, field, $scope.sort.order);
@@ -48,7 +48,7 @@ define(['app'], function(app) {
                             dataService.destroy(url, id).success(function(data) {
                                 $scope.loading = true;
                                 if (data.success) {
-                                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/gajipokok').success(function(data) {
+                                    dataService.get('admin/pegawai/edit/' + $routeParams.id + '/dp3').success(function(data) {
                                         $scope.fields = data.field;
                                         $scope.data = data.values;
                                         $scope.totalItems = $scope.data.length;
@@ -79,16 +79,14 @@ define(['app'], function(app) {
             },
         };
     });
-    app.controller('editgajipokokController', function($scope, $routeParams, dataService, $location) {
-        $scope.header = "Edit Data Gaji Pokok";
+    app.controller('editdp3Controller', function($scope, $routeParams, dataService, $location) {
+        $scope.header = "Edit Data Pelatihan Pegawai";
         // set var statusId yang diambil dari parameter route.
         $scope.statusId = $routeParams.id;
         $scope.idpegawai = $routeParams.subaction;
         $scope.loading = true;
-        $scope.submitted = false;
-
-        dataService.get('admin/gajipokok/create').success(function(data) {
-            $scope.golongan = data.golongan;
+        dataService.get('admin/dp3/create').success(function(data) {
+            $scope.hukuman = data.hukuman;
         });
         // ambil data dari database dengan ajax
         dataService.edit(url, $scope.statusId).success(function(data) {
@@ -101,7 +99,7 @@ define(['app'], function(app) {
                 dataService.update(url, $scope.statusId, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/backend/pegawai/edit/' + $scope.idpegawai + '/gajipokok');
+                                $location.path('/backend/pegawai/edit/' + $scope.idpegawai + '/dp3');
                             }
                         }).
                         error(function(data) {
@@ -113,30 +111,29 @@ define(['app'], function(app) {
         };
     });
 
-    app.controller('newgajipokokController', function($scope, dataService, $location, $routeParams) {
+    app.controller('newdp3Controller', function($scope, dataService, $location, $routeParams) {
         $scope.statusData = {}; //data awal bernilai array kosong;
         $scope.idpegawai = $routeParams.id
-        $scope.header = "Tambah Data Gaji Pokok";
+        $scope.header = "Tambah Data DP3";
         $scope.opened = false;
-        $scope.openedtglnikah = false;
-        $scope.openedtglcerai = false;
+        $scope.openedlulus = false;
         $scope.maxDate = new Date();
         $scope.dateOptions = {
             formatYear: 'yy',
             startingDay: 1
         };
-        dataService.get('admin/gajipokok/create').success(function(data) {
-            $scope.golongan = data.golongan;
+        dataService.get('admin/dp3/create').success(function(data) {
+            $scope.hukuman = data.hukuman;
         });
         $scope.statusData['id_pegawai'] = $scope.idpegawai;
         $scope.submitted = false; // submitted bernilai false 
         $scope.processForm = function(isValid) { // fungsi dimana saat proses form terjadi
-            // jika valid maka akan mengirimkan data ke url admin/gajipokok dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
+            // jika valid maka akan mengirimkan data ke url admin/dp3 dengan $scope.statusData sebagai datanya , dan jika sukses post data maka akan kembali ke base url.
             if (isValid) {
                 dataService.save(url, $scope.statusData).
                         success(function(data) {
                             if (data.success) {
-                                $location.path('/backend/pegawai/edit/' + $scope.statusData['id_pegawai'] + '/gajipokok');
+                                $location.path('/backend/pegawai/edit/' + $scope.statusData['id_pegawai'] + '/dp3');
                             }
                         }).
                         error(function(data) {
@@ -144,6 +141,7 @@ define(['app'], function(app) {
             } else {
                 $scope.submitted = true;
             }
-        };
+        }
+        ;
     });
 });

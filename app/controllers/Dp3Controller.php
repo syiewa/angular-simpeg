@@ -1,6 +1,6 @@
 <?php
 
-class GajiPokokController extends \BaseController {
+class Dp3Controller extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,8 +10,8 @@ class GajiPokokController extends \BaseController {
     public function index($id = null) {
         //
         $data = array(
-            'field' => array('nama_golongan', 'nomor_sk', 'tanggal_sk', 'gaji_pokok', 'tanggal_mulai', 'tanggal_selesai'),
-            'values' => GajiPokok::orderBy('id_golongan')->where('id_pegawai', '=', $id)->get()
+            'field' => array('tahun', 'rata_rata', 'atasan', 'penilai', 'mengetahui'),
+            'values' => Dp3::orderBy('tahun')->where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
     }
@@ -23,10 +23,6 @@ class GajiPokokController extends \BaseController {
      */
     public function create() {
         //
-        $data = array(
-            'golongan' => Golongan::DropdownGolongan(),
-        );
-        return Response::json($data);
     }
 
     /**
@@ -37,14 +33,8 @@ class GajiPokokController extends \BaseController {
     public function store() {
         //
         $data = Input::All();
-        $data['tanggal_sk'] = formatDate($data['tanggal_sk']);
-        $data['tanggal_mulai'] = formatDate($data['tanggal_mulai']);
-        $data['tanggal_selesai'] = formatDate($data['tanggal_selesai']);
-        $diff = getDateDiff($data['tanggal_mulai'], $data['tanggal_selesai']);
-        if ($diff->y > 0) {
-            $data['masa_kerja'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
-        }
-        $riwayat = new GajiPokok($data);
+        $data['rata_rata'] = strval(($data['kesetiaan'] + $data['prestasi'] + $data['tanggung_jawab'] + $data['ketaatan'] + $data['kejujuran'] + $data['kerjasama'] + $data['prakarsa'] + $data['kepemimpinan']) / 8);
+        $riwayat = new Dp3($data);
         if ($riwayat->save()) {
             return Response::json(array('success' => true));
         }
@@ -68,7 +58,7 @@ class GajiPokokController extends \BaseController {
      */
     public function edit($id) {
         //
-        $riwayat = GajiPokok::find($id);
+        $riwayat = Dp3::find($id);
         return Response::json($riwayat);
     }
 
@@ -82,11 +72,8 @@ class GajiPokokController extends \BaseController {
         //
 
         $data = Input::All();
-        $riwayat = GajiPokok::find($id);
-        $diff = getDateDiff($data['tanggal_mulai'], $data['tanggal_selesai']);
-        if ($diff->y > 0) {
-            $data['masa_kerja'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
-        }
+        $riwayat = Dp3::find($id);
+        $data['rata_rata'] = strval(($data['kesetiaan'] + $data['prestasi'] + $data['tanggung_jawab'] + $data['ketaatan'] + $data['kejujuran'] + $data['kerjasama'] + $data['prakarsa'] + $data['kepemimpinan']) / 8);
         if ($riwayat->update($data)) {
             return Response::json(array('success' => TRUE));
         }
@@ -100,7 +87,7 @@ class GajiPokokController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $riwayat = GajiPokok::find($id);
+        $riwayat = Dp3::find($id);
         if ($riwayat->delete()) {
             return Response::json(array('success' => TRUE));
         }

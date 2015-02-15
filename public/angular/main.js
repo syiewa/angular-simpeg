@@ -34,6 +34,8 @@ require.config({
         'seminar': 'seminar/seminarModul',
         'organisasi': 'organisasi/organisasiModul',
         'gajipokok': 'gajipokok/gajipokokModul',
+        'hukumanpegawai': 'hukumanpegawai/hukumanpegawaiModul',
+        'dp3': 'dp3/dp3Modul',
         'home': 'home/homeModul',
         'users': 'users/usersModul'
     },
@@ -50,6 +52,6 @@ require.config({
     // kick start application
     deps: ['app']
 });
-require(['jquery', 'bootstrap', 'home', 'golongan','gajipokok','seminar','organisasi', 'keluarga','users', 'riwayatpangkat', 'riwayatjabatan', 'penghargaanpegawai', 'pendidikan', 'pelatihanpegawai', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
+require(['jquery', 'bootstrap', 'home', 'golongan','gajipokok','dp3','seminar','hukumanpegawai','organisasi', 'keluarga','users', 'riwayatpangkat', 'riwayatjabatan', 'penghargaanpegawai', 'pendidikan', 'pelatihanpegawai', 'statuspegawai', 'eselon', 'unitkerja', 'satuankerja', 'ppk', 'pelatihan', 'jabatan', 'statusjabatan', 'penghargaan', 'hukuman', 'lokasipelatihan', 'lokasikerja', 'pegawai'], function($) {
     return {};
 });

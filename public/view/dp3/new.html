@@ -1,0 +1,118 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h1>{{header}}</h1>
+    </div>
+    <div class="panel-body">
+        <!-- dp3Form ketika button submit ditekan maka akan menjalankan fungsi processForm() -->
+        <form name="dp3Form" ng-submit="processForm(dp3Form.$valid)" novalidate>
+            <!-- 
+            Disini terdapat validasi yang dibuat memakai dengan angular , dimana class div akan berubah menjadai 'has-error'
+            ketika input nama nama_lokasi invalid dan kosong.    
+            -->
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.tahun.$invalid && dp3Form.tahun.$dirty || submitted && dp3Form.tahun.$invalid}">
+                <label for="tahun">Tahun</label>
+                <!-- Input tahun  -->
+                <input type="text" class="form-control" ng-model="statusData.tahun" name="tahun" placeholder="Masukan nama tahun" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.tahun.$invalid && dp3Form.tahun.$dirty || submitted && dp3Form.tahun.$invalid" class="help-block">Tahun Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.kesetiaan.$invalid && dp3Form.kesetiaan.$dirty || submitted && dp3Form.kesetiaan.$invalid}">
+                <label for="kesetiaan">Kesetiaan</label>
+                <!-- Input kesetiaan  -->
+                <input type="number" class="form-control" ng-model="statusData.kesetiaan" name="kesetiaan" placeholder="Masukan kesetiaan" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.kesetiaan.$error.required && dp3Form.kesetiaan.$dirty || submitted && dp3Form.kesetiaan.$error.required" class="help-block">Kesetiaan Diperlukan.</p>
+                <p ng-show="dp3Form.kesetiaan.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.kesetiaan.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.prestasi.$invalid && dp3Form.prestasi.$dirty || submitted && dp3Form.prestasi.$invalid}">
+                <label for="prestasi">Prestasi</label>
+                <!-- Input prestasi  -->
+                <input type="number" class="form-control" ng-model="statusData.prestasi" name="prestasi" placeholder="Masukan prestasi" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.prestasi.$error.required && dp3Form.prestasi.$dirty || submitted && dp3Form.prestasi.$error.required" class="help-block">Prestasi Diperlukan.</p>
+                <p ng-show="dp3Form.prestasi.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.prestasi.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.tanggung_jawab.$invalid && dp3Form.tanggung_jawab.$dirty || submitted && dp3Form.tanggung_jawab.$invalid}">
+                <label for="tanggung_jawab">Tanggung Jawab</label>
+                <!-- Input tanggung_jawab  -->
+                <input type="number" class="form-control" ng-model="statusData.tanggung_jawab" name="tanggung_jawab" placeholder="Masukan tanggung_jawab" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.tanggung_jawab.$error.required && dp3Form.tanggung_jawab.$dirty || submitted && dp3Form.tanggung_jawab.$error.required" class="help-block">Tanggung Jawab Diperlukan.</p>
+                <p ng-show="dp3Form.tanggung_jawab.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.tanggung_jawab.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.ketaatan.$invalid && dp3Form.ketaatan.$dirty || submitted && dp3Form.ketaatan.$invalid}">
+                <label for="ketaatan">Ketaatan</label>
+                <!-- Input ketaatan  -->
+                <input type="number" class="form-control" ng-model="statusData.ketaatan" name="ketaatan" placeholder="Masukan ketaatan" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.ketaatan.$error.required && dp3Form.ketaatan.$dirty || submitted && dp3Form.ketaatan.$error.required" class="help-block">Ketaatan Diperlukan.</p>
+                <p ng-show="dp3Form.ketaatan.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.ketaatan.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.kejujuran.$invalid && dp3Form.kejujuran.$dirty || submitted && dp3Form.kejujuran.$invalid}">
+                <label for="kejujuran">Kejujuran</label>
+                <!-- Input kejujuran  -->
+                <input type="number" class="form-control" ng-model="statusData.kejujuran" name="kejujuran" placeholder="Masukan kejujuran" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.kejujuran.$error.required && dp3Form.kejujuran.$dirty || submitted && dp3Form.kejujuran.$error.required" class="help-block">Kejujuran Diperlukan.</p>
+                <p ng-show="dp3Form.kejujuran.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.kejujuran.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.kerjasama.$invalid && dp3Form.kerjasama.$dirty || submitted && dp3Form.kerjasama.$invalid}">
+                <label for="kerjasama">Kerja Sama</label>
+                <!-- Input kerjasama  -->
+                <input type="number" class="form-control" ng-model="statusData.kerjasama" name="kerjasama" placeholder="Masukan kerjasama" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.kerjasama.$error.required && dp3Form.kerjasama.$dirty || submitted && dp3Form.kerjasama.$error.required" class="help-block">Kerja Sama Diperlukan.</p>
+                <p ng-show="dp3Form.kerjasama.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.kerjasama.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.prakarsa.$invalid && dp3Form.prakarsa.$dirty || submitted && dp3Form.prakarsa.$invalid}">
+                <label for="prakarsa">Prakarsa</label>
+                <!-- Input prakarsa  -->
+                <input type="number" class="form-control" ng-model="statusData.prakarsa" name="prakarsa" placeholder="Masukan prakarsa" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.prakarsa.$error.required && dp3Form.prakarsa.$dirty || submitted && dp3Form.prakarsa.$error.required" class="help-block">Prakarsa Diperlukan.</p>
+                <p ng-show="dp3Form.prakarsa.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.prakarsa.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.kepemimpinan.$invalid && dp3Form.kepemimpinan.$dirty || submitted && dp3Form.kepemimpinan.$invalid}">
+                <label for="kepemimpinan">Kepemimpinan</label>
+                <!-- Input kepemimpinan  -->
+                <input type="number" class="form-control" ng-model="statusData.kepemimpinan" name="kepemimpinan" placeholder="Masukan kepemimpinan" min="0" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.kepemimpinan.$error.required && dp3Form.kepemimpinan.$dirty || submitted && dp3Form.kepemimpinan.$error.required" class="help-block">Kepemimpinan Diperlukan.</p>
+                <p ng-show="dp3Form.kepemimpinan.$error.number" class="help-block">Hanya Angka Saja</p>
+                <p ng-show="dp3Form.kepemimpinan.$error.min" class="help-block">Minimal 0</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.atasan.$invalid && dp3Form.atasan.$dirty || submitted && dp3Form.atasan.$invalid}">
+                <label for="atasan">Atasan</label>
+                <!-- Input atasan  -->
+                <input type="text" class="form-control" ng-model="statusData.atasan" name="atasan" placeholder="Masukan nama atasan" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.atasan.$invalid && dp3Form.atasan.$dirty || submitted && dp3Form.atasan.$invalid" class="help-block">Atasan Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.penilai.$invalid && dp3Form.penilai.$dirty || submitted && dp3Form.penilai.$invalid}">
+                <label for="penilai">Penilai</label>
+                <!-- Input penilai  -->
+                <input type="text" class="form-control" ng-model="statusData.penilai" name="penilai" placeholder="Masukan nama penilai" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.penilai.$invalid && dp3Form.penilai.$dirty || submitted && dp3Form.penilai.$invalid" class="help-block">Penilai Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : dp3Form.mengetahui.$invalid && dp3Form.mengetahui.$dirty || submitted && dp3Form.mengetahui.$invalid}">
+                <label for="mengetahui">Mengetahui</label>
+                <!-- Input mengetahui  -->
+                <input type="text" class="form-control" ng-model="statusData.mengetahui" name="mengetahui" placeholder="Masukan nama mengetahui" required>
+                <!-- validasi input -->
+                <p ng-show="dp3Form.mengetahui.$invalid && dp3Form.mengetahui.$dirty || submitted && dp3Form.mengetahui.$invalid" class="help-block">Mengetahui Diperlukan.</p>
+            </div>
+            <div class="form-group col-sm-12">
+                <button type="submit" class="btn btn-default">Submit</button>
+                <a class="btn btn-default btn-warning" href="backend/pegawai/edit/{{idpegawai}}/hukumanpegawai" role="button">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

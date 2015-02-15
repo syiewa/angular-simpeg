@@ -1,6 +1,6 @@
 <?php
 
-class GajiPokokController extends \BaseController {
+class HukumanPegawaiController extends \BaseController {
 
     /**
      * Display a listing of the resource.
@@ -10,8 +10,8 @@ class GajiPokokController extends \BaseController {
     public function index($id = null) {
         //
         $data = array(
-            'field' => array('nama_golongan', 'nomor_sk', 'tanggal_sk', 'gaji_pokok', 'tanggal_mulai', 'tanggal_selesai'),
-            'values' => GajiPokok::orderBy('id_golongan')->where('id_pegawai', '=', $id)->get()
+            'field' => array('nama_hukuman', 'nomor_sk', 'tanggal_sk','tanggal_mulai', 'tanggal_selesai','masa_berlaku'),
+            'values' => HukumanPegawai::orderBy('id_master_hukuman')->where('id_pegawai', '=', $id)->get()
         );
         return Response::json($data);
     }
@@ -24,7 +24,7 @@ class GajiPokokController extends \BaseController {
     public function create() {
         //
         $data = array(
-            'golongan' => Golongan::DropdownGolongan(),
+            'hukuman' => Hukuman::DropdownHukuman(),
         );
         return Response::json($data);
     }
@@ -42,9 +42,9 @@ class GajiPokokController extends \BaseController {
         $data['tanggal_selesai'] = formatDate($data['tanggal_selesai']);
         $diff = getDateDiff($data['tanggal_mulai'], $data['tanggal_selesai']);
         if ($diff->y > 0) {
-            $data['masa_kerja'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
+            $data['masa_berlaku'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
         }
-        $riwayat = new GajiPokok($data);
+        $riwayat = new HukumanPegawai($data);
         if ($riwayat->save()) {
             return Response::json(array('success' => true));
         }
@@ -68,7 +68,7 @@ class GajiPokokController extends \BaseController {
      */
     public function edit($id) {
         //
-        $riwayat = GajiPokok::find($id);
+        $riwayat = HukumanPegawai::find($id);
         return Response::json($riwayat);
     }
 
@@ -80,12 +80,11 @@ class GajiPokokController extends \BaseController {
      */
     public function update($id) {
         //
-
         $data = Input::All();
-        $riwayat = GajiPokok::find($id);
+        $riwayat = HukumanPegawai::find($id);
         $diff = getDateDiff($data['tanggal_mulai'], $data['tanggal_selesai']);
         if ($diff->y > 0) {
-            $data['masa_kerja'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
+            $data['masa_berlaku'] = $diff->y . ' Tahun ' . $diff->m . ' Bulan';
         }
         if ($riwayat->update($data)) {
             return Response::json(array('success' => TRUE));
@@ -100,7 +99,7 @@ class GajiPokokController extends \BaseController {
      */
     public function destroy($id) {
         //
-        $riwayat = GajiPokok::find($id);
+        $riwayat = HukumanPegawai::find($id);
         if ($riwayat->delete()) {
             return Response::json(array('success' => TRUE));
         }

@@ -42,8 +42,12 @@ Route::group(array('prefix' => 'admin', 'before' => ''), function() {
     Route::resource('seminar', 'SeminarController');
     Route::get('pegawai/edit/{id}/organisasi', 'OrganisasiController@index');
     Route::resource('gajipokok', 'GajiPokokController');
-    Route::get('pegawai/edit/{id}/organisasi', 'GajiPokokController@index');
+    Route::get('pegawai/edit/{id}/gajipokok', 'GajiPokokController@index');
     Route::resource('organisasi', 'OrganisasiController');
+    Route::resource('hukumanpegawai', 'HukumanPegawaiController');
+    Route::get('pegawai/edit/{id}/hukumanpegawai', 'HukumanPegawaiController@index');
+    Route::resource('dp3', 'Dp3Controller');
+    Route::get('pegawai/edit/{id}/dp3', 'Dp3Controller@index');
     Route::resource('users', 'UsersController');
     Route::get('/dropdownunitkerja', 'UnitKerjaController@getUnitKerja');
     Route::get('/dropdownsatuankerja', 'SatuanKerjaController@getSatuanKerja');

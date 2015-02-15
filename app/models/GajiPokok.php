@@ -1,55 +1,28 @@
 <?php
 
-class RiwayatJabatan extends Eloquent {
+class  GajiPokok extends Eloquent {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'tbl_data_riwayat_jabatan';
-    protected $primaryKey = 'id_riwayat_jabatan';
-    protected $fillable = array('id_pegawai', 'penempatan', 'lokasi', 'status', 'id_jabatan', 'id_unit_kerja', 'uraian', 'id_eselon','tmt_eselon', 'nomor_sk', 'tanggal_sk', 'tanggal_mulai', 'tanggal_selesai');
+    protected $table = 'tbl_data_gaji_pokok';
+    protected $primaryKey = 'id_gaji_pokok';
+    protected $fillable = array('id_pegawai', 'id_golongan','tanggal_sk','nomor_sk','dasar_perubahan','gaji_pokok','tanggal_mulai','tanggal_selesai','masa_kerja','pejabat_menetapkan');
     public $timestamps = false;
-    protected $appends = ['nama_status', 'nama_jabatan', 'nama_unit_kerja', 'nama_eselon'];
+    protected $appends = ['nama_golongan'];
 
     /**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
      */
-    public function getNamaJabatanAttribute() {
-        $name = $this->attributes['id_jabatan'];
-        $data = Jabatan::find($name);
+    public function getNamaGolonganAttribute() {
+        $name = $this->attributes['id_golongan'];
+        $data = Golongan::find($name);
         if ($data) {
-            return $data->nama_jabatan;
-        }
-        return '-';
-    }
-
-    public function getNamaEselonAttribute() {
-        $name = $this->attributes['id_eselon'];
-        $data = Eselon::find($name);
-        if ($data) {
-            return $data->nama_eselon;
-        }
-        return '-';
-    }
-
-    public function getNamaUnitKerjaAttribute() {
-        $name = $this->attributes['id_unit_kerja'];
-        $data = UnitKerja::find($name);
-        if ($data) {
-            return $data->nama_unit_kerja;
-        }
-        return '-';
-    }
-
-    public function getNamaStatusAttribute() {
-        $name = $this->attributes['status'];
-        $data = StatusPegawai::find($name);
-        if ($data) {
-            return $data->nama_status;
+            return $data->golongan;
         }
         return '-';
     }
@@ -60,7 +33,7 @@ class RiwayatJabatan extends Eloquent {
 
     public function scopeDropdownRiwayatPangkat($query) {
         $data = array();
-        $jabatan = $query->select(array('id_riwayat_jabatan', 'nama_anggota_riwayat_jabatan'))->get();
+        $jabatan = $query->select(array('id_gaji_pokok', 'nama_anggota_gaji_pokok'))->get();
         if (count($jabatan) > 0) {
             foreach ($jabatan as $ese) {
                 $data[] = array('id' => $ese->id_jabatan, 'label' => $ese->nama_jabatan);
@@ -70,7 +43,7 @@ class RiwayatJabatan extends Eloquent {
     }
 
     public function getTanggalSkAttribute($value) {
-        return date('m/d/Y', strtotime($value));
+        return date('d/m/Y', strtotime($value));
     }
 
     public function setTanggalSkAttribute($value) {
@@ -81,7 +54,7 @@ class RiwayatJabatan extends Eloquent {
         if ($value == '') {
             return $value;
         }
-        return date('m/d/Y', strtotime($value));
+        return date('d/m/Y', strtotime($value));
     }
 
     public function setTanggalMulaiAttribute($value) {
@@ -96,7 +69,7 @@ class RiwayatJabatan extends Eloquent {
         if ($value == '') {
             return $value;
         }
-        return date('m/d/Y', strtotime($value));
+        return date('d/m/Y', strtotime($value));
     }
 
     public function setTanggalSelesai($value) {
